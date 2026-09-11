@@ -1,0 +1,242 @@
+[
+  {
+    "id": "granito",
+    "name": "Granito",
+    "type": "ignea_intrusiva",
+    "texture": "Fanerítica de grano grueso; todos los cristales visibles a simple vista",
+    "composition": ["Cuarzo", "Feldespato potásico", "Plagioclasa", "Biotita"],
+    "displayColor": "#CDB3A4",
+    "identificationKeys": [
+      "Cristales entrelazados de tamaño similar, sin orientación preferente",
+      "Tono claro con moteado oscuro de máficos",
+      "Cuarzo visible como granos grises translúcidos"
+    ],
+    "miningContext": "Roca intrusiva ácida. En sí misma no es mena, pero los stocks graníticos y granodioríticos son el motor térmico de los sistemas hidrotermales.",
+    "hostsFor": ["Vetas de estaño y tungsteno", "Pegmatitas"]
+  },
+  {
+    "id": "granodiorita",
+    "name": "Granodiorita",
+    "type": "ignea_intrusiva",
+    "texture": "Fanerítica de grano medio a grueso",
+    "composition": ["Plagioclasa dominante", "Cuarzo", "Feldespato potásico menor", "Hornblenda", "Biotita"],
+    "displayColor": "#B9B2A4",
+    "identificationKeys": [
+      "Más oscura que el granito por mayor proporción de máficos",
+      "Plagioclasa blanca predomina sobre el feldespato rosado",
+      "Textura holocristalina sin orientación"
+    ],
+    "miningContext": "Es la roca huésped más frecuente de los pórfidos de cobre. Reconocerla en un sondaje ubica al estudiante dentro del sistema mineralizado.",
+    "hostsFor": ["Pórfidos de Cu-Mo", "Skarns de contacto"]
+  },
+  {
+    "id": "diorita",
+    "name": "Diorita",
+    "type": "ignea_intrusiva",
+    "texture": "Fanerítica, aspecto 'sal y pimienta'",
+    "composition": ["Plagioclasa", "Hornblenda", "Biotita", "Cuarzo escaso o ausente"],
+    "displayColor": "#8E8C86",
+    "identificationKeys": [
+      "Contraste marcado entre cristales blancos y negros",
+      "Ausencia o muy poco cuarzo",
+      "Intermedia en color entre granito y gabro"
+    ],
+    "miningContext": "Intrusivo intermedio asociado a sistemas de Cu-Au; suele ser el cuerpo que genera skarns al intruir calizas.",
+    "hostsFor": ["Skarns de Cu-Au", "Vetas mesotermales"]
+  },
+  {
+    "id": "andesita",
+    "name": "Andesita",
+    "type": "ignea_extrusiva",
+    "texture": "Porfídica: fenocristales visibles en una matriz afanítica",
+    "composition": ["Plagioclasa", "Piroxeno", "Hornblenda"],
+    "displayColor": "#6F6B66",
+    "identificationKeys": [
+      "Matriz gris verdosa de grano muy fino",
+      "Fenocristales blancos de plagioclasa destacando sobre la matriz",
+      "Densidad moderada, sin vesículas abundantes"
+    ],
+    "miningContext": "Roca huésped dominante de los depósitos epitermales de los Andes; su alteración argílica o propilítica es la guía de campo hacia la veta.",
+    "hostsFor": ["Vetas epitermales de Au-Ag", "Depósitos de alta sulfuración"]
+  },
+  {
+    "id": "riolita",
+    "name": "Riolita",
+    "type": "ignea_extrusiva",
+    "texture": "Afanítica a porfídica, con frecuente bandeado de flujo",
+    "composition": ["Cuarzo", "Feldespato potásico", "Plagioclasa", "Biotita"],
+    "displayColor": "#D6C5B4",
+    "identificationKeys": [
+      "Color claro, rosado o crema",
+      "Bandeado de flujo ondulado",
+      "Equivalente volcánico del granito"
+    ],
+    "miningContext": "Asociada a domos volcánicos que hospedan mineralización epitermal de baja sulfuración.",
+    "hostsFor": ["Vetas epitermales de baja sulfuración"]
+  },
+  {
+    "id": "basalto",
+    "name": "Basalto",
+    "type": "ignea_extrusiva",
+    "texture": "Afanítica, con frecuencia vesicular",
+    "composition": ["Plagioclasa cálcica", "Piroxeno", "Olivino"],
+    "displayColor": "#3B3B3D",
+    "identificationKeys": [
+      "Color negro a gris muy oscuro",
+      "Vesículas o amígdalas rellenas de minerales secundarios",
+      "Grano tan fino que no se distinguen cristales"
+    ],
+    "miningContext": "Roca de caja poco reactiva. Su alteración a clorita y epidota marca la aureola propilítica externa de un sistema hidrotermal.",
+    "hostsFor": ["Depósitos de cobre nativo", "Mineralización en amígdalas"]
+  },
+  {
+    "id": "toba",
+    "name": "Toba volcánica",
+    "type": "ignea_extrusiva",
+    "texture": "Piroclástica: fragmentos angulosos soldados o cementados",
+    "composition": ["Fragmentos de vidrio", "Cristales rotos", "Líticos"],
+    "displayColor": "#C3B9A8",
+    "identificationKeys": [
+      "Aspecto fragmentario con clastos angulosos",
+      "Baja densidad, se raya con facilidad",
+      "Puede mostrar 'fiammes' aplastadas si está soldada"
+    ],
+    "miningContext": "Por su alta porosidad es una roca muy permeable: canaliza fluidos hidrotermales y se altera intensamente, lo que la vuelve una guía de exploración.",
+    "hostsFor": ["Depósitos diseminados de Au", "Alteración argílica avanzada"]
+  },
+  {
+    "id": "caliza",
+    "name": "Caliza",
+    "type": "sedimentaria",
+    "texture": "Cristalina fina a bioclástica",
+    "composition": ["Calcita"],
+    "displayColor": "#DCD6C4",
+    "identificationKeys": [
+      "Efervesce intensamente con HCl diluido",
+      "Se raya con una punta de acero (dureza 3)",
+      "Puede contener fósiles visibles"
+    ],
+    "miningContext": "Es la roca reactiva por excelencia: al ser intruida por un cuerpo ígneo se transforma en skarn, uno de los ambientes mineralizados más ricos del Perú.",
+    "hostsFor": ["Skarns de Zn-Pb-Ag", "Depósitos tipo MVT"]
+  },
+  {
+    "id": "arenisca",
+    "name": "Arenisca",
+    "type": "sedimentaria",
+    "texture": "Clástica, grano de arena (0,06 a 2 mm)",
+    "composition": ["Cuarzo", "Feldespato", "Fragmentos líticos", "Cemento silíceo o carbonático"],
+    "displayColor": "#C8A97A",
+    "identificationKeys": [
+      "Granos visibles y ásperos al tacto",
+      "Estratificación frecuentemente visible",
+      "Puede rayar el vidrio si el cemento es silíceo"
+    ],
+    "miningContext": "Su porosidad y permeabilidad la hacen conductora de fluidos; en minería subterránea también condiciona el ingreso de agua a las labores.",
+    "hostsFor": ["Depósitos de uranio tipo roll-front", "Cobre estratoligado"]
+  },
+  {
+    "id": "lutita",
+    "name": "Lutita",
+    "type": "sedimentaria",
+    "texture": "Clástica de grano muy fino, fisible",
+    "composition": ["Minerales de arcilla", "Cuarzo microcristalino", "Materia orgánica"],
+    "displayColor": "#5D5B55",
+    "identificationKeys": [
+      "Se parte en láminas delgadas paralelas a la estratificación",
+      "Grano imperceptible al tacto",
+      "Se raya con la uña con facilidad"
+    ],
+    "miningContext": "Es una barrera de baja permeabilidad que puede confinar fluidos mineralizantes, pero también un plano de debilidad crítico para la estabilidad de taludes y labores.",
+    "hostsFor": ["Mineralización estratoligada", "Techos inestables en minería subterránea"]
+  },
+  {
+    "id": "conglomerado",
+    "name": "Conglomerado",
+    "type": "sedimentaria",
+    "texture": "Clástica gruesa con clastos redondeados mayores a 2 mm",
+    "composition": ["Clastos variados", "Matriz arenosa", "Cemento"],
+    "displayColor": "#A08A6E",
+    "identificationKeys": [
+      "Clastos redondeados englobados en matriz fina",
+      "Los clastos son de composición variada",
+      "Si los clastos fueran angulosos sería una brecha sedimentaria"
+    ],
+    "miningContext": "Los paleocanales conglomerádicos concentran minerales pesados y constituyen depósitos de placer de oro.",
+    "hostsFor": ["Placeres auríferos", "Depósitos de paleoplacer"]
+  },
+  {
+    "id": "marmol",
+    "name": "Mármol",
+    "type": "metamorfica",
+    "texture": "Granoblástica, cristales de calcita entrelazados",
+    "composition": ["Calcita recristalizada"],
+    "displayColor": "#E8E5DC",
+    "identificationKeys": [
+      "Efervesce con HCl como la caliza, pero muestra cristales visibles",
+      "Aspecto sacaroideo por la recristalización",
+      "Ausencia de fósiles: fueron destruidos por el metamorfismo"
+    ],
+    "miningContext": "Indica metamorfismo de contacto sobre calizas. Encontrar mármol en un sondaje avisa que hay un intrusivo cerca y, posiblemente, un skarn mineralizado.",
+    "hostsFor": ["Zonas periféricas de skarn"]
+  },
+  {
+    "id": "skarn",
+    "name": "Skarn",
+    "type": "metamorfica",
+    "texture": "Granoblástica gruesa, a menudo zonada y bandeada",
+    "composition": ["Granate (grosularia-andradita)", "Piroxeno (diópsido)", "Epidota", "Sulfuros"],
+    "displayColor": "#8C6B3F",
+    "identificationKeys": [
+      "Granates pardos a rojizos bien desarrollados",
+      "Bandas de colores contrastados según la zonación",
+      "Sulfuros diseminados entre los silicatos cálcicos"
+    ],
+    "miningContext": "No es una roca de clasificación clásica sino un producto de metasomatismo. Es el objetivo de exploración directo en muchas minas polimetálicas peruanas.",
+    "hostsFor": ["Zn-Pb-Ag", "Cu-Au", "Fe", "W"]
+  },
+  {
+    "id": "pizarra",
+    "name": "Pizarra",
+    "type": "metamorfica",
+    "texture": "Foliada, con clivaje pizarroso penetrativo",
+    "composition": ["Minerales de arcilla recristalizados", "Micas muy finas", "Cuarzo"],
+    "displayColor": "#4A5058",
+    "identificationKeys": [
+      "Se parte en láminas planas y resistentes",
+      "Brillo mate a ligeramente sedoso",
+      "El clivaje puede cortar la estratificación original"
+    ],
+    "miningContext": "Metamorfismo regional de bajo grado sobre lutitas. Su foliación penetrativa es un plano de debilidad que condiciona el diseño del sostenimiento.",
+    "hostsFor": ["Vetas de cuarzo-oro en cinturones metamórficos"]
+  },
+  {
+    "id": "esquisto",
+    "name": "Esquisto",
+    "type": "metamorfica",
+    "texture": "Foliada, esquistosidad marcada con micas visibles",
+    "composition": ["Moscovita", "Biotita", "Cuarzo", "Granate accesorio"],
+    "displayColor": "#6E6A5C",
+    "identificationKeys": [
+      "Brillo lustroso por la alineación de micas",
+      "Foliación ondulada con cristales visibles",
+      "Grado metamórfico mayor que la pizarra"
+    ],
+    "miningContext": "Su anisotropía marcada hace que la resistencia del macizo dependa fuertemente de la orientación de la labor respecto de la foliación.",
+    "hostsFor": ["Vetas de cuarzo-oro orogénicas"]
+  },
+  {
+    "id": "gneis",
+    "name": "Gneis",
+    "type": "metamorfica",
+    "texture": "Foliada, bandeado composicional de grano grueso",
+    "composition": ["Cuarzo", "Feldespato", "Biotita", "Anfíbol"],
+    "displayColor": "#9A948A",
+    "identificationKeys": [
+      "Bandas alternas claras y oscuras bien definidas",
+      "Grano grueso, similar al granito pero orientado",
+      "No se parte fácilmente en láminas como el esquisto"
+    ],
+    "miningContext": "Basamento metamórfico de alto grado. Es una roca competente, favorable para labores de gran sección, pero con bandeado que puede guiar el fracturamiento.",
+    "hostsFor": ["Basamento de depósitos IOCG"]
+  }
+]

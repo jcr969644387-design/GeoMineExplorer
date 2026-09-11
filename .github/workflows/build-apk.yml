@@ -1,0 +1,67 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      build_mode:
+        description: 'Tipo de compilación'
+        required: true
+        default: 'release'
+        type: choice
+        options: [release, debug]
+
+jobs:
+  build:
+    name: Compilar APK de Android
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.0'
+          channel: stable
+          cache: true
+
+      - name: Descargar dependencias
+        run: flutter pub get
+
+      # La carpeta android/ no se versiona a propósito: se genera aquí con la
+      # misma versión de Flutter que compila. Así se evita arrastrar en el
+      # repositorio versiones de Gradle y del plugin de Android que quedan
+      # obsoletas y rompen la compilación meses después.
+      - name: Generar el proyecto Android
+        run: bash tool/bootstrap.sh
+
+      - name: Compilar APK
+        run: flutter build apk --${{ inputs.build_mode || 'release' }} --split-per-abi
+
+      - name: Compilar APK universal
+        run: flutter build apk --${{ inputs.build_mode || 'release' }}
+
+      - name: Publicar los APK como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: geomine-explorer-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Adjuntar los APK a la release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/app/outputs/flutter-apk/*.apk

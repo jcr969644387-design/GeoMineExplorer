@@ -1,0 +1,767 @@
+[
+  {
+    "id": "cuarzo",
+    "name": "Cuarzo",
+    "formula": "SiO2",
+    "group": "Silicatos",
+    "luster": "no_metalico",
+    "hardnessMin": 7.0,
+    "hardnessMax": 7.0,
+    "streak": "blanca",
+    "colors": [
+      "incoloro",
+      "blanco lechoso",
+      "gris ahumado"
+    ],
+    "displayColor": "#D8D6D1",
+    "cleavage": "ninguno",
+    "specificGravity": 2.65,
+    "crystalSystem": "Trigonal",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Raya el vidrio con facilidad (dureza 7)",
+      "Fractura concoidea, sin planos de clivaje",
+      "Cristales prismáticos hexagonales terminados en pirámide"
+    ],
+    "economicUse": "Ganga dominante en vetas hidrotermales; no es mena, pero su textura indica el ambiente de formación.",
+    "miningRelevance": "En vetas epitermales la textura del cuarzo (bandeado, crustiforme, brechoso) es una guía de exploración: el cuarzo de textura coloforme suele acompañar los clavos de mayor ley de Au-Ag.",
+    "confusedWith": [
+      "calcita",
+      "baritina",
+      "feldespato_ortoclasa"
+    ]
+  },
+  {
+    "id": "pirita",
+    "name": "Pirita",
+    "formula": "FeS2",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 6.0,
+    "hardnessMax": 6.5,
+    "streak": "negra verdosa",
+    "colors": [
+      "amarillo latón"
+    ],
+    "displayColor": "#C9A227",
+    "cleavage": "ninguno",
+    "specificGravity": 5.0,
+    "crystalSystem": "Cúbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Dureza alta para un sulfuro: no se raya con la punta de acero",
+      "Cubos con estriado perpendicular entre caras contiguas",
+      "Raya negra verdosa, nunca amarilla"
+    ],
+    "economicUse": "Rara vez es mena; se explota como guía de mineralización y, en algunos yacimientos, por el oro que contiene en forma refractaria.",
+    "miningRelevance": "Su abundancia define el potencial de drenaje ácido de roca (DAR) de los desmontes: un desmonte piritoso mal dispuesto genera pasivo ambiental por décadas.",
+    "confusedWith": [
+      "calcopirita",
+      "oro_nativo",
+      "arsenopirita",
+      "marcasita"
+    ]
+  },
+  {
+    "id": "calcopirita",
+    "name": "Calcopirita",
+    "formula": "CuFeS2",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 3.5,
+    "hardnessMax": 4.0,
+    "streak": "negra verdosa",
+    "colors": [
+      "amarillo latón intenso",
+      "pátina irisada"
+    ],
+    "displayColor": "#D4A437",
+    "cleavage": "ninguno",
+    "specificGravity": 4.2,
+    "crystalSystem": "Tetragonal",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Se raya con la punta de acero, a diferencia de la pirita",
+      "Amarillo más intenso y a menudo con pátina tornasolada",
+      "Densidad menor que la pirita"
+    ],
+    "economicUse": "Principal mena de cobre a nivel mundial.",
+    "miningRelevance": "Es el sulfuro primario del pórfido de cobre; su presencia dominante indica que se está en la zona hipógena, por debajo del enriquecimiento supergénico.",
+    "confusedWith": [
+      "pirita",
+      "bornita",
+      "oro_nativo"
+    ]
+  },
+  {
+    "id": "galena",
+    "name": "Galena",
+    "formula": "PbS",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 2.5,
+    "hardnessMax": 2.5,
+    "streak": "gris plomo",
+    "colors": [
+      "gris plomo"
+    ],
+    "displayColor": "#8A8D91",
+    "cleavage": "perfecto",
+    "specificGravity": 7.5,
+    "crystalSystem": "Cúbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Clivaje cúbico perfecto en tres direcciones a 90°",
+      "Peso específico muy alto: se siente notoriamente pesada en la mano",
+      "Blanda, se raya con la uña reforzada o con cobre"
+    ],
+    "economicUse": "Principal mena de plomo; casi siempre portadora de plata, lo que puede dominar su valor económico.",
+    "miningRelevance": "En vetas polimetálicas peruanas la galena argentífera define la ley de Ag del concentrado; la relación galena/esfalerita condiciona el esquema de flotación selectiva.",
+    "confusedWith": [
+      "esfalerita",
+      "molibdenita",
+      "estibina"
+    ]
+  },
+  {
+    "id": "esfalerita",
+    "name": "Esfalerita",
+    "formula": "ZnS",
+    "group": "Sulfuros",
+    "luster": "no_metalico",
+    "hardnessMin": 3.5,
+    "hardnessMax": 4.0,
+    "streak": "parda amarillenta",
+    "colors": [
+      "pardo resinoso",
+      "marrón oscuro",
+      "amarillo miel"
+    ],
+    "displayColor": "#7A4A2B",
+    "cleavage": "perfecto",
+    "specificGravity": 4.0,
+    "crystalSystem": "Cúbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Brillo resinoso a adamantino, no propiamente metálico",
+      "Clivaje dodecaédrico perfecto en seis direcciones",
+      "Raya parda clara, mucho más clara que el mineral"
+    ],
+    "economicUse": "Principal mena de zinc; portadora de indio y cadmio como subproductos.",
+    "miningRelevance": "La variedad oscura rica en hierro ('marmatita') penaliza el concentrado; reconocerla en el frente permite anticipar problemas metalúrgicos.",
+    "confusedWith": [
+      "galena",
+      "rodocrosita",
+      "casiterita"
+    ]
+  },
+  {
+    "id": "bornita",
+    "name": "Bornita",
+    "formula": "Cu5FeS4",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 3.0,
+    "hardnessMax": 3.0,
+    "streak": "gris negruzca",
+    "colors": [
+      "bronce en fractura fresca",
+      "irisado azul-púrpura alterado"
+    ],
+    "displayColor": "#7A4E86",
+    "cleavage": "ninguno",
+    "specificGravity": 5.1,
+    "crystalSystem": "Ortorrómbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Pátina irisada azul-púrpura característica ('bornita pavo real')",
+      "En fractura fresca es bronce rosado",
+      "Blanda comparada con pirita"
+    ],
+    "economicUse": "Mena de cobre de alta ley (aprox. 63 % Cu).",
+    "miningRelevance": "Su aparición junto a calcosina marca la transición hacia la zona de enriquecimiento secundario de un pórfido, donde las leyes suben de forma brusca.",
+    "confusedWith": [
+      "calcopirita",
+      "covelina",
+      "calcosina"
+    ]
+  },
+  {
+    "id": "calcosina",
+    "name": "Calcosina",
+    "formula": "Cu2S",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 2.5,
+    "hardnessMax": 3.0,
+    "streak": "gris negruzca",
+    "colors": [
+      "gris plomo azulado",
+      "negro mate alterado"
+    ],
+    "displayColor": "#5A6068",
+    "cleavage": "ninguno",
+    "specificGravity": 5.6,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Muy blanda, se raya con cuchillo dejando brillo metálico",
+      "Suele formar películas o costras sobre calcopirita",
+      "Color gris azulado que oscurece con la exposición"
+    ],
+    "economicUse": "Mena de cobre de muy alta ley (aprox. 80 % Cu).",
+    "miningRelevance": "Es el mineral clave de la zona de enriquecimiento supergénico; los primeros años de vida de muchos pórfidos se sostienen sobre este horizonte.",
+    "confusedWith": [
+      "bornita",
+      "covelina",
+      "galena"
+    ]
+  },
+  {
+    "id": "covelina",
+    "name": "Covelina",
+    "formula": "CuS",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 1.5,
+    "hardnessMax": 2.0,
+    "streak": "gris negruzca",
+    "colors": [
+      "azul índigo"
+    ],
+    "displayColor": "#2E4A8C",
+    "cleavage": "perfecto",
+    "specificGravity": 4.6,
+    "crystalSystem": "Hexagonal",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Azul índigo inconfundible",
+      "Hábito laminar y tacto untuoso",
+      "Extremadamente blanda, se raya con la uña"
+    ],
+    "economicUse": "Mena de cobre secundaria, de aparición local pero de alta ley.",
+    "miningRelevance": "Acompaña a la calcosina en el enriquecimiento supergénico; su color permite mapear a simple vista el techo de esa zona en un banco o en un sondaje.",
+    "confusedWith": [
+      "bornita",
+      "calcosina"
+    ]
+  },
+  {
+    "id": "enargita",
+    "name": "Enargita",
+    "formula": "Cu3AsS4",
+    "group": "Sulfosales",
+    "luster": "metalico",
+    "hardnessMin": 3.0,
+    "hardnessMax": 3.0,
+    "streak": "negra",
+    "colors": [
+      "gris acero a negro"
+    ],
+    "displayColor": "#4A4A4E",
+    "cleavage": "perfecto",
+    "specificGravity": 4.45,
+    "crystalSystem": "Ortorrómbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Cristales prismáticos estriados de color gris acero",
+      "Clivaje prismático perfecto",
+      "Raya negra, blanda respecto de la pirita"
+    ],
+    "economicUse": "Mena de cobre con arsénico; penaliza fuertemente el concentrado.",
+    "miningRelevance": "Marca ambientes de alta sulfuración. Su presencia obliga a planificar mezclas de mineral para no exceder los límites de arsénico que aceptan las fundiciones.",
+    "confusedWith": [
+      "calcosina",
+      "tetraedrita",
+      "estibina"
+    ]
+  },
+  {
+    "id": "arsenopirita",
+    "name": "Arsenopirita",
+    "formula": "FeAsS",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 5.5,
+    "hardnessMax": 6.0,
+    "streak": "negra",
+    "colors": [
+      "blanco plateado a gris acero"
+    ],
+    "displayColor": "#A8AAA6",
+    "cleavage": "regular",
+    "specificGravity": 6.1,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Color blanco plateado más frío que la pirita",
+      "Dureza alta y densidad muy elevada",
+      "Al golpearla desprende olor a ajo (arsénico)"
+    ],
+    "economicUse": "Fuente de arsénico; frecuentemente portadora de oro refractario.",
+    "miningRelevance": "Cuando el oro está dentro de la red de la arsenopirita, la cianuración convencional falla y se requiere tostación o biooxidación: reconocerla cambia toda la ruta metalúrgica.",
+    "confusedWith": [
+      "pirita",
+      "marcasita"
+    ]
+  },
+  {
+    "id": "pirrotita",
+    "name": "Pirrotita",
+    "formula": "Fe(1-x)S",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 3.5,
+    "hardnessMax": 4.5,
+    "streak": "gris negruzca",
+    "colors": [
+      "bronce pardusco"
+    ],
+    "displayColor": "#9B7040",
+    "cleavage": "ninguno",
+    "specificGravity": 4.6,
+    "crystalSystem": "Monoclínico",
+    "magnetic": true,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Magnética (de débil a fuerte según la variedad)",
+      "Color bronce con tono pardo, más apagado que la calcopirita",
+      "Se altera rápidamente al aire"
+    ],
+    "economicUse": "Rara vez mena; en yacimientos magmáticos acompaña a pentlandita (Ni).",
+    "miningRelevance": "Su magnetismo permite separarla en planta; en mina es un indicador del ambiente reductor de un skarn distal.",
+    "confusedWith": [
+      "magnetita",
+      "calcopirita",
+      "bornita"
+    ]
+  },
+  {
+    "id": "molibdenita",
+    "name": "Molibdenita",
+    "formula": "MoS2",
+    "group": "Sulfuros",
+    "luster": "metalico",
+    "hardnessMin": 1.0,
+    "hardnessMax": 1.5,
+    "streak": "gris verdosa",
+    "colors": [
+      "gris plomo azulado"
+    ],
+    "displayColor": "#6E7378",
+    "cleavage": "perfecto",
+    "specificGravity": 4.7,
+    "crystalSystem": "Hexagonal",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Tacto graso y flexible, mancha los dedos",
+      "Hábito laminar hexagonal con clivaje basal perfecto",
+      "La más blanda de los sulfuros comunes"
+    ],
+    "economicUse": "Única mena importante de molibdeno; subproducto clave en pórfidos de Cu-Mo.",
+    "miningRelevance": "El Mo es el subproducto que sostiene el costo de operación de varios pórfidos; su distribución en vetillas finas exige un muestreo distinto al del cobre.",
+    "confusedWith": [
+      "galena",
+      "grafito"
+    ]
+  },
+  {
+    "id": "oro_nativo",
+    "name": "Oro nativo",
+    "formula": "Au",
+    "group": "Elementos nativos",
+    "luster": "metalico",
+    "hardnessMin": 2.5,
+    "hardnessMax": 3.0,
+    "streak": "amarilla dorada",
+    "colors": [
+      "amarillo dorado"
+    ],
+    "displayColor": "#E3B341",
+    "cleavage": "ninguno",
+    "specificGravity": 19.3,
+    "crystalSystem": "Cúbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Raya amarilla dorada: la prueba que lo separa de pirita y calcopirita",
+      "Maleable, se deforma sin romperse",
+      "Densidad extrema, base de la concentración gravimétrica"
+    ],
+    "economicUse": "Mena de oro; se explota desde leyes de gramos por tonelada.",
+    "miningRelevance": "En vetas epitermales el oro libre se concentra en clavos discretos; esto explica el 'efecto pepita' y por qué el muestreo de estas vetas tiene alta varianza.",
+    "confusedWith": [
+      "pirita",
+      "calcopirita"
+    ]
+  },
+  {
+    "id": "hematita",
+    "name": "Hematita",
+    "formula": "Fe2O3",
+    "group": "Óxidos",
+    "luster": "metalico",
+    "hardnessMin": 5.0,
+    "hardnessMax": 6.0,
+    "streak": "roja parduzca",
+    "colors": [
+      "gris acero especular",
+      "rojo terroso"
+    ],
+    "displayColor": "#7B3B34",
+    "cleavage": "ninguno",
+    "specificGravity": 5.3,
+    "crystalSystem": "Trigonal",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Raya rojo pardo aunque la muestra sea gris metálica: es el criterio decisivo",
+      "No es magnética en condiciones normales",
+      "Puede presentarse especular, oolítica o terrosa"
+    ],
+    "economicUse": "Principal mena de hierro junto con la magnetita.",
+    "miningRelevance": "En la zona de óxidos de un yacimiento, las manchas rojas de hematita forman parte del 'gossan', el sombrero de hierro que guía la exploración hacia sulfuros en profundidad.",
+    "confusedWith": [
+      "magnetita",
+      "goethita",
+      "limonita"
+    ]
+  },
+  {
+    "id": "magnetita",
+    "name": "Magnetita",
+    "formula": "Fe3O4",
+    "group": "Óxidos",
+    "luster": "metalico",
+    "hardnessMin": 5.5,
+    "hardnessMax": 6.5,
+    "streak": "negra",
+    "colors": [
+      "negro hierro"
+    ],
+    "displayColor": "#2B2B30",
+    "cleavage": "ninguno",
+    "specificGravity": 5.2,
+    "crystalSystem": "Cúbico",
+    "magnetic": true,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Fuertemente magnética: atrae el imán sin ambigüedad",
+      "Raya negra, no roja como la hematita",
+      "Cristales octaédricos frecuentes"
+    ],
+    "economicUse": "Mena de hierro de alta ley; también subproducto en skarns y IOCG.",
+    "miningRelevance": "Su respuesta magnética permite delimitar cuerpos mineralizados desde el aire antes de perforar, lo que abarata enormemente la exploración.",
+    "confusedWith": [
+      "hematita",
+      "pirrotita",
+      "cromita"
+    ]
+  },
+  {
+    "id": "malaquita",
+    "name": "Malaquita",
+    "formula": "Cu2(CO3)(OH)2",
+    "group": "Carbonatos",
+    "luster": "no_metalico",
+    "hardnessMin": 3.5,
+    "hardnessMax": 4.0,
+    "streak": "verde clara",
+    "colors": [
+      "verde intenso bandeado"
+    ],
+    "displayColor": "#1F7A63",
+    "cleavage": "regular",
+    "specificGravity": 4.0,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": true,
+    "diagnostic": [
+      "Verde intenso con bandeado concéntrico",
+      "Efervesce con HCl diluido por ser carbonato",
+      "Raya verde clara"
+    ],
+    "economicUse": "Mena oxidada de cobre, tratable por lixiviación ácida.",
+    "miningRelevance": "Su presencia en superficie indica cobre oxidado: define la ruta de lixiviación en pilas y electroobtención, distinta de la flotación de sulfuros.",
+    "confusedWith": [
+      "crisocola",
+      "azurita"
+    ]
+  },
+  {
+    "id": "calcita",
+    "name": "Calcita",
+    "formula": "CaCO3",
+    "group": "Carbonatos",
+    "luster": "no_metalico",
+    "hardnessMin": 3.0,
+    "hardnessMax": 3.0,
+    "streak": "blanca",
+    "colors": [
+      "incoloro",
+      "blanco",
+      "beige"
+    ],
+    "displayColor": "#E6E1D5",
+    "cleavage": "perfecto",
+    "specificGravity": 2.71,
+    "crystalSystem": "Trigonal",
+    "magnetic": false,
+    "reactsHcl": true,
+    "diagnostic": [
+      "Efervescencia intensa con HCl diluido en frío",
+      "Clivaje romboédrico perfecto en tres direcciones no perpendiculares",
+      "Doble refracción visible en cristales transparentes"
+    ],
+    "economicUse": "Ganga frecuente; también materia prima para cemento y cal.",
+    "miningRelevance": "El contenido de carbonatos en la roca encajonante determina su capacidad de neutralizar drenaje ácido, un dato central en el plan de cierre de mina.",
+    "confusedWith": [
+      "cuarzo",
+      "yeso",
+      "dolomita",
+      "baritina"
+    ]
+  },
+  {
+    "id": "rodocrosita",
+    "name": "Rodocrosita",
+    "formula": "MnCO3",
+    "group": "Carbonatos",
+    "luster": "no_metalico",
+    "hardnessMin": 3.5,
+    "hardnessMax": 4.0,
+    "streak": "blanca",
+    "colors": [
+      "rosa a rojo rosado"
+    ],
+    "displayColor": "#C7736F",
+    "cleavage": "perfecto",
+    "specificGravity": 3.7,
+    "crystalSystem": "Trigonal",
+    "magnetic": false,
+    "reactsHcl": true,
+    "diagnostic": [
+      "Color rosa característico",
+      "Efervesce con HCl, más lentamente que la calcita",
+      "Clivaje romboédrico"
+    ],
+    "economicUse": "Mena menor de manganeso; también mineral ornamental.",
+    "miningRelevance": "Es ganga típica de vetas polimetálicas de plata; su abundancia ayuda a ubicar el nivel dentro del sistema epitermal.",
+    "confusedWith": [
+      "calcita",
+      "esfalerita"
+    ]
+  },
+  {
+    "id": "baritina",
+    "name": "Baritina",
+    "formula": "BaSO4",
+    "group": "Sulfatos",
+    "luster": "no_metalico",
+    "hardnessMin": 3.0,
+    "hardnessMax": 3.5,
+    "streak": "blanca",
+    "colors": [
+      "blanco",
+      "gris",
+      "amarillento"
+    ],
+    "displayColor": "#DCDCD4",
+    "cleavage": "perfecto",
+    "specificGravity": 4.5,
+    "crystalSystem": "Ortorrómbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Densidad anómalamente alta para un mineral no metálico y claro",
+      "Clivaje basal y prismático perfecto, hábito tabular",
+      "No efervesce con HCl, a diferencia de la calcita"
+    ],
+    "economicUse": "Insumo para lodos de perforación y cargas industriales.",
+    "miningRelevance": "Frecuente en la parte alta de sistemas epitermales; su aparición en superficie sugiere que el nivel mineralizado principal puede estar más abajo.",
+    "confusedWith": [
+      "calcita",
+      "cuarzo",
+      "yeso",
+      "fluorita"
+    ]
+  },
+  {
+    "id": "yeso",
+    "name": "Yeso",
+    "formula": "CaSO4·2H2O",
+    "group": "Sulfatos",
+    "luster": "no_metalico",
+    "hardnessMin": 2.0,
+    "hardnessMax": 2.0,
+    "streak": "blanca",
+    "colors": [
+      "blanco",
+      "incoloro",
+      "gris"
+    ],
+    "displayColor": "#EFEDE6",
+    "cleavage": "perfecto",
+    "specificGravity": 2.32,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Se raya con la uña: es el patrón de dureza 2",
+      "Clivaje perfecto en láminas flexibles pero no elásticas",
+      "No efervesce con HCl"
+    ],
+    "economicUse": "Materia prima de construcción y regulador del fraguado del cemento.",
+    "miningRelevance": "En labores subterráneas, costras de yeso sobre las paredes indican circulación de aguas sulfatadas y pueden anticipar problemas de corrosión en el sostenimiento.",
+    "confusedWith": [
+      "calcita",
+      "anhidrita",
+      "baritina",
+      "moscovita"
+    ]
+  },
+  {
+    "id": "fluorita",
+    "name": "Fluorita",
+    "formula": "CaF2",
+    "group": "Halogenuros",
+    "luster": "no_metalico",
+    "hardnessMin": 4.0,
+    "hardnessMax": 4.0,
+    "streak": "blanca",
+    "colors": [
+      "violeta",
+      "verde",
+      "incoloro",
+      "amarillo"
+    ],
+    "displayColor": "#8E6FB8",
+    "cleavage": "perfecto",
+    "specificGravity": 3.18,
+    "crystalSystem": "Cúbico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Clivaje octaédrico perfecto en cuatro direcciones",
+      "Cristales cúbicos de colores intensos y variables",
+      "Es el patrón de dureza 4; no raya el vidrio"
+    ],
+    "economicUse": "Fundente siderúrgico y fuente de flúor industrial.",
+    "miningRelevance": "Indica actividad hidrotermal ligada a intrusiones; su zonación de color se usa como guía en vetas de estaño y tungsteno.",
+    "confusedWith": [
+      "cuarzo",
+      "calcita",
+      "apatito",
+      "baritina"
+    ]
+  },
+  {
+    "id": "feldespato_ortoclasa",
+    "name": "Feldespato (ortoclasa)",
+    "formula": "KAlSi3O8",
+    "group": "Silicatos",
+    "luster": "no_metalico",
+    "hardnessMin": 6.0,
+    "hardnessMax": 6.0,
+    "streak": "blanca",
+    "colors": [
+      "rosado",
+      "blanco",
+      "crema"
+    ],
+    "displayColor": "#D9A79A",
+    "cleavage": "perfecto",
+    "specificGravity": 2.56,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Dos direcciones de clivaje que se cortan a 90°",
+      "Caras de clivaje planas y brillantes, a diferencia del cuarzo",
+      "Es el patrón de dureza 6"
+    ],
+    "economicUse": "Materia prima cerámica; en minería es roca huésped más que mena.",
+    "miningRelevance": "Su alteración a sericita o arcillas define halos de alteración que se mapean para vectorizar hacia el centro de un pórfido.",
+    "confusedWith": [
+      "cuarzo",
+      "plagioclasa",
+      "calcita"
+    ]
+  },
+  {
+    "id": "moscovita",
+    "name": "Moscovita",
+    "formula": "KAl2(AlSi3O10)(OH)2",
+    "group": "Silicatos",
+    "luster": "no_metalico",
+    "hardnessMin": 2.0,
+    "hardnessMax": 2.5,
+    "streak": "blanca",
+    "colors": [
+      "incoloro",
+      "plateado",
+      "castaño claro"
+    ],
+    "displayColor": "#CFC7B0",
+    "cleavage": "perfecto",
+    "specificGravity": 2.8,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Se exfolia en láminas delgadas, transparentes y elásticas",
+      "Brillo nacarado sobre la superficie de clivaje",
+      "Muy blanda, se corta con la uña"
+    ],
+    "economicUse": "Uso industrial como aislante; en minería es indicadora de alteración.",
+    "miningRelevance": "Su variedad fina (sericita) define la alteración fílica de los pórfidos de cobre, asociada a la mayor densidad de vetillas mineralizadas.",
+    "confusedWith": [
+      "biotita",
+      "yeso",
+      "clorita"
+    ]
+  },
+  {
+    "id": "biotita",
+    "name": "Biotita",
+    "formula": "K(Mg,Fe)3(AlSi3O10)(OH)2",
+    "group": "Silicatos",
+    "luster": "no_metalico",
+    "hardnessMin": 2.5,
+    "hardnessMax": 3.0,
+    "streak": "blanca grisácea",
+    "colors": [
+      "negro pardusco",
+      "verde oscuro"
+    ],
+    "displayColor": "#3A3026",
+    "cleavage": "perfecto",
+    "specificGravity": 3.0,
+    "crystalSystem": "Monoclínico",
+    "magnetic": false,
+    "reactsHcl": false,
+    "diagnostic": [
+      "Láminas oscuras, elásticas y con brillo nacarado",
+      "Raya clara pese al color oscuro del mineral",
+      "Clivaje basal perfecto en una sola dirección"
+    ],
+    "economicUse": "Sin valor como mena; mineral formador de roca.",
+    "miningRelevance": "La biotita secundaria define la alteración potásica, el núcleo de un pórfido de cobre y su zona de mayor ley primaria.",
+    "confusedWith": [
+      "moscovita",
+      "clorita",
+      "molibdenita"
+    ]
+  }
+]

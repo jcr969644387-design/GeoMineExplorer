@@ -1,0 +1,386 @@
+[
+  {
+    "id": "ex_id_001",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 1,
+    "context": "Mapeo de la galería 340, nivel 4150.",
+    "stem": "Una muestra metálica amarilla no se raya con la punta de acero y deja raya negro verdosa. Presenta caras cúbicas con estrías perpendiculares entre caras contiguas. ¿Qué mineral es?",
+    "options": [
+      { "id": "a", "text": "Pirita", "correct": true },
+      { "id": "b", "text": "Calcopirita", "correct": false },
+      { "id": "c", "text": "Oro nativo", "correct": false },
+      { "id": "d", "text": "Bornita", "correct": false }
+    ],
+    "explanation": "La dureza 6-6,5 es decisiva: la pirita no se raya con acero, mientras que la calcopirita (3,5-4) sí. El oro daría raya amarilla dorada y sería maleable, no frágil. La bornita muestra pátina irisada y es blanda.",
+    "relatedIds": ["pirita", "calcopirita", "oro_nativo", "bornita"]
+  },
+  {
+    "id": "ex_id_002",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 1,
+    "context": "Revisión de testigos de sondaje.",
+    "stem": "Un mineral gris metálico se parte en cubos perfectos, se raya con una moneda de cobre y se siente extraordinariamente pesado para su tamaño. ¿Cuál es y qué implica económicamente?",
+    "options": [
+      { "id": "a", "text": "Galena, mena de plomo frecuentemente argentífera", "correct": true },
+      { "id": "b", "text": "Molibdenita, mena de molibdeno", "correct": false },
+      { "id": "c", "text": "Magnetita, mena de hierro", "correct": false },
+      { "id": "d", "text": "Calcosina, mena de cobre", "correct": false }
+    ],
+    "explanation": "El clivaje cúbico perfecto en tres direcciones a 90° más una densidad de 7,5 identifican la galena sin ambigüedad. La molibdenita tiene hábito laminar y tacto graso; la magnetita es magnética y no tiene clivaje; la calcosina tampoco presenta clivaje cúbico.",
+    "relatedIds": ["galena", "molibdenita", "magnetita", "calcosina"]
+  },
+  {
+    "id": "ex_id_003",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 2,
+    "context": "Muestreo de superficie en un afloramiento oxidado.",
+    "stem": "Una muestra gris acero con brillo metálico deja raya rojo pardo sobre la porcelana y no es atraída por el imán. ¿Qué mineral es?",
+    "options": [
+      { "id": "a", "text": "Hematita", "correct": true },
+      { "id": "b", "text": "Magnetita", "correct": false },
+      { "id": "c", "text": "Pirrotita", "correct": false },
+      { "id": "d", "text": "Arsenopirita", "correct": false }
+    ],
+    "explanation": "La raya roja parda es diagnóstica de la hematita aunque la muestra se vea gris metálica. La magnetita y la pirrotita responden al imán; la arsenopirita da raya negra y color blanco plateado.",
+    "relatedIds": ["hematita", "magnetita", "pirrotita", "arsenopirita"]
+  },
+  {
+    "id": "ex_id_004",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 2,
+    "context": "Sondaje diamantino en un pórfido de cobre, tramo 180-210 m.",
+    "stem": "El testigo muestra un sulfuro bronce rosado en fractura fresca que desarrolla tonos azul-púrpura irisados al exponerse, acompañado por películas gris azuladas muy blandas. ¿En qué zona del yacimiento se encuentra el tramo?",
+    "options": [
+      { "id": "a", "text": "Zona de enriquecimiento supergénico: bornita con calcosina", "correct": true },
+      { "id": "b", "text": "Zona hipógena primaria: calcopirita con pirita", "correct": false },
+      { "id": "c", "text": "Zona de óxidos: malaquita y crisocola", "correct": false },
+      { "id": "d", "text": "Zona lixiviada estéril: solo limonitas", "correct": false }
+    ],
+    "explanation": "Bornita más calcosina es la asociación característica del enriquecimiento secundario, donde las leyes de cobre suben respecto de la zona primaria. La zona hipógena está dominada por calcopirita sin pátina irisada; la zona de óxidos presenta carbonatos y silicatos verdes que efervescen o rayan distinto.",
+    "relatedIds": ["bornita", "calcosina", "calcopirita", "malaquita"]
+  },
+  {
+    "id": "ex_id_005",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 3,
+    "context": "Evaluación metalúrgica preliminar de una veta de oro.",
+    "stem": "La veta contiene oro asociado a un sulfuro blanco plateado, duro (5,5-6), muy denso, que desprende olor a ajo al golpearlo. ¿Qué consecuencia tiene este hallazgo para el proyecto?",
+    "options": [
+      { "id": "a", "text": "Es arsenopirita: el oro puede ser refractario y la cianuración directa tendría baja recuperación", "correct": true },
+      { "id": "b", "text": "Es pirita: el oro será de libre molienda y la cianuración será suficiente", "correct": false },
+      { "id": "c", "text": "Es galena: habrá que flotar plomo antes de recuperar el oro", "correct": false },
+      { "id": "d", "text": "Es molibdenita: el molibdeno será el principal subproducto", "correct": false }
+    ],
+    "explanation": "El olor a ajo por volatilización de arsénico junto con dureza y densidad altas identifican la arsenopirita. Cuando el oro está encapsulado en su red cristalina, se requiere tostación, oxidación a presión o biooxidación antes de cianurar. La pirita es amarillo latón y no da olor a ajo.",
+    "relatedIds": ["arsenopirita", "pirita", "oro_nativo", "galena"]
+  },
+  {
+    "id": "ex_id_006",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 2,
+    "context": "Determinación de ganga en una veta polimetálica.",
+    "stem": "Dos muestras blancas se ven casi idénticas. La primera efervesce con HCl diluido; la segunda no efervesce pero se siente claramente más pesada de lo esperado. ¿De qué minerales se trata?",
+    "options": [
+      { "id": "a", "text": "Calcita y baritina, respectivamente", "correct": true },
+      { "id": "b", "text": "Cuarzo y calcita, respectivamente", "correct": false },
+      { "id": "c", "text": "Yeso y cuarzo, respectivamente", "correct": false },
+      { "id": "d", "text": "Baritina y calcita, respectivamente", "correct": false }
+    ],
+    "explanation": "La efervescencia identifica el carbonato (calcita). La densidad de 4,5 en un mineral claro y no metálico es anómala y apunta a baritina, sulfato de bario. El cuarzo tiene densidad 2,65 y no efervesce; el yeso se raya con la uña.",
+    "relatedIds": ["calcita", "baritina", "cuarzo", "yeso"]
+  },
+  {
+    "id": "ex_id_007",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 3,
+    "context": "Control de calidad del concentrado de cobre.",
+    "stem": "En el frente aparece un sulfuro gris acero prismático y estriado, de dureza 3 y raya negra, junto a la calcopirita habitual. La fundición ha advertido por penalidades. ¿Qué mineral es y qué decisión operativa corresponde?",
+    "options": [
+      { "id": "a", "text": "Enargita: planificar mezcla de mineral para controlar el arsénico del concentrado", "correct": true },
+      { "id": "b", "text": "Covelina: aumentar la ley de cobre alimentada a planta", "correct": false },
+      { "id": "c", "text": "Molibdenita: separar un circuito de molibdeno", "correct": false },
+      { "id": "d", "text": "Pirita: reducir el consumo de cal en flotación", "correct": false }
+    ],
+    "explanation": "La enargita (Cu3AsS4) es una sulfosal de cobre con arsénico típica de sistemas de alta sulfuración. Las fundiciones penalizan el arsénico, por lo que la respuesta operativa es la mezcla controlada de mineral. La covelina es azul índigo y no penaliza; la molibdenita es laminar y grasa al tacto.",
+    "relatedIds": ["enargita", "covelina", "molibdenita", "pirita"]
+  },
+  {
+    "id": "ex_cl_001",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 1,
+    "context": "Mapeo geológico de superficie.",
+    "stem": "Una roca presenta cristales de tamaño similar visibles a simple vista, sin orientación preferente, con cuarzo gris translúcido, feldespato rosado y biotita negra. ¿Cómo se clasifica?",
+    "options": [
+      { "id": "a", "text": "Ígnea intrusiva ácida: granito", "correct": true },
+      { "id": "b", "text": "Ígnea extrusiva ácida: riolita", "correct": false },
+      { "id": "c", "text": "Metamórfica de alto grado: gneis", "correct": false },
+      { "id": "d", "text": "Sedimentaria clástica: arenisca", "correct": false }
+    ],
+    "explanation": "La textura fanerítica (cristales visibles y entrelazados) indica enfriamiento lento en profundidad, es decir una roca intrusiva. La riolita es su equivalente volcánico pero afanítica. El gneis tendría bandeado orientado y la arenisca, granos clásticos sin entrelazado.",
+    "relatedIds": ["granito", "riolita", "gneis", "arenisca"]
+  },
+  {
+    "id": "ex_cl_002",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 2,
+    "context": "Descripción de testigos de un proyecto de cobre.",
+    "stem": "El sondaje atraviesa una roca fanerítica de grano medio, con plagioclasa blanca dominante, algo de cuarzo, hornblenda y biotita. ¿Qué implicancia exploratoria tiene esta litología?",
+    "options": [
+      { "id": "a", "text": "Es granodiorita, la roca huésped típica de los pórfidos de Cu-Mo", "correct": true },
+      { "id": "b", "text": "Es basalto, lo que descarta mineralización de cobre porfídico", "correct": false },
+      { "id": "c", "text": "Es caliza, por lo que se debe buscar un skarn", "correct": false },
+      { "id": "d", "text": "Es toba, indicando un ambiente epitermal superficial", "correct": false }
+    ],
+    "explanation": "El predominio de plagioclasa sobre feldespato potásico con cuarzo subordinado define la granodiorita, el intrusivo más frecuentemente asociado a pórfidos de cobre. El basalto sería afanítico y oscuro; la caliza efervesce con HCl; la toba es fragmentaria y de baja densidad.",
+    "relatedIds": ["granodiorita", "basalto", "caliza", "toba"]
+  },
+  {
+    "id": "ex_cl_003",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 2,
+    "context": "Reconocimiento en un frente de mina subterránea.",
+    "stem": "Una roca clara efervesce con HCl y muestra cristales visibles de aspecto sacaroideo, sin fósiles. A pocos metros aparece un cuerpo intrusivo. ¿Qué se está observando y qué se debería buscar?",
+    "options": [
+      { "id": "a", "text": "Mármol: caliza recristalizada por metamorfismo de contacto; conviene buscar skarn en el contacto", "correct": true },
+      { "id": "b", "text": "Caliza inalterada: no hay indicio de intrusión cercana", "correct": false },
+      { "id": "c", "text": "Cuarcita: metamorfismo de una arenisca, sin relación con el intrusivo", "correct": false },
+      { "id": "d", "text": "Gneis: metamorfismo regional de alto grado", "correct": false }
+    ],
+    "explanation": "La recristalización que destruye los fósiles y genera textura sacaroidea, manteniendo la efervescencia, define el mármol. Indica una aureola térmica y por lo tanto un contacto intrusivo cercano, el lugar donde se desarrolla el skarn mineralizado. Una cuarcita no efervesce.",
+    "relatedIds": ["marmol", "caliza", "skarn", "gneis"]
+  },
+  {
+    "id": "ex_cl_004",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 1,
+    "context": "Levantamiento de un talud en mina a cielo abierto.",
+    "stem": "Una roca oscura se parte en láminas delgadas paralelas, tiene grano imperceptible y se raya con la uña. ¿Cómo la clasifica y qué riesgo operativo introduce?",
+    "options": [
+      { "id": "a", "text": "Lutita: plano de debilidad que puede controlar deslizamientos en el talud", "correct": true },
+      { "id": "b", "text": "Basalto: roca competente sin riesgo estructural", "correct": false },
+      { "id": "c", "text": "Gneis: bandeado composicional de alto grado", "correct": false },
+      { "id": "d", "text": "Conglomerado: clastos redondeados en matriz fina", "correct": false }
+    ],
+    "explanation": "La fisilidad, el grano muy fino y la dureza baja definen la lutita. Su anisotropía la convierte en el plano de falla preferente en taludes, sobre todo si buza hacia la excavación. El basalto es afanítico pero duro y no fisible.",
+    "relatedIds": ["lutita", "basalto", "gneis", "conglomerado"]
+  },
+  {
+    "id": "ex_cl_005",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 3,
+    "context": "Interpretación de un contacto en una mina polimetálica.",
+    "stem": "En el contacto entre una diorita y una secuencia calcárea aparece una roca bandeada con granates pardo-rojizos, piroxeno verde y sulfuros diseminados. ¿Qué es y por qué importa?",
+    "options": [
+      { "id": "a", "text": "Skarn: producto de metasomatismo de contacto y objetivo directo de exploración de Zn-Pb-Ag", "correct": true },
+      { "id": "b", "text": "Conglomerado mineralizado de origen sedimentario", "correct": false },
+      { "id": "c", "text": "Esquisto de metamorfismo regional", "correct": false },
+      { "id": "d", "text": "Brecha de falla con harina de roca", "correct": false }
+    ],
+    "explanation": "Granate y piroxeno cálcicos formados en el contacto intrusivo-caliza definen un skarn, formado por reemplazamiento metasomático. Es un objetivo de perforación prioritario. Un esquisto tendría foliación micácea y una brecha de falla, matriz triturada sin silicatos cálcicos.",
+    "relatedIds": ["skarn", "conglomerado", "esquisto", "diorita"]
+  },
+  {
+    "id": "ex_es_001",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 2,
+    "context": "Avance de la galería principal, nivel 4200.",
+    "stem": "La veta se corta bruscamente contra un plano de falla subvertical. Sobre el espejo de falla se observan estrías horizontales. ¿Dónde debe buscarse la continuación de la veta?",
+    "options": [
+      { "id": "a", "text": "Lateralmente, mediante cruceros a ambos lados del plano de falla", "correct": true },
+      { "id": "b", "text": "En profundidad, mediante una rampa descendente", "correct": false },
+      { "id": "c", "text": "Hacia arriba, mediante una chimenea", "correct": false },
+      { "id": "d", "text": "La veta terminó y no tiene continuación", "correct": false }
+    ],
+    "explanation": "Las estrías horizontales indican desplazamiento de rumbo, es decir movimiento lateral. El bloque desplazado se encuentra a un costado, por lo que la búsqueda se hace con cruceros y no profundizando. Profundizar sería gastar metros en un bloque que no se movió verticalmente.",
+    "relatedIds": ["falla_rumbo", "veta_tabular"]
+  },
+  {
+    "id": "ex_es_002",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 3,
+    "context": "Modelamiento de recursos a partir de sondajes.",
+    "stem": "Un sondaje intersecta dos veces el mismo manto mineralizado, con la misma litología de caja y la misma secuencia de alteración. Entre ambas intersecciones hay una zona de roca triturada con estrías inclinadas. ¿Cuál es la interpretación correcta?",
+    "options": [
+      { "id": "a", "text": "Una falla inversa repitió el manto: se trata de un solo cuerpo, no dos", "correct": true },
+      { "id": "b", "text": "Son dos mantos independientes y el recurso se duplica", "correct": false },
+      { "id": "c", "text": "Es un pliegue isoclinal sin implicancia en el cálculo de recursos", "correct": false },
+      { "id": "d", "text": "Es un error de perforación y debe descartarse el sondaje", "correct": false }
+    ],
+    "explanation": "Las fallas inversas cabalgan el bloque techo sobre el piso y provocan repetición estratigráfica. Contabilizar ambas intersecciones como cuerpos distintos duplicaría artificialmente el recurso, un error con consecuencias directas sobre la valorización del proyecto.",
+    "relatedIds": ["falla_inversa", "veta_tabular"]
+  },
+  {
+    "id": "ex_es_003",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 1,
+    "context": "Medición de potencia en un frente de explotación.",
+    "stem": "Un estudiante mide la potencia de la veta a lo largo del eje de avance de la galería, que corta la veta en ángulo oblicuo. ¿Qué consecuencia tiene esta medición?",
+    "options": [
+      { "id": "a", "text": "Sobreestima la potencia real y, con ella, el tonelaje del bloque", "correct": true },
+      { "id": "b", "text": "Subestima la potencia real porque ignora la caja techo", "correct": false },
+      { "id": "c", "text": "No tiene efecto porque la potencia es independiente de la dirección", "correct": false },
+      { "id": "d", "text": "Sobreestima la ley pero no afecta el tonelaje", "correct": false }
+    ],
+    "explanation": "La potencia debe medirse perpendicular a las paredes de la veta. Cualquier medición oblicua entrega la potencia aparente, siempre mayor que la verdadera, e infla el cálculo de tonelaje del bloque.",
+    "relatedIds": ["veta_tabular"]
+  },
+  {
+    "id": "ex_es_004",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 2,
+    "context": "Selección de método de explotación.",
+    "stem": "Un cuerpo mineralizado corresponde a una red densa de vetillas entrecruzadas sin orientación dominante, con ley baja pero homogénea en un volumen amplio. ¿Qué se está describiendo y qué método favorece?",
+    "options": [
+      { "id": "a", "text": "Un stockwork, que favorece métodos masivos como block caving o tajo abierto", "correct": true },
+      { "id": "b", "text": "Una veta tabular angosta, que favorece corte y relleno", "correct": false },
+      { "id": "c", "text": "Una brecha hidrotermal, que exige explotación selectiva de alta ley", "correct": false },
+      { "id": "d", "text": "Un manto sedimentario, que favorece cámaras y pilares", "correct": false }
+    ],
+    "explanation": "El stockwork mineraliza el volumen completo de roca y no un plano, de modo que no hay nada que seguir selectivamente. Su viabilidad depende de mover grandes tonelajes a bajo costo unitario, lo que apunta a métodos masivos.",
+    "relatedIds": ["stockwork", "veta_tabular", "brecha_hidrotermal"]
+  },
+  {
+    "id": "ex_es_005",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 2,
+    "context": "Levantamiento geomecánico de una labor.",
+    "stem": "Se registra una familia de fracturas con espaciado regular de 20 cm, sin desplazamiento entre bloques y sin estrías. ¿Qué son y para qué se usa este dato?",
+    "options": [
+      { "id": "a", "text": "Diaclasas: alimentan el cálculo de RMR y el diseño de sostenimiento y voladura", "correct": true },
+      { "id": "b", "text": "Fallas normales: definen el desplazamiento del bloque techo", "correct": false },
+      { "id": "c", "text": "Planos de estratificación: definen la edad relativa de las capas", "correct": false },
+      { "id": "d", "text": "Vetillas de stockwork: definen la ley del bloque", "correct": false }
+    ],
+    "explanation": "La ausencia de desplazamiento distingue la diaclasa de la falla. El espaciado, junto con la persistencia, rugosidad, apertura y relleno, son parámetros de entrada directos de la clasificación RMR y condicionan el sostenimiento y el diseño de la malla de perforación.",
+    "relatedIds": ["diaclasa", "falla_normal", "stockwork"]
+  },
+  {
+    "id": "ex_es_006",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 3,
+    "context": "Exploración regional en una secuencia plegada.",
+    "stem": "Un manto mineralizado está plegado. En el anticlinal aparece parcialmente erosionado; en el sinclinal adyacente se conserva pero a mayor profundidad. Con presupuesto para una sola campaña, ¿qué recomienda?",
+    "options": [
+      { "id": "a", "text": "Perforar el sinclinal: aunque es más profundo, allí el manto se conserva completo", "correct": true },
+      { "id": "b", "text": "Perforar el anticlinal por ser más somero y económico", "correct": false },
+      { "id": "c", "text": "Perforar ambos flancos con la mitad del presupuesto cada uno", "correct": false },
+      { "id": "d", "text": "Descartar el área por complejidad estructural", "correct": false }
+    ],
+    "explanation": "El sinclinal preserva en su núcleo las unidades más jóvenes, incluido el manto que en el anticlinal ya fue erosionado. La mayor profundidad encarece cada metro perforado, pero la probabilidad de intersectar el cuerpo completo es sustancialmente mayor. Dividir el presupuesto suele producir dos campañas no concluyentes.",
+    "relatedIds": ["pliegue_sinclinal", "pliegue_anticlinal"]
+  },
+  {
+    "id": "ex_id_008",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 1,
+    "context": "Práctica de laboratorio de mineralogía.",
+    "stem": "Una lámina mineral se raya con la uña, se exfolia en hojas flexibles y no efervesce con HCl. Su densidad es baja (2,32). ¿Qué mineral es?",
+    "options": [
+      { "id": "a", "text": "Yeso", "correct": true },
+      { "id": "b", "text": "Calcita", "correct": false },
+      { "id": "c", "text": "Moscovita", "correct": false },
+      { "id": "d", "text": "Baritina", "correct": false }
+    ],
+    "explanation": "El yeso es el patrón de dureza 2 de la escala de Mohs y no efervesce, lo que lo separa de la calcita. La moscovita produce láminas elásticas, no solo flexibles, y la baritina es notablemente más densa.",
+    "relatedIds": ["yeso", "calcita", "moscovita", "baritina"]
+  },
+  {
+    "id": "ex_id_009",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 2,
+    "context": "Reconocimiento del sombrero de hierro de un prospecto.",
+    "stem": "En superficie se observa un mineral verde intenso con bandeado concéntrico que efervesce con HCl diluido. ¿Qué indica para la ruta de procesamiento del proyecto?",
+    "options": [
+      { "id": "a", "text": "Malaquita: cobre oxidado, tratable por lixiviación ácida y electroobtención", "correct": true },
+      { "id": "b", "text": "Calcopirita: cobre primario, tratable por flotación convencional", "correct": false },
+      { "id": "c", "text": "Covelina: cobre supergénico, tratable por flotación", "correct": false },
+      { "id": "d", "text": "Epidota: alteración propilítica sin valor económico", "correct": false }
+    ],
+    "explanation": "El verde bandeado que efervesce es carbonato de cobre: malaquita. Los óxidos de cobre no flotan bien y se tratan por lixiviación en pilas seguida de extracción por solventes y electroobtención, una ruta distinta a la de los sulfuros.",
+    "relatedIds": ["malaquita", "calcopirita", "covelina"]
+  },
+  {
+    "id": "ex_id_010",
+    "module": "identificacion",
+    "competency": "identificacion_minerales",
+    "difficulty": 3,
+    "context": "Discriminación de dos sulfuros grises en el frente.",
+    "stem": "Dos muestras grises metálicas se confunden. La primera es laminar, grasa al tacto y mancha los dedos; la segunda se parte en cubos y es mucho más densa. ¿Cuáles son?",
+    "options": [
+      { "id": "a", "text": "Molibdenita y galena, respectivamente", "correct": true },
+      { "id": "b", "text": "Galena y molibdenita, respectivamente", "correct": false },
+      { "id": "c", "text": "Calcosina y molibdenita, respectivamente", "correct": false },
+      { "id": "d", "text": "Molibdenita y calcosina, respectivamente", "correct": false }
+    ],
+    "explanation": "La molibdenita es la más blanda de los sulfuros comunes (1-1,5), laminar y untuosa. La galena tiene clivaje cúbico perfecto y una densidad de 7,5, muy superior. La calcosina no presenta clivaje cúbico ni hábito laminar.",
+    "relatedIds": ["molibdenita", "galena", "calcosina"]
+  },
+  {
+    "id": "ex_cl_006",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 2,
+    "context": "Mapeo de un distrito epitermal.",
+    "stem": "La roca de caja es gris verdosa, de matriz muy fina, con fenocristales blancos de plagioclasa. ¿Qué roca es y qué ambiente mineralizado sugiere?",
+    "options": [
+      { "id": "a", "text": "Andesita: roca huésped característica de vetas epitermales de Au-Ag en los Andes", "correct": true },
+      { "id": "b", "text": "Granito: ambiente de vetas de estaño y wolframio", "correct": false },
+      { "id": "c", "text": "Caliza: ambiente de skarn polimetálico", "correct": false },
+      { "id": "d", "text": "Lutita: ambiente sedimentario sin mineralización", "correct": false }
+    ],
+    "explanation": "La textura porfídica con matriz afanítica indica una roca volcánica; la composición intermedia con plagioclasa dominante define la andesita. Es la caja habitual de los sistemas epitermales andinos, donde la alteración argílica o propilítica guía hacia la veta.",
+    "relatedIds": ["andesita", "granito", "caliza", "lutita"]
+  },
+  {
+    "id": "ex_cl_007",
+    "module": "clasificacion",
+    "competency": "clasificacion_rocas",
+    "difficulty": 1,
+    "context": "Descripción litológica básica.",
+    "stem": "Una roca está formada por clastos redondeados mayores a 2 mm, de composición variada, englobados en una matriz arenosa. ¿Cómo se clasifica?",
+    "options": [
+      { "id": "a", "text": "Conglomerado, roca sedimentaria clástica gruesa", "correct": true },
+      { "id": "b", "text": "Brecha hidrotermal, con clastos angulosos y matriz mineralizada", "correct": false },
+      { "id": "c", "text": "Toba volcánica, con fragmentos piroclásticos", "correct": false },
+      { "id": "d", "text": "Granito, con cristales entrelazados", "correct": false }
+    ],
+    "explanation": "El redondeamiento de los clastos indica transporte sedimentario y define el conglomerado. Si los clastos fueran angulosos se trataría de una brecha; el granito no tiene clastos sino cristales formados in situ.",
+    "relatedIds": ["conglomerado", "brecha_hidrotermal", "toba", "granito"]
+  },
+  {
+    "id": "ex_es_007",
+    "module": "estructuras",
+    "competency": "interpretacion_estructuras",
+    "difficulty": 2,
+    "context": "Exploración en el contacto de un intrusivo con calizas.",
+    "stem": "El equipo debe decidir dónde ubicar las plataformas de perforación en un sistema de skarn. ¿Cuál es la recomendación técnicamente correcta?",
+    "options": [
+      { "id": "a", "text": "Sobre el contacto intrusivo-caliza, donde se desarrolla el skarn", "correct": true },
+      { "id": "b", "text": "En el centro del cuerpo intrusivo, donde la roca es más fresca", "correct": false },
+      { "id": "c", "text": "En la caliza alejada del contacto, fuera de la aureola térmica", "correct": false },
+      { "id": "d", "text": "En la cobertura aluvial, para abaratar la perforación", "correct": false }
+    ],
+    "explanation": "El skarn se forma por reemplazamiento metasomático en la zona de contacto, donde los fluidos del intrusivo reaccionan con la caliza. El interior del intrusivo suele ser estéril y la caliza distal queda fuera de la aureola de reacción.",
+    "relatedIds": ["contacto_intrusivo", "skarn", "caliza"]
+  }
+]

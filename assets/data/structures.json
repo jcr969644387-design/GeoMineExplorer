@@ -1,0 +1,170 @@
+[
+  {
+    "id": "veta_tabular",
+    "name": "Veta tabular",
+    "category": "veta",
+    "definition": "Cuerpo mineralizado de forma planar que rellena una fractura preexistente, con dos paredes definidas: caja techo y caja piso.",
+    "recognitionKeys": [
+      "Contactos netos contra la roca de caja",
+      "Potencia medible perpendicular a las paredes",
+      "Relleno de cuarzo, carbonatos y sulfuros distinto de la roca encajonante"
+    ],
+    "miningImplication": "La potencia y el buzamiento definen el método de explotación. Vetas angostas y de fuerte buzamiento favorecen corte y relleno; potencias mayores permiten sublevel stoping.",
+    "keyParameters": ["Rumbo", "Buzamiento", "Potencia", "Ley media", "Continuidad"],
+    "commonError": "Medir la potencia en la dirección de avance de la labor en lugar de perpendicular a las paredes: se sobreestima la potencia real y con ella el tonelaje."
+  },
+  {
+    "id": "veta_ramificada",
+    "name": "Sistema de vetas ramificadas",
+    "category": "veta",
+    "definition": "Conjunto de vetas que se dividen y vuelven a unirse, formando lazos cimoides y ramales de menor potencia.",
+    "recognitionKeys": [
+      "Ramales que divergen del cuerpo principal en ángulo agudo",
+      "Zonas de unión con engrosamiento de la potencia",
+      "Leyes erráticas entre ramales"
+    ],
+    "miningImplication": "Complica el diseño de mallas de perforación y la dilución. Los lazos cimoides suelen concentrar mayor ley, por lo que definen los clavos económicos.",
+    "keyParameters": ["Ángulo de ramificación", "Potencia por ramal", "Dilución esperada"],
+    "commonError": "Asumir que la ley del ramal es igual a la de la veta principal al calcular reservas."
+  },
+  {
+    "id": "stockwork",
+    "name": "Stockwork",
+    "category": "veta",
+    "definition": "Red densa y multidireccional de vetillas milimétricas a centimétricas que mineraliza un volumen completo de roca en lugar de un plano.",
+    "recognitionKeys": [
+      "Vetillas entrecruzadas sin orientación dominante",
+      "La roca completa resulta económica, no solo las vetillas",
+      "Frecuente en el núcleo de pórfidos"
+    ],
+    "miningImplication": "Habilita métodos masivos de bajo costo unitario como block caving o tajo abierto, porque no hay un cuerpo estrecho que seguir selectivamente.",
+    "keyParameters": ["Densidad de vetillas por metro", "Ley de la roca total", "Volumen mineralizado"],
+    "commonError": "Muestrear solo las vetillas y no la roca intersticial, lo que sesga la ley hacia arriba."
+  },
+  {
+    "id": "diseminado",
+    "name": "Mineralización diseminada",
+    "category": "veta",
+    "definition": "Sulfuros distribuidos como granos aislados dentro de la masa de la roca, sin estructura de relleno visible.",
+    "recognitionKeys": [
+      "Granos finos de sulfuros dispersos en la matriz",
+      "Sin contactos netos ni geometría planar",
+      "Leyes bajas pero homogéneas en grandes volúmenes"
+    ],
+    "miningImplication": "Obliga a operar grandes tonelajes con leyes bajas: la viabilidad depende de la escala y del costo unitario, no de la ley puntual.",
+    "keyParameters": ["Ley media", "Tonelaje", "Ley de corte"],
+    "commonError": "Descartar el cuerpo por ley baja sin evaluar el tonelaje total y el costo de operación a escala."
+  },
+  {
+    "id": "brecha_hidrotermal",
+    "name": "Brecha hidrotermal",
+    "category": "veta",
+    "definition": "Roca fragmentada por la presión de fluidos hidrotermales, cuyos espacios entre clastos quedan rellenos de minerales de mena y ganga.",
+    "recognitionKeys": [
+      "Clastos angulosos de la roca de caja",
+      "Matriz de relleno mineralizado entre los clastos",
+      "Geometría de chimenea o cuerpo irregular"
+    ],
+    "miningImplication": "Suele concentrar leyes altas pero con geometría difícil de modelar; exige perforación cerrada para delimitar el cuerpo.",
+    "keyParameters": ["Proporción clasto/matriz", "Geometría del cuerpo", "Ley de la matriz"],
+    "commonError": "Confundirla con una brecha de falla: la hidrotermal tiene matriz mineralizada, la de falla tiene harina de roca."
+  },
+  {
+    "id": "falla_normal",
+    "name": "Falla normal",
+    "category": "falla",
+    "definition": "Falla en la que el bloque techo desciende respecto del bloque piso, producto de un régimen de esfuerzos extensional.",
+    "recognitionKeys": [
+      "Bloque techo desplazado hacia abajo",
+      "Buzamiento típico entre 45° y 70°",
+      "Asociada a extensión regional y a cuencas"
+    ],
+    "miningImplication": "Corta y desplaza vetas. Para recuperar la veta perdida se debe reconocer cuál bloque bajó y perforar en consecuencia; equivocarse cuesta metros de exploración estéril.",
+    "keyParameters": ["Salto", "Rumbo y buzamiento del plano", "Sentido de desplazamiento"],
+    "commonError": "Determinar el sentido de desplazamiento sin usar indicadores cinemáticos (estrías, escalones, arrastre) y solo por la geometría aparente en el frente."
+  },
+  {
+    "id": "falla_inversa",
+    "name": "Falla inversa",
+    "category": "falla",
+    "definition": "Falla en la que el bloque techo asciende respecto del bloque piso, producto de un régimen compresivo.",
+    "recognitionKeys": [
+      "Bloque techo desplazado hacia arriba",
+      "Buzamiento generalmente menor a 45° en cabalgamientos",
+      "Puede repetir unidades estratigráficas en un sondaje"
+    ],
+    "miningImplication": "Puede duplicar el cuerpo mineralizado, generando dos intersecciones del mismo manto. No reconocerlo lleva a duplicar el recurso en el modelo de bloques.",
+    "keyParameters": ["Salto", "Ángulo del plano", "Repetición estratigráfica"],
+    "commonError": "Interpretar dos intersecciones de la misma veta como dos cuerpos independientes."
+  },
+  {
+    "id": "falla_rumbo",
+    "name": "Falla de rumbo",
+    "category": "falla",
+    "definition": "Falla con desplazamiento predominantemente horizontal, paralelo al rumbo del plano de falla.",
+    "recognitionKeys": [
+      "Plano subvertical",
+      "Estrías horizontales sobre el espejo de falla",
+      "Desplazamiento lateral de los contactos en planta"
+    ],
+    "miningImplication": "El desplazamiento se aprecia mejor en planta que en sección. Buscar la veta desplazada requiere cruceros laterales, no profundizar.",
+    "keyParameters": ["Desplazamiento horizontal", "Sentido dextral o sinestral"],
+    "commonError": "Buscar la continuación de la veta hacia abajo cuando el desplazamiento fue lateral."
+  },
+  {
+    "id": "diaclasa",
+    "name": "Diaclasa",
+    "category": "fractura",
+    "definition": "Fractura de la roca sin desplazamiento apreciable entre sus bloques.",
+    "recognitionKeys": [
+      "Superficie de fractura sin estrías ni desplazamiento",
+      "Suelen formar familias con orientación sistemática",
+      "Espaciado regular medible"
+    ],
+    "miningImplication": "El espaciado y la condición de las diaclasas alimentan directamente el cálculo de RMR y definen el tipo de sostenimiento y el diseño de voladura.",
+    "keyParameters": ["Espaciado", "Persistencia", "Rugosidad", "Apertura", "Relleno"],
+    "commonError": "Registrar solo la orientación y olvidar la condición de la discontinuidad, que pesa fuertemente en la clasificación geomecánica."
+  },
+  {
+    "id": "pliegue_anticlinal",
+    "name": "Anticlinal",
+    "category": "pliegue",
+    "definition": "Pliegue convexo hacia arriba en el que las capas más antiguas quedan en el núcleo.",
+    "recognitionKeys": [
+      "Capas que buzan en sentidos opuestos alejándose del eje",
+      "Unidades más antiguas en el centro de la estructura",
+      "Charnela identificable en sección"
+    ],
+    "miningImplication": "La charnela concentra fracturamiento por extensión y puede actuar como trampa de fluidos mineralizantes, generando engrosamiento de los mantos.",
+    "keyParameters": ["Orientación del eje", "Inmersión", "Apertura del pliegue"],
+    "commonError": "Interpretar la estructura como un solo manto continuo y subestimar el engrosamiento en la charnela."
+  },
+  {
+    "id": "pliegue_sinclinal",
+    "name": "Sinclinal",
+    "category": "pliegue",
+    "definition": "Pliegue cóncavo hacia arriba en el que las capas más jóvenes quedan en el núcleo.",
+    "recognitionKeys": [
+      "Capas que buzan hacia el eje desde ambos lados",
+      "Unidades más jóvenes en el centro",
+      "Frecuentemente conserva unidades erosionadas en los flancos"
+    ],
+    "miningImplication": "Preserva mantos que en los anticlinales ya fueron erosionados, lo que puede hacerlo el objetivo de exploración más rentable a pesar de estar más profundo.",
+    "keyParameters": ["Orientación del eje", "Profundidad del núcleo"],
+    "commonError": "Descartar el sinclinal por profundidad sin evaluar que allí se conserva el manto completo."
+  },
+  {
+    "id": "contacto_intrusivo",
+    "name": "Contacto intrusivo",
+    "category": "contacto",
+    "definition": "Superficie de contacto entre un cuerpo ígneo intrusivo y la roca que atraviesa, con aureola de metamorfismo térmico.",
+    "recognitionKeys": [
+      "Cambio brusco de litología",
+      "Aureola de recristalización en la roca de caja",
+      "Apófisis y diques que penetran la roca encajonante"
+    ],
+    "miningImplication": "Cuando el intrusivo corta calizas, el contacto es el lugar donde se desarrolla el skarn: es un objetivo de perforación prioritario.",
+    "keyParameters": ["Geometría del contacto", "Ancho de la aureola", "Litología de caja"],
+    "commonError": "Perforar el centro del intrusivo en lugar del contacto, donde se concentra la mineralización de skarn."
+  }
+]

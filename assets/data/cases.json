@@ -1,0 +1,204 @@
+[
+  {
+    "id": "caso_veta_perdida",
+    "title": "La veta que desapareció",
+    "deposit": "Veta epitermal de Au-Ag en andesitas",
+    "difficulty": 2,
+    "competency": "interpretacion_estructuras",
+    "briefing": "Usted es geólogo de mina. La galería 340 sigue la veta San Rafael desde hace ocho meses con potencia estable de 1,2 m y ley de 8 g/t Au. Esta mañana el frente amaneció en roca estéril. El jefe de mina necesita una decisión hoy: cada día de avance a ciegas cuesta cerca de 4 000 USD.",
+    "steps": [
+      {
+        "id": "s1",
+        "title": "Leer el frente",
+        "narrative": "En el frente ya no hay veta. Aparece un plano pulido de roca, de disposición subvertical, con una franja de roca triturada de unos 30 cm de espesor. La superficie tiene estrías bien marcadas, inclinadas unos 20° respecto de la horizontal.",
+        "question": "¿Qué estructura está cortando la veta?",
+        "options": [
+          { "id": "a", "text": "Una falla: el plano pulido con estrías y la zona triturada son diagnósticos", "correct": true },
+          { "id": "b", "text": "Una diaclasa: es una fractura sin desplazamiento", "correct": false },
+          { "id": "c", "text": "Un contacto intrusivo: cambia la litología", "correct": false },
+          { "id": "d", "text": "El final natural de la veta por agotamiento del fluido", "correct": false }
+        ],
+        "explanation": "Las estrías y la brecha de falla con harina de roca indican que hubo movimiento entre bloques: es una falla. Una diaclasa no presentaría estrías ni zona triturada, y un contacto intrusivo mostraría un cambio litológico con aureola térmica, no un plano pulido."
+      },
+      {
+        "id": "s2",
+        "title": "Determinar el tipo de movimiento",
+        "narrative": "Las estrías son casi horizontales, con una inclinación de solo 20°. Sobre el plano se reconocen escalones que indican el sentido del movimiento. En el mapeo de superficie, un dique que cruza la zona aparece desplazado 45 m hacia el este en planta.",
+        "question": "¿Qué tipo de falla es y cómo debe orientarse la búsqueda?",
+        "options": [
+          { "id": "a", "text": "Falla de rumbo: el desplazamiento es lateral, hay que explorar con cruceros horizontales", "correct": true },
+          { "id": "b", "text": "Falla normal: el bloque techo bajó, hay que profundizar con una rampa", "correct": false },
+          { "id": "c", "text": "Falla inversa: el bloque techo subió, hay que explorar con una chimenea", "correct": false },
+          { "id": "d", "text": "Falla de rumbo, pero el desplazamiento es irrelevante para ubicar la veta", "correct": false }
+        ],
+        "explanation": "Estrías subhorizontales más desplazamiento lateral observado en planta definen una falla de rumbo. La veta desplazada está al costado, no arriba ni abajo. Perforar una rampa descendente consumiría semanas de avance sin intersectar el cuerpo."
+      },
+      {
+        "id": "s3",
+        "title": "Dimensionar el crucero",
+        "narrative": "El dique de referencia está desplazado 45 m hacia el este. La veta San Rafael y el dique tienen rumbos similares y ambos están cortados por la misma falla, de modo que ambos habrían sufrido el mismo desplazamiento.",
+        "question": "¿Qué labor recomienda ejecutar?",
+        "options": [
+          { "id": "a", "text": "Un crucero de aproximadamente 45 m hacia el este desde el frente actual", "correct": true },
+          { "id": "b", "text": "Un crucero de 45 m hacia el oeste, en sentido opuesto al dique", "correct": false },
+          { "id": "c", "text": "Continuar el avance recto otros 45 m esperando reencontrar la veta", "correct": false },
+          { "id": "d", "text": "Perforar sondajes verticales de 45 m desde superficie", "correct": false }
+        ],
+        "explanation": "Cuando un marcador geológico cortado por la misma falla muestra un desplazamiento conocido, ese valor es la mejor estimación disponible del salto que sufrió la veta. Un crucero dirigido es mucho más barato que avanzar a ciegas o perforar desde superficie a través de toda la cobertura."
+      },
+      {
+        "id": "s4",
+        "title": "Controlar el riesgo",
+        "narrative": "Antes de autorizar el crucero, el jefe de mina pregunta qué puede salir mal con esta interpretación.",
+        "question": "¿Cuál es la principal limitación del razonamiento aplicado?",
+        "options": [
+          { "id": "a", "text": "El dique y la veta podrían tener orientaciones distintas, de modo que el desplazamiento aparente no sea idéntico; conviene confirmar con un sondaje corto antes del crucero", "correct": true },
+          { "id": "b", "text": "Ninguna: el desplazamiento del dique determina con exactitud la posición de la veta", "correct": false },
+          { "id": "c", "text": "El error está en haber usado estrías, que no son indicadores confiables", "correct": false },
+          { "id": "d", "text": "El problema es que las fallas de rumbo nunca desplazan vetas", "correct": false }
+        ],
+        "explanation": "El desplazamiento aparente de un marcador depende de su orientación respecto del plano de falla. Dos estructuras con rumbos distintos cortadas por la misma falla muestran desplazamientos aparentes diferentes. Un sondaje corto y económico desde el frente permite validar la hipótesis antes de comprometer el crucero completo."
+      }
+    ],
+    "closing": "El razonamiento clave de este caso no es identificar la falla, sino usar un marcador geológico independiente para cuantificar el salto y, sobre todo, reconocer la incertidumbre del método antes de comprometer presupuesto."
+  },
+  {
+    "id": "caso_porfido_zonacion",
+    "title": "Leer un sondaje de pórfido",
+    "deposit": "Pórfido de Cu-Mo en granodiorita",
+    "difficulty": 3,
+    "competency": "identificacion_minerales",
+    "briefing": "Llega a la sala de logueo el sondaje DDH-112, de 400 m. Debe describir la zonación vertical y recomendar qué tramos enviar a ensayo prioritario. El laboratorio solo puede procesar un tercio de las muestras esta semana.",
+    "steps": [
+      {
+        "id": "s1",
+        "title": "Tramo 0-60 m",
+        "narrative": "Roca de color pardo rojizo, friable, con manchas rojas terrosas y costras pardas. No se observan sulfuros. La raya de los minerales opacos es rojo parda.",
+        "question": "¿Qué zona representa este tramo?",
+        "options": [
+          { "id": "a", "text": "Zona lixiviada con gossan de hematita y limonita: leyes de cobre bajas", "correct": true },
+          { "id": "b", "text": "Zona de enriquecimiento supergénico: leyes altas de cobre", "correct": false },
+          { "id": "c", "text": "Zona hipógena primaria: calcopirita y pirita", "correct": false },
+          { "id": "d", "text": "Roca estéril sin relación con el sistema mineralizado", "correct": false }
+        ],
+        "explanation": "La raya rojo parda identifica la hematita; junto con las limonitas forma el gossan o sombrero de hierro. El cobre fue lixiviado y migró hacia abajo, por lo que este tramo tiene leyes bajas pero es una guía de exploración valiosa: indica que hay un sistema debajo."
+      },
+      {
+        "id": "s2",
+        "title": "Tramo 60-95 m",
+        "narrative": "Aparecen minerales verdes bandeados que efervescen con HCl diluido, junto a costras de color celeste verdoso que no efervescen.",
+        "question": "¿Qué tipo de mineralización es y qué ruta de proceso implica?",
+        "options": [
+          { "id": "a", "text": "Óxidos de cobre (malaquita y crisocola): ruta de lixiviación ácida y electroobtención", "correct": true },
+          { "id": "b", "text": "Sulfuros primarios: ruta de flotación convencional", "correct": false },
+          { "id": "c", "text": "Ganga de calcita sin cobre: descartar el tramo", "correct": false },
+          { "id": "d", "text": "Alteración propilítica con epidota: sin valor económico", "correct": false }
+        ],
+        "explanation": "El verde bandeado que efervesce es malaquita, un carbonato de cobre. La zona de óxidos se trata por lixiviación en pilas, extracción por solventes y electroobtención, no por flotación. Confundir esta ruta al planificar la planta es un error de proyecto costoso."
+      },
+      {
+        "id": "s3",
+        "title": "Tramo 95-140 m",
+        "narrative": "Aparece un sulfuro bronce rosado en fractura fresca que desarrolla irisaciones azul-púrpura, con películas gris azuladas muy blandas que se rayan con cuchillo, y granos azul índigo dispersos.",
+        "question": "¿Qué zona es y por qué es prioritaria para ensayo?",
+        "options": [
+          { "id": "a", "text": "Enriquecimiento supergénico (bornita, calcosina, covelina): las leyes de cobre son las más altas del sondaje", "correct": true },
+          { "id": "b", "text": "Zona hipógena: leyes moderadas y estables", "correct": false },
+          { "id": "c", "text": "Zona de óxidos profunda: leyes bajas", "correct": false },
+          { "id": "d", "text": "Alteración potásica estéril", "correct": false }
+        ],
+        "explanation": "Bornita (63 % Cu), calcosina (80 % Cu) y covelina son minerales secundarios con contenidos de cobre muy superiores a la calcopirita (34 % Cu). El horizonte de enriquecimiento supergénico es, típicamente, el que sostiene los primeros años de operación de un pórfido, y por eso concentra la prioridad de ensayo."
+      },
+      {
+        "id": "s4",
+        "title": "Tramo 140-400 m",
+        "narrative": "Predomina un sulfuro amarillo latón de dureza 3,5-4 que se raya con acero, acompañado de pirita abundante y vetillas finas con un mineral gris laminar, graso al tacto. La biotita de la roca es secundaria y de grano fino.",
+        "question": "¿Cómo describe este tramo?",
+        "options": [
+          { "id": "a", "text": "Zona hipógena con calcopirita, pirita y molibdenita, en alteración potásica", "correct": true },
+          { "id": "b", "text": "Zona supergénica con calcosina dominante", "correct": false },
+          { "id": "c", "text": "Zona lixiviada con hematita", "correct": false },
+          { "id": "d", "text": "Skarn de contacto con granate y piroxeno", "correct": false }
+        ],
+        "explanation": "La calcopirita se distingue de la pirita por rayarse con acero. El mineral gris laminar y graso es molibdenita, el subproducto que sostiene el costo de operación de muchos pórfidos. La biotita secundaria define la alteración potásica, el núcleo del sistema y su zona de mayor ley primaria."
+      },
+      {
+        "id": "s5",
+        "title": "Decidir la prioridad de ensayo",
+        "narrative": "Debe elegir qué tercio del sondaje enviar primero al laboratorio.",
+        "question": "¿Qué tramos prioriza y con qué criterio?",
+        "options": [
+          { "id": "a", "text": "95-140 m completo y muestreo espaciado del tramo hipógeno: el supergénico define el valor de los primeros años y el hipógeno define la vida larga", "correct": true },
+          { "id": "b", "text": "0-60 m completo, porque la zona lixiviada es la más accesible", "correct": false },
+          { "id": "c", "text": "Solo 140-400 m, porque es el tramo de mayor longitud", "correct": false },
+          { "id": "d", "text": "Muestreo uniforme de todo el sondaje sin priorización geológica", "correct": false }
+        ],
+        "explanation": "Priorizar por longitud o accesibilidad ignora la información geológica ya obtenida. El criterio correcto combina valor económico inmediato (supergénico) con la necesidad de caracterizar el recurso de largo plazo (hipógeno). El muestreo uniforme desperdicia la capacidad limitada del laboratorio en la zona lixiviada, que ya se sabe pobre."
+      }
+    ],
+    "closing": "La zonación vertical de un pórfido no es un dato de memoria: es una herramienta de decisión que ordena presupuesto de laboratorio, diseño de planta y secuencia de explotación."
+  },
+  {
+    "id": "caso_skarn_contacto",
+    "title": "Dónde poner la plataforma",
+    "deposit": "Skarn polimetálico de Zn-Pb-Ag",
+    "difficulty": 2,
+    "competency": "clasificacion_rocas",
+    "briefing": "Su empresa tiene presupuesto para tres sondajes en un prospecto de 4 km². El mapeo muestra un cuerpo de diorita intruyendo una secuencia de calizas. Debe recomendar dónde ubicar las plataformas.",
+    "steps": [
+      {
+        "id": "s1",
+        "title": "Reconocer la aureola",
+        "narrative": "Al acercarse al cuerpo de diorita, la caliza gris con fósiles pasa gradualmente a una roca clara de aspecto sacaroideo, con cristales visibles, que sigue efervesciendo con HCl pero ya no conserva fósiles.",
+        "question": "¿Qué está observando y qué le indica?",
+        "options": [
+          { "id": "a", "text": "Mármol: la aureola de metamorfismo de contacto, señal de que el intrusivo está cerca", "correct": true },
+          { "id": "b", "text": "Caliza recristalizada por diagénesis, sin relación con la intrusión", "correct": false },
+          { "id": "c", "text": "Cuarcita: metamorfismo de una arenisca", "correct": false },
+          { "id": "d", "text": "Skarn: ya es la zona mineralizada", "correct": false }
+        ],
+        "explanation": "La recristalización que borra los fósiles manteniendo la composición carbonática define el mármol. Es metamorfismo térmico, no metasomatismo: todavía no hay aporte de hierro, sílice y metales desde el intrusivo. La cuarcita no efervesce."
+      },
+      {
+        "id": "s2",
+        "title": "Encontrar el skarn",
+        "narrative": "Ya en el contacto, aparece una roca bandeada con granates pardo-rojizos de hasta 1 cm, piroxeno verde y sulfuros diseminados: esfalerita parda resinosa y galena gris de clivaje cúbico.",
+        "question": "¿Qué es esta roca y qué la diferencia del mármol?",
+        "options": [
+          { "id": "a", "text": "Skarn: hubo aporte metasomático de Fe, Si y metales desde el intrusivo, no solo calor", "correct": true },
+          { "id": "b", "text": "Mármol mineralizado: la misma roca con sulfuros encima", "correct": false },
+          { "id": "c", "text": "Brecha hidrotermal: clastos con matriz mineralizada", "correct": false },
+          { "id": "d", "text": "Gneis: bandeado de metamorfismo regional", "correct": false }
+        ],
+        "explanation": "La diferencia clave es química, no textural: el mármol solo recristalizó, mientras que el skarn incorporó elementos transportados por los fluidos del intrusivo, formando silicatos cálcicos (granate, piroxeno) junto con los sulfuros. Por eso el skarn es el objetivo de exploración y el mármol solo la señal de proximidad."
+      },
+      {
+        "id": "s3",
+        "title": "Ubicar las plataformas",
+        "narrative": "Con tres sondajes disponibles, el equipo discute dónde perforar.",
+        "question": "¿Cuál es la distribución técnicamente más sólida?",
+        "options": [
+          { "id": "a", "text": "Los tres a lo largo del contacto diorita-caliza, cubriendo distintos sectores de la traza", "correct": true },
+          { "id": "b", "text": "Los tres en el centro de la diorita, donde la roca está fresca", "correct": false },
+          { "id": "c", "text": "Uno en la diorita, uno en la caliza distal y uno en el contacto, para comparar", "correct": false },
+          { "id": "d", "text": "Los tres en la caliza alejada del contacto, para abaratar la perforación", "correct": false }
+        ],
+        "explanation": "El skarn se desarrolla en el contacto, por lo que concentrar allí los tres sondajes maximiza la probabilidad de intersectar mineralización y permite evaluar su continuidad lateral. La opción de 'uno en cada ambiente' suena metodológica pero gasta dos tercios del presupuesto en confirmar lo que el mapeo ya demostró."
+      },
+      {
+        "id": "s4",
+        "title": "Anticipar el proceso",
+        "narrative": "El sondaje confirma esfalerita y galena en proporciones similares. La gerencia pregunta qué implica para la futura planta.",
+        "question": "¿Qué debe señalar?",
+        "options": [
+          { "id": "a", "text": "Se requiere flotación selectiva para separar concentrados de Zn y de Pb, y conviene verificar el contenido de Fe en la esfalerita", "correct": true },
+          { "id": "b", "text": "Basta una lixiviación ácida en pilas, como en los óxidos de cobre", "correct": false },
+          { "id": "c", "text": "Se produce un único concentrado polimetálico sin separación", "correct": false },
+          { "id": "d", "text": "El contenido de hierro de la esfalerita es irrelevante para el proceso", "correct": false }
+        ],
+        "explanation": "Dos sulfuros con valor independiente exigen flotación selectiva, que separa primero el plomo y luego el zinc. La esfalerita rica en hierro (marmatita) penaliza el concentrado y complica la selectividad, por lo que caracterizarla temprano evita sorpresas en la etapa de ingeniería."
+      }
+    ],
+    "closing": "La decisión de dónde perforar se sostiene en una cadena de razonamiento litológico: mármol indica proximidad, skarn indica el objetivo, y la mineralogía del skarn anticipa la planta."
+  }
+]
