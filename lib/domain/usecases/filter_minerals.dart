@@ -124,7 +124,8 @@ class FilterMinerals {
       if (buckets.length < 2) {
         continue;
       }
-      final int largestGroup = buckets.values.reduce((int a, int b) => a > b ? a : b);
+      final int largestGroup =
+          buckets.values.reduce((int a, int b) => a > b ? a : b);
       final bool better = buckets.length > bestGroups ||
           (buckets.length == bestGroups && largestGroup < bestLargestGroup);
       if (better) {

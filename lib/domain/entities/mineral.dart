@@ -115,6 +115,11 @@ class Mineral {
     required this.economicUse,
     required this.miningRelevance,
     required this.confusedWith,
+    this.habit = '',
+    this.fracture = '',
+    this.associations = const <String>[],
+    this.environment = '',
+    this.processing = '',
   });
 
   final String id;
@@ -142,6 +147,25 @@ class Mineral {
   /// Por que este mineral importa en una operacion minera real.
   final String miningRelevance;
   final List<String> confusedWith;
+
+  /// Habito cristalino: la forma en que el mineral crece en la naturaleza.
+  final String habit;
+
+  /// Fractura y tenacidad, complemento del clivaje.
+  final String fracture;
+
+  /// Paragenesis: minerales con los que aparece habitualmente en la misma
+  /// muestra. Ver dos de ellos juntos es, en la practica, una prueba mas.
+  final List<String> associations;
+
+  /// Ambiente de formacion y tipo de yacimiento donde se encuentra.
+  final String environment;
+
+  /// Comportamiento en planta: como se concentra o por que penaliza.
+  final String processing;
+
+  /// Verdadero si la ficha trae la seccion tecnica ampliada.
+  bool get hasExtendedData => habit.isNotEmpty || environment.isNotEmpty;
 
   String get hardnessLabel => hardnessMin == hardnessMax
       ? hardnessMin.toStringAsFixed(1)

@@ -19,28 +19,40 @@ class RockDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(rock.name)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(
+          GeoSpacing.gutter,
+          8,
+          GeoSpacing.gutter,
+          32,
+        ),
         children: <Widget>[
           Row(
             children: <Widget>[
               SampleSwatch(
-                  hexColor: rock.displayColor, metallic: false, size: 72),
+                hexColor: rock.displayColor,
+                metallic: false,
+                size: 76,
+              ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     GeoTag(
-                        label: rock.type.label, color: GeoPalette.malachite),
+                      label: rock.type.label,
+                      color: GeoPalette.malachite,
+                    ),
                     const SizedBox(height: 8),
-                    Text(rock.type.description,
-                        style: theme.textTheme.bodySmall),
+                    Text(
+                      rock.type.description,
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 22),
           GeoCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,52 +60,64 @@ class RockDetailView extends StatelessWidget {
                 Text('Descripción', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 10),
                 PropertyRow(label: 'Textura', value: rock.texture),
+                if (rock.grainSize.isNotEmpty)
+                  PropertyRow(label: 'Granulometría', value: rock.grainSize),
                 PropertyRow(
-                    label: 'Composición', value: rock.composition.join(', ')),
+                  label: 'Composición',
+                  value: rock.composition.join(', '),
+                ),
+                if (rock.classification.isNotEmpty)
+                  PropertyRow(
+                    label: 'Clasificación',
+                    value: rock.classification,
+                  ),
               ],
             ),
           ),
           const SizedBox(height: 12),
-          GeoCard(
-            accentColor: GeoPalette.malachite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Cómo reconocerla', style: theme.textTheme.titleMedium),
-                const SizedBox(height: 10),
-                BulletList(items: rock.identificationKeys),
-              ],
-            ),
+          GeoDetailCard(
+            icon: Icons.search,
+            accent: GeoPalette.malachite,
+            title: 'Cómo reconocerla',
+            child: BulletList(items: rock.identificationKeys),
           ),
           const SizedBox(height: 12),
-          GeoCard(
-            accentColor: GeoPalette.pyrite,
+          GeoDetailCard(
+            icon: Icons.factory_outlined,
+            accent: GeoPalette.pyrite,
+            title: 'Lectura minera',
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Lectura minera', style: theme.textTheme.titleMedium),
-                const SizedBox(height: 10),
                 Text(rock.miningContext, style: theme.textTheme.bodyMedium),
                 if (rock.hostsFor.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 14),
-                  Text('Hospeda',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface
-                            .withValues(alpha: 0.62),
-                      )),
+                  Text('Hospeda', style: theme.textTheme.bodySmall),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 6,
                     runSpacing: 6,
-                    children: rock.hostsFor
-                        .map((String item) =>
-                            GeoTag(label: item, color: GeoPalette.pyrite))
-                        .toList(),
+                    children: <Widget>[
+                      for (final String item in rock.hostsFor)
+                        GeoTag(label: item, color: GeoPalette.pyrite),
+                    ],
                   ),
                 ],
               ],
             ),
           ),
+          if (rock.geotechnical.isNotEmpty) ...<Widget>[
+            const SizedBox(height: 12),
+            GeoDetailCard(
+              icon: Icons.construction_outlined,
+              accent: GeoPalette.azurite,
+              title: 'Comportamiento en la labor',
+              child: Text(
+                rock.geotechnical,
+                style: theme.textTheme.bodyMedium,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -112,72 +136,84 @@ class StructureDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(structure.name)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(
+          GeoSpacing.gutter,
+          8,
+          GeoSpacing.gutter,
+          32,
+        ),
         children: <Widget>[
           GeoTag(label: structure.category.label, color: GeoPalette.malachite),
           const SizedBox(height: 14),
           Text(structure.definition, style: theme.textTheme.bodyLarge),
-          const SizedBox(height: 20),
-          GeoCard(
-            accentColor: GeoPalette.malachite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Cómo reconocerla en la labor',
-                    style: theme.textTheme.titleMedium),
-                const SizedBox(height: 10),
-                BulletList(items: structure.recognitionKeys),
-              ],
+          const SizedBox(height: 22),
+          GeoDetailCard(
+            icon: Icons.search,
+            accent: GeoPalette.malachite,
+            title: 'Cómo reconocerla en la labor',
+            child: BulletList(items: structure.recognitionKeys),
+          ),
+          if (structure.measurement.isNotEmpty) ...<Widget>[
+            const SizedBox(height: 12),
+            GeoDetailCard(
+              icon: Icons.straighten,
+              accent: GeoPalette.slate,
+              title: 'Qué se mide y cómo',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    structure.measurement,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'Parámetros que se registran',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: <Widget>[
+                      for (final String item in structure.keyParameters)
+                        GeoTag(label: item, color: GeoPalette.slate),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          GeoDetailCard(
+            icon: Icons.factory_outlined,
+            accent: GeoPalette.pyrite,
+            title: 'Consecuencia operativa',
+            child: Text(
+              structure.miningImplication,
+              style: theme.textTheme.bodyMedium,
             ),
           ),
-          const SizedBox(height: 12),
-          GeoCard(
-            accentColor: GeoPalette.pyrite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Consecuencia operativa',
-                    style: theme.textTheme.titleMedium),
-                const SizedBox(height: 10),
-                Text(structure.miningImplication,
-                    style: theme.textTheme.bodyMedium),
-                const SizedBox(height: 14),
-                Text('Parámetros que se miden',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color:
-                          theme.colorScheme.onSurface.withValues(alpha: 0.62),
-                    )),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: structure.keyParameters
-                      .map((String item) =>
-                          GeoTag(label: item, color: GeoPalette.pyrite))
-                      .toList(),
-                ),
-              ],
+          if (structure.geotechnical.isNotEmpty) ...<Widget>[
+            const SizedBox(height: 12),
+            GeoDetailCard(
+              icon: Icons.construction_outlined,
+              accent: GeoPalette.azurite,
+              title: 'Estabilidad y sostenimiento',
+              child: Text(
+                structure.geotechnical,
+                style: theme.textTheme.bodyMedium,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 12),
-          GeoCard(
-            accentColor: GeoPalette.hematite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    const Icon(Icons.report_problem_outlined,
-                        size: 18, color: GeoPalette.hematite),
-                    const SizedBox(width: 8),
-                    Text('Error frecuente',
-                        style: theme.textTheme.titleMedium
-                            ?.copyWith(color: GeoPalette.hematite)),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Text(structure.commonError, style: theme.textTheme.bodyMedium),
-              ],
+          GeoDetailCard(
+            icon: Icons.report_problem_outlined,
+            accent: GeoPalette.hematite,
+            title: 'Error frecuente',
+            child: Text(
+              structure.commonError,
+              style: theme.textTheme.bodyMedium,
             ),
           ),
         ],

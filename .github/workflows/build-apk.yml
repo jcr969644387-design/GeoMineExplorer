@@ -36,32 +36,52 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Descargar dependencias
-        run: flutter pub get
-
       # La carpeta android/ no se versiona a propósito: se genera aquí con la
-      # misma versión de Flutter que compila. Así se evita arrastrar en el
-      # repositorio versiones de Gradle y del plugin de Android que quedan
-      # obsoletas y rompen la compilación meses después.
+      # misma versión de Flutter que compila. El script además fija el nombre
+      # visible de la aplicación y genera el icono del lanzador.
       - name: Generar el proyecto Android
         run: bash tool/bootstrap.sh
 
-      - name: Compilar APK
-        run: flutter build apk --${{ inputs.build_mode || 'release' }} --split-per-abi
-
-      - name: Compilar APK universal
+      # Un solo APK universal. NO se usa --split-per-abi: esa opción genera un
+      # APK por arquitectura y, al subirlos todos juntos, el archivo descargado
+      # contenía cuatro APK y no estaba claro cuál instalar.
+      - name: Compilar el APK universal
         run: flutter build apk --${{ inputs.build_mode || 'release' }}
 
-      - name: Publicar los APK como artefacto
+      - name: Renombrar el APK con la versión de la entrega
+        id: apk
+        run: |
+          set -euo pipefail
+          mode="${{ inputs.build_mode || 'release' }}"
+          version="$(sed -n 's/^version: *//p' pubspec.yaml | head -n1 | cut -d'+' -f1)"
+          artifact="GeoMineExplorerV${version}"
+          out="build/app/outputs/flutter-apk"
+
+          # Red de seguridad: si alguna vez vuelve a colarse --split-per-abi,
+          # aquí aparecen varios APK y la compilación falla en lugar de
+          # publicar un paquete confuso.
+          count="$(find "$out" -maxdepth 1 -name '*.apk' | wc -l)"
+          if [ "$count" -ne 1 ]; then
+            echo "Se esperaba un único APK y se encontraron $count:" >&2
+            find "$out" -maxdepth 1 -name '*.apk' >&2
+            exit 1
+          fi
+
+          mkdir -p dist
+          cp "$out/app-${mode}.apk" "dist/${artifact}.apk"
+          echo "artifact=${artifact}" >> "$GITHUB_OUTPUT"
+          ls -lh dist
+
+      - name: Publicar el APK como artefacto
         uses: actions/upload-artifact@v4
         with:
-          name: geomine-explorer-apk
-          path: build/app/outputs/flutter-apk/*.apk
+          name: ${{ steps.apk.outputs.artifact }}
+          path: dist/*.apk
           if-no-files-found: error
           retention-days: 30
 
-      - name: Adjuntar los APK a la release
+      - name: Adjuntar el APK a la release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: build/app/outputs/flutter-apk/*.apk
+          files: dist/*.apk

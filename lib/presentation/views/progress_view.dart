@@ -5,7 +5,9 @@ import '../../app/theme.dart';
 import '../../domain/entities/mineral.dart';
 import '../../domain/entities/student_progress.dart';
 import '../providers.dart';
+import '../services/feedback_service.dart';
 import '../widgets/geo_card.dart';
+import 'settings_view.dart';
 
 /// Panel de avance.
 ///
@@ -34,32 +36,38 @@ class ProgressView extends ConsumerWidget {
         title: const Text('Mi avance'),
         actions: <Widget>[
           IconButton(
+            tooltip: 'Ajustes',
+            icon: const Icon(Icons.tune, size: 22),
+            onPressed: () => Navigator.of(context).push<void>(
+              MaterialPageRoute<void>(
+                builder: (_) => const SettingsView(),
+              ),
+            ),
+          ),
+          IconButton(
             tooltip: 'Reiniciar avance',
-            icon: const Icon(Icons.restart_alt, size: 20),
+            icon: const Icon(Icons.restart_alt, size: 22),
             onPressed: () => _confirmReset(context, ref),
           ),
+          const SizedBox(width: 4),
         ],
       ),
       body: progressAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (Object error, StackTrace stack) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Text('No se pudo cargar el avance.\n$error'),
-          ),
+        error: (Object error, StackTrace stack) => GeoMessage(
+          icon: Icons.error_outline,
+          color: GeoPalette.hematite,
+          title: 'No se pudo cargar el avance',
+          message: '$error',
         ),
         data: (StudentProgress progress) {
           if (progress.totalAttempts == 0) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: Text(
-                  'Todavía no hay datos.\nResuelve una sesión de práctica o un '
-                  'caso para empezar a medir tu criterio.',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyMedium,
-                ),
-              ),
+            return const GeoMessage(
+              icon: Icons.insights_outlined,
+              title: 'Todavía no hay datos',
+              message: 'Resuelve una sesión de práctica o un caso para '
+                  'empezar a medir tu criterio. Aquí se registra qué has '
+                  'acertado, no cuánto tiempo has pasado en la aplicación.',
             );
           }
 
@@ -67,20 +75,31 @@ class ProgressView extends ConsumerWidget {
           final Set<String> pending = progress.pendingReviewItemIds;
 
           return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+            padding: const EdgeInsets.fromLTRB(
+              GeoSpacing.gutter,
+              8,
+              GeoSpacing.gutter,
+              32,
+            ),
             children: <Widget>[
               GeoCard(
                 accentColor: GeoPalette.malachite,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 18,
+                ),
                 child: Row(
                   children: <Widget>[
+                    _Metric(
+                      value: '${(progress.globalAccuracy * 100).round()} %',
+                      label: 'Acierto global',
+                      color: GeoPalette.malachite,
+                    ),
                     _Metric(
                       value: '${progress.totalCorrect}/'
                           '${progress.totalAttempts}',
                       label: 'Respuestas correctas',
-                    ),
-                    _Metric(
-                      value: '${(progress.globalAccuracy * 100).round()} %',
-                      label: 'Acierto global',
+                      color: GeoPalette.azurite,
                     ),
                     _Metric(
                       value: catalogSize == 0
@@ -88,63 +107,104 @@ class ProgressView extends ConsumerWidget {
                           : '${progress.reviewedMineralIds.length}/'
                               '$catalogSize',
                       label: 'Fichas revisadas',
+                      color: GeoPalette.pyrite,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              Text('Por competencia', style: theme.textTheme.titleMedium),
-              const SizedBox(height: 4),
-              Text(
-                'Se considera consolidada con al menos 5 intentos y 80 % de '
-                'acierto.',
-                style: theme.textTheme.bodySmall,
+              const SizedBox(height: 24),
+              const GeoSectionHeader(
+                title: 'Por competencia',
+                subtitle: 'Consolidada con al menos 5 intentos y 80 % de '
+                    'acierto',
               ),
-              const SizedBox(height: 12),
-              ...scores.map(
-                (CompetencyScore score) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+              for (final CompetencyScore score in scores)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 14),
                   child: _CompetencyRow(
                     label: _competencyLabels[score.competency] ??
                         score.competency,
                     score: score,
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
               GeoCard(
                 accentColor: pending.isEmpty
                     ? GeoPalette.malachite
                     : GeoPalette.hematite,
-                child: Column(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Confusiones sin resolver',
-                        style: theme.textTheme.titleMedium),
-                    const SizedBox(height: 8),
-                    Text(
-                      pending.isEmpty
-                          ? 'No quedan ejercicios fallados pendientes de '
-                              'recuperar.'
-                          : '${pending.length} ejercicio(s) fallados aún sin '
-                              'acertar. Vuelven a aparecer al inicio de la '
-                              'próxima sesión de práctica.',
-                      style: theme.textTheme.bodyMedium,
+                    GeoIconBadge(
+                      icon: pending.isEmpty
+                          ? Icons.check_circle_outline
+                          : Icons.refresh,
+                      color: pending.isEmpty
+                          ? GeoPalette.malachite
+                          : GeoPalette.hematite,
+                      size: 40,
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Confusiones sin resolver',
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            pending.isEmpty
+                                ? 'No quedan ejercicios fallados pendientes '
+                                    'de recuperar.'
+                                : '${pending.length} ejercicio(s) fallados '
+                                    'aún sin acertar. Vuelven a aparecer al '
+                                    'inicio de la próxima sesión de práctica.',
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 12),
               GeoCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: <Widget>[
-                    Text('Casos resueltos',
-                        style: theme.textTheme.titleMedium),
-                    const SizedBox(height: 8),
-                    Text('${progress.completedCaseIds.length}',
-                        style: theme.textTheme.headlineSmall),
+                    const GeoIconBadge(
+                      icon: Icons.engineering_outlined,
+                      color: GeoPalette.azurite,
+                      size: 40,
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Text(
+                        'Casos resueltos',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ),
+                    Text(
+                      '${progress.completedCaseIds.length}',
+                      style: theme.textTheme.headlineSmall,
+                    ),
                   ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              const GeoSectionHeader(title: 'Cómo leer este panel'),
+              GeoCard(
+                accentColor: GeoPalette.slate,
+                child: Text(
+                  'El acierto global mezcla competencias y por sí solo dice '
+                  'poco: lo que importa es la barra más corta. Una '
+                  'competencia con menos de cinco intentos todavía no es '
+                  'medible, aunque muestre 100 %. Los ejercicios fallados se '
+                  'reinyectan al inicio de la siguiente sesión hasta que se '
+                  'aciertan, de modo que la cola pendiente tiende a cero solo '
+                  'cuando el criterio se corrigió de verdad.',
+                  style: theme.textTheme.bodyMedium,
                 ),
               ),
             ],
@@ -155,6 +215,7 @@ class ProgressView extends ConsumerWidget {
   }
 
   Future<void> _confirmReset(BuildContext context, WidgetRef ref) async {
+    ref.read(feedbackProvider).emit(GeoFeedback.tap);
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
@@ -182,10 +243,15 @@ class ProgressView extends ConsumerWidget {
 }
 
 class _Metric extends StatelessWidget {
-  const _Metric({required this.value, required this.label});
+  const _Metric({
+    required this.value,
+    required this.label,
+    required this.color,
+  });
 
   final String value;
   final String label;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -194,9 +260,12 @@ class _Metric extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(value, style: theme.textTheme.titleLarge),
-          const SizedBox(height: 2),
-          Text(label, style: theme.textTheme.bodySmall),
+          Text(
+            value,
+            style: theme.textTheme.titleLarge?.copyWith(color: color),
+          ),
+          const SizedBox(height: 3),
+          Text(label, style: theme.textTheme.labelSmall),
         ],
       ),
     );
@@ -219,25 +288,30 @@ class _CompetencyRow extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Expanded(child: Text(label, style: theme.textTheme.bodyLarge)),
+            Expanded(
+              child: Text(label, style: theme.textTheme.bodyLarge),
+            ),
             Text(
               '${score.correct}/${score.attempts}',
               style: theme.textTheme.bodySmall,
             ),
             if (score.isMastered) ...<Widget>[
               const SizedBox(width: 8),
-              const Icon(Icons.verified_outlined,
-                  size: 16, color: GeoPalette.malachite),
+              const Icon(
+                Icons.verified_outlined,
+                size: 16,
+                color: GeoPalette.malachite,
+              ),
             ],
           ],
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 8),
         ClipRRect(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(6),
           child: LinearProgressIndicator(
             value: score.accuracy,
-            minHeight: 6,
-            backgroundColor: theme.colorScheme.outline.withValues(alpha: 0.35),
+            minHeight: 8,
+            backgroundColor: accent.withValues(alpha: 0.15),
             valueColor: AlwaysStoppedAnimation<Color>(accent),
           ),
         ),

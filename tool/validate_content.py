@@ -105,6 +105,13 @@ def main() -> int:
             errors.append(f"{ref}: sin criterios diagnósticos")
         if not m.get("miningRelevance"):
             errors.append(f"{ref}: sin relevancia minera declarada")
+        # Ficha técnica ampliada (v1.0.1). Se valida como obligatoria para que
+        # un mineral nuevo no entre al catálogo con la ficha a medias.
+        for field in ("habit", "fracture", "environment", "processing"):
+            if not m.get(field):
+                errors.append(f"{ref}: falta el campo '{field}'")
+        if not m.get("associations"):
+            errors.append(f"{ref}: sin minerales asociados (paragénesis)")
         for other in m.get("confusedWith", []):
             if other not in mineral_ids:
                 # No es un error: el catálogo del MVP es parcial y estas
@@ -141,6 +148,9 @@ def main() -> int:
             errors.append(f"{ref}: sin claves de identificación")
         if not r.get("miningContext"):
             errors.append(f"{ref}: sin contexto minero")
+        for field in ("classification", "grainSize", "geotechnical"):
+            if not r.get(field):
+                errors.append(f"{ref}: falta el campo '{field}'")
 
     # --- Estructuras -----------------------------------------------------
     for s in structures:
@@ -149,6 +159,9 @@ def main() -> int:
             errors.append(f"{ref}: sin claves de reconocimiento")
         if not s.get("miningImplication"):
             errors.append(f"{ref}: sin implicancia minera")
+        for field in ("measurement", "geotechnical"):
+            if not s.get(field):
+                errors.append(f"{ref}: falta el campo '{field}'")
 
     # --- Ejercicios ------------------------------------------------------
     for e in exercises:

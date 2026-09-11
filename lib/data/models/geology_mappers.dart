@@ -20,6 +20,13 @@ class GeologyMappers {
         .toList();
   }
 
+  /// Campo de texto opcional.
+  ///
+  /// Las secciones tecnicas ampliadas se incorporaron despues del primer
+  /// catalogo: leerlas como opcionales evita que un registro antiguo, o un
+  /// doble de prueba reducido, rompa el mapeo entero.
+  static String _text(dynamic value) => value as String? ?? '';
+
   static double _toDouble(dynamic value) {
     if (value is int) {
       return value.toDouble();
@@ -48,6 +55,11 @@ class GeologyMappers {
       economicUse: json['economicUse'] as String,
       miningRelevance: json['miningRelevance'] as String,
       confusedWith: _stringList(json['confusedWith']),
+      habit: _text(json['habit']),
+      fracture: _text(json['fracture']),
+      associations: _stringList(json['associations']),
+      environment: _text(json['environment']),
+      processing: _text(json['processing']),
     );
   }
 
@@ -62,6 +74,9 @@ class GeologyMappers {
       identificationKeys: _stringList(json['identificationKeys']),
       miningContext: json['miningContext'] as String,
       hostsFor: _stringList(json['hostsFor']),
+      classification: _text(json['classification']),
+      grainSize: _text(json['grainSize']),
+      geotechnical: _text(json['geotechnical']),
     );
   }
 
@@ -75,6 +90,8 @@ class GeologyMappers {
       miningImplication: json['miningImplication'] as String,
       keyParameters: _stringList(json['keyParameters']),
       commonError: json['commonError'] as String,
+      measurement: _text(json['measurement']),
+      geotechnical: _text(json['geotechnical']),
     );
   }
 

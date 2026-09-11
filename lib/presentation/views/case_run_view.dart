@@ -6,6 +6,7 @@ import '../../domain/entities/attempt.dart';
 import '../../domain/entities/exercise.dart';
 import '../../domain/entities/mining_case.dart';
 import '../providers.dart';
+import '../services/feedback_service.dart';
 import '../viewmodels/case_view_model.dart';
 import '../widgets/answer_option_tile.dart';
 import '../widgets/geo_card.dart';
@@ -22,6 +23,8 @@ class CaseRunView extends ConsumerWidget {
     CaseStep step,
   ) async {
     final bool correct = ref.read(caseProvider(caseId).notifier).confirm();
+    final FeedbackService feedback = ref.read(feedbackProvider);
+    feedback.emit(correct ? GeoFeedback.correct : GeoFeedback.wrong);
     await ref.read(progressProvider.notifier).recordAttempt(
           itemId: '${miningCase.id}:${step.id}',
           competency: miningCase.competency,
@@ -42,11 +45,11 @@ class CaseRunView extends ConsumerWidget {
     if (miningCase == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Text('No se pudo cargar el caso.\n${state.error}'),
-          ),
+        body: GeoMessage(
+          icon: Icons.error_outline,
+          color: GeoPalette.hematite,
+          title: 'No se pudo cargar el caso',
+          message: '${state.error}',
         ),
       );
     }
@@ -64,16 +67,19 @@ class CaseRunView extends ConsumerWidget {
       appBar: AppBar(
         title: Text(miningCase.title),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(3),
+          preferredSize: const Size.fromHeight(4),
           child: LinearProgressIndicator(
             value: state.stepIndex / miningCase.stepCount,
-            minHeight: 3,
-            backgroundColor: theme.colorScheme.outline.withValues(alpha: 0.4),
           ),
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+        padding: const EdgeInsets.fromLTRB(
+          GeoSpacing.gutter,
+          12,
+          GeoSpacing.gutter,
+          32,
+        ),
         children: <Widget>[
           if (state.stepIndex == 0) ...<Widget>[
             GeoCard(
@@ -81,43 +87,75 @@ class CaseRunView extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Encargo', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Text(miningCase.briefing,
-                      style: theme.textTheme.bodyMedium),
+                  Row(
+                    children: <Widget>[
+                      const GeoIconBadge(
+                        icon: Icons.assignment_outlined,
+                        color: GeoPalette.slate,
+                        size: 38,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Encargo',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    miningCase.briefing,
+                    style: theme.textTheme.bodyMedium,
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
           ],
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               GeoTag(
                 label: 'Etapa ${state.stepIndex + 1} de '
                     '${miningCase.stepCount}',
                 color: GeoPalette.malachite,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(step.title, style: theme.textTheme.titleMedium),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          GeoCard(
-            accentColor: GeoPalette.pyrite,
-            child: Text(step.narrative, style: theme.textTheme.bodyMedium),
-          ),
-          const SizedBox(height: 18),
-          Text(step.question, style: theme.textTheme.titleMedium),
           const SizedBox(height: 14),
+          GeoCard(
+            accentColor: GeoPalette.pyriteLight,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Icon(Icons.description_outlined, size: 18),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    step.narrative,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(step.question, style: theme.textTheme.titleMedium),
+          const SizedBox(height: 16),
           ...step.options.map(
             (ExerciseOption option) => AnswerOptionTile(
               option: option,
               selected: state.selectedOptionId == option.id,
               revealed: state.answered,
-              onTap: () =>
-                  ref.read(caseProvider(caseId).notifier).select(option.id),
+              onTap: () {
+                ref.read(feedbackProvider).emit(GeoFeedback.select);
+                ref.read(caseProvider(caseId).notifier).select(option.id);
+              },
             ),
           ),
           const SizedBox(height: 8),
@@ -126,11 +164,12 @@ class CaseRunView extends ConsumerWidget {
               correct: step.isCorrect(state.selectedOptionId ?? ''),
               explanation: step.explanation,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
             FilledButton(
               onPressed: () async {
-                final bool isLast =
-                    state.stepIndex + 1 >= miningCase.stepCount;
+                final bool isLast = state.stepIndex + 1 >= miningCase.stepCount;
+                final FeedbackService feedback = ref.read(feedbackProvider);
+                feedback.emit(isLast ? GeoFeedback.complete : GeoFeedback.tap);
                 ref.read(caseProvider(caseId).notifier).next();
                 if (isLast) {
                   await ref
@@ -169,24 +208,58 @@ class _CaseSummary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(miningCase.title)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+        padding: const EdgeInsets.fromLTRB(
+          GeoSpacing.gutter,
+          12,
+          GeoSpacing.gutter,
+          32,
+        ),
         children: <Widget>[
-          Text('$correct de ${miningCase.stepCount} decisiones correctas',
-              style: theme.textTheme.headlineSmall),
-          const SizedBox(height: 20),
           GeoCard(
             accentColor: GeoPalette.malachite,
+            padding: const EdgeInsets.all(22),
+            child: Row(
+              children: <Widget>[
+                const GeoIconBadge(
+                  icon: Icons.verified_outlined,
+                  color: GeoPalette.malachite,
+                  size: 48,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '$correct de ${miningCase.stepCount}',
+                        style: theme.textTheme.headlineSmall,
+                      ),
+                      Text(
+                        'decisiones correctas',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          GeoCard(
+            accentColor: GeoPalette.pyrite,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Idea central del caso',
-                    style: theme.textTheme.titleMedium),
+                Text(
+                  'Idea central del caso',
+                  style: theme.textTheme.titleMedium,
+                ),
                 const SizedBox(height: 10),
                 Text(miningCase.closing, style: theme.textTheme.bodyMedium),
               ],
             ),
           ),
-          const SizedBox(height: 22),
+          const SizedBox(height: 24),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('Volver a los casos'),

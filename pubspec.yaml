@@ -1,7 +1,11 @@
 name: geomine_explorer
 description: Laboratorio geologico movil para estudiantes de Ingenieria de Minas.
 publish_to: 'none'
-version: 1.0.0+1
+
+# La version del proyecto sigue la numeracion de las entregas: la etiqueta
+# GeoMineExplorerV1.0.1 corresponde a 1.0.1 y el APK se publica con ese mismo
+# nombre. Ver docs/09_versionado.md.
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -9,15 +13,29 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  audioplayers: ^6.1.0
   flutter_riverpod: ^2.5.1
   shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.1
   flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/data/
+    - assets/audio/
+    - assets/icon/logo_mark.png
+
+# Icono de la aplicacion. Se genera con `dart run flutter_launcher_icons`
+# dentro de tool/bootstrap.sh, porque la carpeta android/ no se versiona.
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#0D1F26"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  min_sdk_android: 24

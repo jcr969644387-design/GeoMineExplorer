@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-/// Fila etiqueta-valor usada en las fichas del catalogo.
+/// Fila etiqueta-valor usada en las fichas del catalogo y en la guia tecnica.
 class PropertyRow extends StatelessWidget {
   const PropertyRow({
     super.key,
     required this.label,
     required this.value,
     this.highlighted = false,
+    this.labelWidth = 122,
   });
 
   final String label;
@@ -15,20 +16,26 @@ class PropertyRow extends StatelessWidget {
   /// Marca las propiedades diagnosticas, las que resuelven la identificacion.
   final bool highlighted;
 
+  /// Ancho de la columna de etiquetas. Las tablas de la guia usan etiquetas
+  /// mas largas que las fichas, y alinearlas todas al mismo ancho dejaba el
+  /// texto partido en dos lineas sin necesidad.
+  final double labelWidth;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            width: 118,
+            width: labelWidth,
             child: Text(
               label,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.62),
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.58),
               ),
             ),
           ),
@@ -36,7 +43,7 @@ class PropertyRow extends StatelessWidget {
             child: Text(
               value,
               style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: highlighted ? FontWeight.w600 : FontWeight.w400,
+                fontWeight: highlighted ? FontWeight.w700 : FontWeight.w400,
                 color: highlighted ? theme.colorScheme.primary : null,
               ),
             ),
@@ -62,15 +69,15 @@ class BulletList extends StatelessWidget {
       children: items
           .map(
             (String item) => Padding(
-              padding: const EdgeInsets.only(bottom: 6),
+              padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 7, right: 10),
                     child: Container(
-                      width: 5,
-                      height: 5,
+                      width: 6,
+                      height: 6,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: bulletColor ?? theme.colorScheme.primary,

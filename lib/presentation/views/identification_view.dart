@@ -6,8 +6,10 @@ import '../../domain/entities/identification_query.dart';
 import '../../domain/entities/mineral.dart';
 import '../../domain/usecases/filter_minerals.dart';
 import '../providers.dart';
+import '../services/feedback_service.dart';
 import '../widgets/geo_card.dart';
 import '../widgets/sample_swatch.dart';
+import 'field_guide_view.dart';
 import 'mineral_detail_view.dart';
 
 /// Determinador de minerales por propiedades observadas.
@@ -32,30 +34,46 @@ class IdentificationView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Determinador'),
         actions: <Widget>[
+          IconButton(
+            tooltip: 'Cómo se hace cada prueba',
+            icon: const Icon(Icons.help_outline, size: 22),
+            onPressed: () => Navigator.of(context).push<void>(
+              MaterialPageRoute<void>(
+                builder: (_) => const FieldGuideView(),
+              ),
+            ),
+          ),
           TextButton(
             onPressed: query.isEmpty ? null : actions.reset,
             child: const Text('Limpiar'),
           ),
+          const SizedBox(width: 4),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(
+          GeoSpacing.gutter,
+          8,
+          GeoSpacing.gutter,
+          32,
+        ),
         children: <Widget>[
           Text(
             'Declara solo lo que realmente observaste. La clave funciona con '
             'información parcial, igual que en campo.',
             style: theme.textTheme.bodySmall,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           result.when(
             loading: () => const SizedBox.shrink(),
             error: (Object error, StackTrace stack) => const SizedBox.shrink(),
             data: (IdentificationResult data) =>
                 _ResultHeader(result: data, criteria: query.activeCriteria),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           _ChoiceBlock<LusterType>(
-            title: '1. Brillo',
+            step: 1,
+            title: 'Brillo',
             hint: 'Primera bifurcación: ¿parece metal o no?',
             options: LusterType.values,
             labelOf: (LusterType value) => value.label,
@@ -63,7 +81,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setLuster,
           ),
           _ChoiceBlock<HardnessBand>(
-            title: '2. Dureza',
+            step: 2,
+            title: 'Dureza',
             hint: 'Prueba de rayado, no un número exacto de Mohs.',
             options: HardnessBand.values,
             labelOf: (HardnessBand value) => value.label,
@@ -71,7 +90,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setHardness,
           ),
           _ChoiceBlock<String>(
-            title: '3. Color de raya',
+            step: 3,
+            title: 'Color de raya',
             hint: 'Frota la muestra sobre porcelana sin vidriar.',
             options: streaks,
             labelOf: (String value) => value,
@@ -79,7 +99,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setStreak,
           ),
           _ChoiceBlock<DensityBand>(
-            title: '4. Peso específico',
+            step: 4,
+            title: 'Peso específico',
             hint: 'Sopesa la muestra en la mano y compárala con una roca '
                 'común del mismo tamaño.',
             options: DensityBand.values,
@@ -88,7 +109,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setDensity,
           ),
           _ChoiceBlock<CleavageType>(
-            title: '5. Clivaje',
+            step: 5,
+            title: 'Clivaje',
             hint: '¿Se parte por superficies planas y repetidas?',
             options: CleavageType.values,
             labelOf: (CleavageType value) => value.label,
@@ -96,7 +118,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setCleavage,
           ),
           _ChoiceBlock<bool>(
-            title: '6. Magnetismo',
+            step: 6,
+            title: 'Magnetismo',
             hint: 'Acerca un imán a la muestra.',
             options: const <bool>[true, false],
             labelOf: (bool value) => value ? 'Atrae el imán' : 'No responde',
@@ -104,7 +127,8 @@ class IdentificationView extends ConsumerWidget {
             onSelected: actions.setMagnetic,
           ),
           _ChoiceBlock<bool>(
-            title: '7. Reacción con HCl',
+            step: 7,
+            title: 'Reacción con HCl',
             hint: 'Una gota de ácido clorhídrico diluido en frío.',
             options: const <bool>[true, false],
             labelOf: (bool value) => value ? 'Efervesce' : 'No reacciona',
@@ -113,8 +137,7 @@ class IdentificationView extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           result.when(
-            loading: () =>
-                const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: CircularProgressIndicator()),
             error: (Object error, StackTrace stack) => Text(
               'No se pudo cargar el catálogo: $error',
               style: TextStyle(color: theme.colorScheme.error),
@@ -129,33 +152,56 @@ class IdentificationView extends ConsumerWidget {
 }
 
 /// Pequeña fachada sobre el ViewModel para mantener la vista declarativa.
+///
+/// Ademas centraliza la realimentacion: cada observacion declarada vibra una
+/// vez, y al hacerlo desde aqui ningun bloque de opciones tiene que saber que
+/// existe un servicio de sonido.
 class IdentificationViewModelActions {
   const IdentificationViewModelActions(this._ref);
 
   final WidgetRef _ref;
 
-  void setLuster(LusterType? value) =>
-      _ref.read(identificationQueryProvider.notifier).setLuster(value);
+  void _touch() => _ref.read(feedbackProvider).emit(GeoFeedback.select);
 
-  void setHardness(HardnessBand? value) =>
-      _ref.read(identificationQueryProvider.notifier).setHardness(value);
+  void setLuster(LusterType? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setLuster(value);
+  }
 
-  void setCleavage(CleavageType? value) =>
-      _ref.read(identificationQueryProvider.notifier).setCleavage(value);
+  void setHardness(HardnessBand? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setHardness(value);
+  }
 
-  void setStreak(String? value) =>
-      _ref.read(identificationQueryProvider.notifier).setStreak(value);
+  void setCleavage(CleavageType? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setCleavage(value);
+  }
 
-  void setDensity(DensityBand? value) =>
-      _ref.read(identificationQueryProvider.notifier).setDensity(value);
+  void setStreak(String? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setStreak(value);
+  }
 
-  void setMagnetic(bool? value) =>
-      _ref.read(identificationQueryProvider.notifier).setMagnetic(value);
+  void setDensity(DensityBand? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setDensity(value);
+  }
 
-  void setReactsHcl(bool? value) =>
-      _ref.read(identificationQueryProvider.notifier).setReactsHcl(value);
+  void setMagnetic(bool? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setMagnetic(value);
+  }
 
-  void reset() => _ref.read(identificationQueryProvider.notifier).reset();
+  void setReactsHcl(bool? value) {
+    _touch();
+    _ref.read(identificationQueryProvider.notifier).setReactsHcl(value);
+  }
+
+  void reset() {
+    _ref.read(feedbackProvider).emit(GeoFeedback.tap);
+    _ref.read(identificationQueryProvider.notifier).reset();
+  }
 }
 
 /// Cabecera con el numero de candidatos y la prueba sugerida.
@@ -175,21 +221,32 @@ class _ResultHeader extends StatelessWidget {
     final Color accent = impossible
         ? GeoPalette.hematite
         : (resolved ? GeoPalette.malachite : GeoPalette.pyrite);
+    final IconData icon = impossible
+        ? Icons.report_problem_outlined
+        : (resolved ? Icons.verified_outlined : Icons.filter_alt_outlined);
 
     return GeoCard(
       accentColor: accent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            impossible
-                ? 'Ninguna muestra cumple estas observaciones'
-                : (resolved
-                    ? 'Identificación resuelta'
-                    : '$count candidatos posibles'),
-            style: theme.textTheme.titleMedium?.copyWith(color: accent),
+          Row(
+            children: <Widget>[
+              GeoIconBadge(icon: icon, color: accent, size: 40),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  impossible
+                      ? 'Ninguna muestra cumple estas observaciones'
+                      : (resolved
+                          ? 'Identificación resuelta'
+                          : '$count candidatos posibles'),
+                  style: theme.textTheme.titleMedium?.copyWith(color: accent),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 10),
           Text(
             impossible
                 ? 'Alguna prueba puede estar mal ejecutada. Revisa la dureza: '
@@ -210,7 +267,7 @@ class _ResultHeader extends StatelessWidget {
             style: theme.textTheme.bodySmall,
           ),
           if (criteria == 0) ...<Widget>[
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Text(
               'Todavía no declaraste ninguna observación.',
               style: theme.textTheme.bodySmall?.copyWith(
@@ -228,6 +285,7 @@ class _ResultHeader extends StatelessWidget {
 class _ChoiceBlock<T> extends StatelessWidget {
   const _ChoiceBlock({
     super.key,
+    required this.step,
     required this.title,
     required this.hint,
     required this.options,
@@ -236,6 +294,7 @@ class _ChoiceBlock<T> extends StatelessWidget {
     required this.onSelected,
   });
 
+  final int step;
   final String title;
   final String hint;
   final List<T> options;
@@ -249,27 +308,65 @@ class _ChoiceBlock<T> extends StatelessWidget {
     if (options.isEmpty) {
       return const SizedBox.shrink();
     }
+    final bool answered = selected != null;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 18),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(title, style: theme.textTheme.titleMedium),
-          const SizedBox(height: 2),
-          Text(hint, style: theme.textTheme.bodySmall),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: options.map((T option) {
-              final bool isSelected = option == selected;
-              return ChoiceChip(
-                label: Text(labelOf(option)),
-                selected: isSelected,
-                onSelected: (bool value) =>
-                    onSelected(value ? option : null),
-              );
-            }).toList(),
+          Row(
+            children: <Widget>[
+              Container(
+                width: 26,
+                height: 26,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: answered
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.primary.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                ),
+                child: answered
+                    ? Icon(
+                        Icons.check,
+                        size: 15,
+                        color: theme.colorScheme.onPrimary,
+                      )
+                    : Text(
+                        '$step',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(title, style: theme.textTheme.titleMedium),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Padding(
+            padding: const EdgeInsets.only(left: 36),
+            child: Text(hint, style: theme.textTheme.bodySmall),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.only(left: 36),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                for (final T option in options)
+                  ChoiceChip(
+                    label: Text(labelOf(option)),
+                    selected: option == selected,
+                    onSelected: (bool value) =>
+                        onSelected(value ? option : null),
+                  ),
+              ],
+            ),
           ),
         ],
       ),
@@ -278,46 +375,56 @@ class _ChoiceBlock<T> extends StatelessWidget {
 }
 
 /// Lista de minerales aun compatibles con las observaciones.
-class _CandidateList extends StatelessWidget {
+class _CandidateList extends ConsumerWidget {
   const _CandidateList({required this.candidates});
 
   final List<Mineral> candidates;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     if (candidates.isEmpty) {
       return const SizedBox.shrink();
     }
+    final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Candidatos', style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 10),
-        ...candidates.map(
-          (Mineral mineral) => Padding(
+        const GeoSectionHeader(
+          title: 'Candidatos',
+          subtitle: 'Abre una ficha para contrastar los criterios '
+              'diagnósticos',
+        ),
+        for (final Mineral mineral in candidates)
+          Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: GeoCard(
               padding: const EdgeInsets.all(12),
-              onTap: () => Navigator.of(context).push<void>(
-                MaterialPageRoute<void>(
-                  builder: (_) => MineralDetailView(mineral: mineral),
-                ),
-              ),
+              onTap: () {
+                ref.read(feedbackProvider).emit(GeoFeedback.tap);
+                Navigator.of(context).push<void>(
+                  MaterialPageRoute<void>(
+                    builder: (_) => MineralDetailView(mineral: mineral),
+                  ),
+                );
+              },
               child: Row(
                 children: <Widget>[
-                  SampleSwatch.forMineral(mineral, size: 40),
+                  SampleSwatch.forMineral(mineral, size: 44),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(mineral.name,
-                            style: Theme.of(context).textTheme.titleMedium),
+                        Text(
+                          mineral.name,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 2),
                         Text(
                           'Dureza ${mineral.hardnessLabel} · raya '
                           '${mineral.streak} · PE '
                           '${mineral.specificGravity.toStringAsFixed(1)}',
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: theme.textTheme.bodySmall,
                         ),
                       ],
                     ),
@@ -327,7 +434,6 @@ class _CandidateList extends StatelessWidget {
               ),
             ),
           ),
-        ),
       ],
     );
   }

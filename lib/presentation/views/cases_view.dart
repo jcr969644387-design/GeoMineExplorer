@@ -5,6 +5,7 @@ import '../../app/theme.dart';
 import '../../domain/entities/mining_case.dart';
 import '../../domain/entities/student_progress.dart';
 import '../providers.dart';
+import '../services/feedback_service.dart';
 import '../widgets/geo_card.dart';
 import 'case_run_view.dart';
 
@@ -23,69 +24,132 @@ class CasesView extends ConsumerWidget {
       appBar: AppBar(title: const Text('Casos mineros')),
       body: cases.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (Object error, StackTrace stack) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Text('No se pudieron cargar los casos.\n$error'),
-          ),
+        error: (Object error, StackTrace stack) => GeoMessage(
+          icon: Icons.error_outline,
+          color: GeoPalette.hematite,
+          title: 'No se pudieron cargar los casos',
+          message: '$error',
         ),
         data: (List<MiningCase> items) => ListView(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+          padding: const EdgeInsets.fromLTRB(
+            GeoSpacing.gutter,
+            8,
+            GeoSpacing.gutter,
+            32,
+          ),
           children: <Widget>[
             Text(
               'Escenarios encadenados donde cada decisión condiciona la '
-              'siguiente, como ocurre en una campaña real.',
+              'siguiente, como ocurre en una campaña real. No hay atajo: para '
+              'cerrar el caso hay que atravesar todas las etapas.',
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 18),
-            ...items.map(
-              (MiningCase item) {
-                final bool completed =
-                    progress.completedCaseIds.contains(item.id);
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: GeoCard(
-                    accentColor: completed
-                        ? GeoPalette.malachite
-                        : GeoPalette.pyrite,
-                    onTap: () => Navigator.of(context).push<void>(
-                      MaterialPageRoute<void>(
-                        builder: (_) => CaseRunView(caseId: item.id),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(item.title,
-                                  style: theme.textTheme.titleMedium),
-                            ),
-                            if (completed)
-                              const Icon(Icons.check_circle,
-                                  size: 18, color: GeoPalette.malachite),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Text(item.deposit, style: theme.textTheme.bodySmall),
-                        const SizedBox(height: 10),
-                        Wrap(
-                          spacing: 6,
-                          runSpacing: 6,
-                          children: <Widget>[
-                            GeoTag(label: '${item.stepCount} decisiones'),
-                            GeoTag(label: 'Nivel ${item.difficulty}'),
-                          ],
-                        ),
-                      ],
-                    ),
+            for (final MiningCase item in items)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _CaseCard(
+                  item: item,
+                  completed: progress.completedCaseIds.contains(item.id),
+                ),
+              ),
+            const SizedBox(height: 6),
+            GeoCard(
+              accentColor: GeoPalette.azurite,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Cómo se resuelve un caso',
+                    style: theme.textTheme.titleMedium,
                   ),
-                );
-              },
+                  const SizedBox(height: 10),
+                  Text(
+                    'Cada etapa entrega información de campo parcial —un '
+                    'mapeo, un resultado de laboratorio, un reporte de '
+                    'sondaje— y exige una decisión antes de ver la siguiente. '
+                    'La explicación aparece siempre, se acierte o no, porque '
+                    'el criterio se construye entendiendo por qué una '
+                    'alternativa era mejor, no solo cuál era.',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _CaseCard extends ConsumerWidget {
+  const _CaseCard({required this.item, required this.completed});
+
+  final MiningCase item;
+  final bool completed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ThemeData theme = Theme.of(context);
+    final Color accent =
+        completed ? GeoPalette.malachite : GeoPalette.pyriteLight;
+
+    return GeoCard(
+      accentColor: accent,
+      onTap: () {
+        ref.read(feedbackProvider).emit(GeoFeedback.tap);
+        Navigator.of(context).push<void>(
+          MaterialPageRoute<void>(
+            builder: (_) => CaseRunView(caseId: item.id),
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              GeoIconBadge(
+                icon: completed ? Icons.task_alt : Icons.engineering_outlined,
+                color: completed ? GeoPalette.malachite : GeoPalette.pyrite,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(item.title, style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 4),
+                    Text(item.deposit, style: theme.textTheme.bodySmall),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: <Widget>[
+              GeoTag(
+                label: '${item.stepCount} decisiones',
+                icon: Icons.alt_route,
+              ),
+              GeoTag(
+                label: 'Nivel ${item.difficulty}',
+                color: GeoPalette.slate,
+              ),
+              if (completed)
+                const GeoTag(
+                  label: 'Resuelto',
+                  color: GeoPalette.malachite,
+                  icon: Icons.check,
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

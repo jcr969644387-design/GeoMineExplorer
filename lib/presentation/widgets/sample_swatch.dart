@@ -27,7 +27,7 @@ class SampleSwatch extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.7),
         ),

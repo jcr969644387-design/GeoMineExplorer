@@ -5,9 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:geomine_explorer/data/models/geology_mappers.dart';
 import 'package:geomine_explorer/domain/entities/exercise.dart';
 import 'package:geomine_explorer/domain/entities/geological_structure.dart';
+import 'package:geomine_explorer/domain/entities/identification_query.dart';
 import 'package:geomine_explorer/domain/entities/mineral.dart';
 import 'package:geomine_explorer/domain/entities/mining_case.dart';
 import 'package:geomine_explorer/domain/entities/rock.dart';
+import 'package:geomine_explorer/domain/usecases/filter_minerals.dart';
 
 List<Map<String, dynamic>> readAsset(String fileName) {
   final String raw = File('assets/data/$fileName').readAsStringSync();
@@ -55,10 +57,47 @@ void main() {
 
   group('catálogo empaquetado', () {
     test('los 24 minerales se mapean sin error', () {
-      final List<Mineral> minerals =
-          readAsset('minerals.json').map(GeologyMappers.mineralFromJson).toList();
+      final List<Mineral> minerals = readAsset('minerals.json')
+          .map(GeologyMappers.mineralFromJson)
+          .toList();
       expect(minerals.length, 24);
       expect(minerals.map((Mineral m) => m.id).toSet().length, minerals.length);
+    });
+
+    test('cada mineral trae su ficha técnica ampliada', () {
+      // La v1.0.1 añadió hábito, fractura, paragénesis, ambiente y
+      // comportamiento en planta. Si un registro nuevo se agrega sin ellos,
+      // la ficha se muestra a medias y nadie se entera hasta verla.
+      final List<Mineral> minerals = readAsset('minerals.json')
+          .map(GeologyMappers.mineralFromJson)
+          .toList();
+      for (final Mineral mineral in minerals) {
+        expect(mineral.habit, isNotEmpty, reason: mineral.id);
+        expect(mineral.fracture, isNotEmpty, reason: mineral.id);
+        expect(mineral.environment, isNotEmpty, reason: mineral.id);
+        expect(mineral.processing, isNotEmpty, reason: mineral.id);
+        expect(mineral.associations, isNotEmpty, reason: mineral.id);
+      }
+    });
+
+    test('cada roca declara clasificación, grano y geotecnia', () {
+      final List<Rock> rocks =
+          readAsset('rocks.json').map(GeologyMappers.rockFromJson).toList();
+      for (final Rock rock in rocks) {
+        expect(rock.classification, isNotEmpty, reason: rock.id);
+        expect(rock.grainSize, isNotEmpty, reason: rock.id);
+        expect(rock.geotechnical, isNotEmpty, reason: rock.id);
+      }
+    });
+
+    test('cada estructura declara cómo se mide y su efecto geotécnico', () {
+      final List<GeologicalStructure> structures = readAsset('structures.json')
+          .map(GeologyMappers.structureFromJson)
+          .toList();
+      for (final GeologicalStructure structure in structures) {
+        expect(structure.measurement, isNotEmpty, reason: structure.id);
+        expect(structure.geotechnical, isNotEmpty, reason: structure.id);
+      }
     });
 
     test('las rocas se mapean sin error', () {
@@ -107,10 +146,11 @@ void main() {
 
     test('las referencias cruzadas de los ejercicios existen en el catálogo',
         () {
+      String idOf(Map<String, dynamic> item) => item['id'] as String;
       final Set<String> known = <String>{
-        ...readAsset('minerals.json').map((Map<String, dynamic> m) => m['id'] as String),
-        ...readAsset('rocks.json').map((Map<String, dynamic> m) => m['id'] as String),
-        ...readAsset('structures.json').map((Map<String, dynamic> m) => m['id'] as String),
+        ...readAsset('minerals.json').map(idOf),
+        ...readAsset('rocks.json').map(idOf),
+        ...readAsset('structures.json').map(idOf),
       };
       final List<Exercise> exercises = readAsset('exercises.json')
           .map(GeologyMappers.exerciseFromJson)
@@ -120,6 +160,24 @@ void main() {
           expect(known, contains(id), reason: 'Ejercicio ${exercise.id}');
         }
       }
+    });
+
+    test('la clave determinativa resuelve la hematita por su raya', () {
+      // Caso de referencia del módulo: brillo metálico más raya roja parduzca
+      // no lo cumple ninguna otra muestra del catálogo.
+      final List<Mineral> minerals = readAsset('minerals.json')
+          .map(GeologyMappers.mineralFromJson)
+          .toList();
+      const IdentificationQuery query = IdentificationQuery(
+        luster: LusterType.metalico,
+        streak: 'roja parduzca',
+      );
+      final IdentificationResult result = const FilterMinerals()(
+        minerals,
+        query,
+      );
+      expect(result.isResolved, isTrue);
+      expect(result.candidates.single.id, 'hematita');
     });
   });
 }

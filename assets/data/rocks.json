@@ -12,6 +12,9 @@
       "Cuarzo visible como granos grises translúcidos"
     ],
     "miningContext": "Roca intrusiva ácida. En sí misma no es mena, pero los stocks graníticos y granodioríticos son el motor térmico de los sistemas hidrotermales.",
+    "classification": "Ígnea plutónica félsica: más de 20 % de cuarzo y feldespato alcalino dominante en el diagrama QAPF.",
+    "grainSize": "Grano grueso, entre 2 y 10 mm; todos los cristales se distinguen a simple vista.",
+    "geotechnical": "Muy competente en roca fresca; los problemas vienen del diaclasado ortogonal y de la meteorización esferoidal en superficie.",
     "hostsFor": ["Vetas de estaño y tungsteno", "Pegmatitas"]
   },
   {
@@ -27,6 +30,9 @@
       "Textura holocristalina sin orientación"
     ],
     "miningContext": "Es la roca huésped más frecuente de los pórfidos de cobre. Reconocerla en un sondaje ubica al estudiante dentro del sistema mineralizado.",
+    "classification": "Ígnea plutónica intermedia a félsica: plagioclasa claramente dominante sobre el feldespato potásico en QAPF.",
+    "grainSize": "Grano medio a grueso, entre 1 y 5 mm.",
+    "geotechnical": "Competente cuando está sana, pero es la roca que hospeda la mayoría de los pórfidos andinos y suele llegar cortada por stockwork.",
     "hostsFor": ["Pórfidos de Cu-Mo", "Skarns de contacto"]
   },
   {
@@ -42,6 +48,9 @@
       "Intermedia en color entre granito y gabro"
     ],
     "miningContext": "Intrusivo intermedio asociado a sistemas de Cu-Au; suele ser el cuerpo que genera skarns al intruir calizas.",
+    "classification": "Ígnea plutónica intermedia: plagioclasa cálcica y anfíbol, con menos de 5 % de cuarzo.",
+    "grainSize": "Grano medio, entre 1 y 5 mm.",
+    "geotechnical": "Competente y abrasiva; el anfíbol eleva el desgaste de brocas y el consumo de aceros.",
     "hostsFor": ["Skarns de Cu-Au", "Vetas mesotermales"]
   },
   {
@@ -57,6 +66,9 @@
       "Densidad moderada, sin vesículas abundantes"
     ],
     "miningContext": "Roca huésped dominante de los depósitos epitermales de los Andes; su alteración argílica o propilítica es la guía de campo hacia la veta.",
+    "classification": "Ígnea volcánica intermedia, 52 a 63 % de sílice; equivalente extrusivo de la diorita.",
+    "grainSize": "Matriz afanítica menor a 0,1 mm con fenocristales de 1 a 5 mm.",
+    "geotechnical": "Resistente, con disyunción columnar y alteración argílica frecuente en las zonas de falla, que es donde se vuelve inestable.",
     "hostsFor": ["Vetas epitermales de Au-Ag", "Depósitos de alta sulfuración"]
   },
   {
@@ -72,6 +84,9 @@
       "Equivalente volcánico del granito"
     ],
     "miningContext": "Asociada a domos volcánicos que hospedan mineralización epitermal de baja sulfuración.",
+    "classification": "Ígnea volcánica félsica, más de 69 % de sílice; equivalente extrusivo del granito.",
+    "grainSize": "Afanítica a vítrea, cristales no resolubles a simple vista.",
+    "geotechnical": "Alta resistencia a compresión y perforación lenta; el vidrio volcánico la hace muy abrasiva.",
     "hostsFor": ["Vetas epitermales de baja sulfuración"]
   },
   {
@@ -87,6 +102,9 @@
       "Grano tan fino que no se distinguen cristales"
     ],
     "miningContext": "Roca de caja poco reactiva. Su alteración a clorita y epidota marca la aureola propilítica externa de un sistema hidrotermal.",
+    "classification": "Ígnea volcánica máfica, 45 a 52 % de sílice: plagioclasa cálcica y piroxeno.",
+    "grainSize": "Afanítica, menor a 0,1 mm.",
+    "geotechnical": "Muy resistente; las vesículas y las juntas columnares gobiernan la estabilidad y la permeabilidad.",
     "hostsFor": ["Depósitos de cobre nativo", "Mineralización en amígdalas"]
   },
   {
@@ -102,6 +120,9 @@
       "Puede mostrar 'fiammes' aplastadas si está soldada"
     ],
     "miningContext": "Por su alta porosidad es una roca muy permeable: canaliza fluidos hidrotermales y se altera intensamente, lo que la vuelve una guía de exploración.",
+    "classification": "Piroclástica; se clasifica por el tamaño del fragmento: ceniza menor a 2 mm, lapilli de 2 a 64 mm, bloques mayores.",
+    "grainSize": "Muy variable, de ceniza a bloques dentro de una misma unidad.",
+    "geotechnical": "Baja resistencia y alta porosidad; se descompone a arcillas y suele ser la unidad más problemática para el sostenimiento.",
     "hostsFor": ["Depósitos diseminados de Au", "Alteración argílica avanzada"]
   },
   {
@@ -117,6 +138,9 @@
       "Puede contener fósiles visibles"
     ],
     "miningContext": "Es la roca reactiva por excelencia: al ser intruida por un cuerpo ígneo se transforma en skarn, uno de los ambientes mineralizados más ricos del Perú.",
+    "classification": "Sedimentaria carbonatada; se describe con la clasificación de Dunham según la fábrica, de mudstone a boundstone.",
+    "grainSize": "De micrítica, menor a 4 micrómetros, a bioclástica gruesa.",
+    "geotechnical": "Competente en seco, pero la disolución kárstica genera cavidades imprevisibles y vías de agua hacia la labor.",
     "hostsFor": ["Skarns de Zn-Pb-Ag", "Depósitos tipo MVT"]
   },
   {
@@ -132,6 +156,9 @@
       "Puede rayar el vidrio si el cemento es silíceo"
     ],
     "miningContext": "Su porosidad y permeabilidad la hacen conductora de fluidos; en minería subterránea también condiciona el ingreso de agua a las labores.",
+    "classification": "Sedimentaria clástica; se clasifica por su proporción de cuarzo, feldespato y fragmentos líticos (diagrama de Folk).",
+    "grainSize": "Arena, entre 0,06 y 2 mm.",
+    "geotechnical": "Su resistencia la fija el cemento: silíceo la vuelve muy dura, arcilloso la deja friable. Es acuífero frecuente.",
     "hostsFor": ["Depósitos de uranio tipo roll-front", "Cobre estratoligado"]
   },
   {
@@ -147,6 +174,9 @@
       "Se raya con la uña con facilidad"
     ],
     "miningContext": "Es una barrera de baja permeabilidad que puede confinar fluidos mineralizantes, pero también un plano de debilidad crítico para la estabilidad de taludes y labores.",
+    "classification": "Sedimentaria clástica de grano fino: más de la mitad de las partículas por debajo de 0,004 mm.",
+    "grainSize": "Arcilla y limo, menor a 0,06 mm.",
+    "geotechnical": "La roca débil por excelencia: se disgrega con el agua, levanta el piso de la labor y es causa habitual de cierre de galerías.",
     "hostsFor": ["Mineralización estratoligada", "Techos inestables en minería subterránea"]
   },
   {
@@ -162,6 +192,9 @@
       "Si los clastos fueran angulosos sería una brecha sedimentaria"
     ],
     "miningContext": "Los paleocanales conglomerádicos concentran minerales pesados y constituyen depósitos de placer de oro.",
+    "classification": "Sedimentaria clástica gruesa de clastos redondeados; si los clastos son angulosos la roca es una brecha.",
+    "grainSize": "Clastos mayores a 2 mm dentro de una matriz arenosa.",
+    "geotechnical": "Comportamiento heterogéneo: clastos duros en matriz blanda desgastan la broca de forma desigual y desvían el barreno.",
     "hostsFor": ["Placeres auríferos", "Depósitos de paleoplacer"]
   },
   {
@@ -177,6 +210,9 @@
       "Ausencia de fósiles: fueron destruidos por el metamorfismo"
     ],
     "miningContext": "Indica metamorfismo de contacto sobre calizas. Encontrar mármol en un sondaje avisa que hay un intrusivo cerca y, posiblemente, un skarn mineralizado.",
+    "classification": "Metamórfica no foliada, producto del metamorfismo de contacto o regional de calizas y dolomías.",
+    "grainSize": "Granoblástica, entre 0,5 y 5 mm.",
+    "geotechnical": "Competente pero soluble; reacciona con ácido clorhídrico y se decolora bajo humedad ácida.",
     "hostsFor": ["Zonas periféricas de skarn"]
   },
   {
@@ -192,6 +228,9 @@
       "Sulfuros diseminados entre los silicatos cálcicos"
     ],
     "miningContext": "No es una roca de clasificación clásica sino un producto de metasomatismo. Es el objetivo de exploración directo en muchas minas polimetálicas peruanas.",
+    "classification": "Metamórfica de contacto metasomática, con zonación proximal a distal de granate a piroxeno y anfíbol.",
+    "grainSize": "Granoblástica gruesa, entre 1 y 10 mm.",
+    "geotechnical": "Muy duro y abrasivo: el granate alcanza dureza 7 y dispara el consumo de aceros de perforación.",
     "hostsFor": ["Zn-Pb-Ag", "Cu-Au", "Fe", "W"]
   },
   {
@@ -207,6 +246,9 @@
       "El clivaje puede cortar la estratificación original"
     ],
     "miningContext": "Metamorfismo regional de bajo grado sobre lutitas. Su foliación penetrativa es un plano de debilidad que condiciona el diseño del sostenimiento.",
+    "classification": "Metamórfica foliada de grado bajo, con clivaje pizarroso penetrativo independiente de la estratificación.",
+    "grainSize": "Menor a 0,1 mm; los minerales no se resuelven a simple vista.",
+    "geotechnical": "Fuertemente anisotrópica: resistente perpendicular a la foliación y débil paralela a ella, lo que produce desprendimientos planares en el techo.",
     "hostsFor": ["Vetas de cuarzo-oro en cinturones metamórficos"]
   },
   {
@@ -222,6 +264,9 @@
       "Grado metamórfico mayor que la pizarra"
     ],
     "miningContext": "Su anisotropía marcada hace que la resistencia del macizo dependa fuertemente de la orientación de la labor respecto de la foliación.",
+    "classification": "Metamórfica foliada de grado medio; la esquistosidad la definen micas visibles.",
+    "grainSize": "Entre 0,1 y 2 mm, con micas identificables.",
+    "geotechnical": "Muy anisotrópica; las micas actúan como planos de deslizamiento y bajan varios puntos la clasificación del macizo.",
     "hostsFor": ["Vetas de cuarzo-oro orogénicas"]
   },
   {
@@ -237,6 +282,9 @@
       "No se parte fácilmente en láminas como el esquisto"
     ],
     "miningContext": "Basamento metamórfico de alto grado. Es una roca competente, favorable para labores de gran sección, pero con bandeado que puede guiar el fracturamiento.",
+    "classification": "Metamórfica foliada de grado alto, con bandeado composicional claro y oscuro bien marcado.",
+    "grainSize": "Grano grueso, entre 1 y 10 mm.",
+    "geotechnical": "Competente salvo a lo largo de las bandas micáceas, donde se concentra la rotura.",
     "hostsFor": ["Basamento de depósitos IOCG"]
   }
 ]

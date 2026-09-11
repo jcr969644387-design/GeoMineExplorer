@@ -8,7 +8,9 @@ Se ejecuta en cada `push` y `pull request` sobre `main` y `develop`.
 
 | Trabajo | Pasos |
 |---|---|
-| `analyze-and-test` | Formato (`dart format --set-exit-if-changed`), análisis estático (`flutter analyze --fatal-infos`), pruebas con cobertura, publicación del reporte lcov |
+| `analyze-and-test` | Formato (`dart format --set-exit-if-changed`, informativo), análisis estático (`flutter analyze --no-fatal-infos`), pruebas con cobertura, publicación del reporte lcov |
+
+La salida del análisis y de las pruebas se copia al resumen del job: los registros completos de GitHub Actions exigen iniciar sesión, y el resumen es público. Quien revise el repositorio ve qué falló sin necesidad de acceso.
 | `validate-content` | `python tool/validate_content.py` |
 
 La validación de contenido es un trabajo separado a propósito: no necesita Flutter, corre en segundos y falla con un mensaje que un revisor no programador puede entender.
@@ -18,11 +20,12 @@ La validación de contenido es un trabajo separado a propósito: no necesita Flu
 Se ejecuta en `push` a `main`, en etiquetas `v*` y manualmente.
 
 1. Java 17 y Flutter 3.32.0.
-2. `flutter pub get`.
-3. **`bash tool/bootstrap.sh`** — genera la carpeta `android/`.
-4. `flutter build apk --release --split-per-abi` y APK universal.
-5. Publica los APK como artefacto (30 días).
-6. Si el disparador fue una etiqueta `v*`, los adjunta a la release de GitHub.
+2. **`bash tool/bootstrap.sh`** — genera `android/`, fija el nombre visible y produce el icono.
+3. `flutter build apk --release` — **un único APK universal**, sin `--split-per-abi`.
+4. Comprobación: si aparece más de un APK, el flujo falla.
+5. Renombra el APK a `GeoMineExplorerV<version>.apk` leyendo la versión de `pubspec.yaml`.
+6. Publica ese único archivo como artefacto (30 días).
+7. Si el disparador fue una etiqueta `v*`, lo adjunta a la release de GitHub.
 
 ---
 
@@ -51,20 +54,20 @@ flutter run
 
 1. Crear un repositorio en GitHub y subir el contenido de este paquete.
 2. Entrar en **Actions**, seleccionar **Build APK** y pulsar **Run workflow**.
-3. Al terminar, descargar el artefacto `geomine-explorer-apk`.
+3. Al terminar, descargar el artefacto `GeoMineExplorerV1.0.1`.
 
-Contiene el APK universal y los APK por arquitectura (`armeabi-v7a`, `arm64-v8a`, `x86_64`). Para instalar en un teléfono cualquiera, el universal es el más simple; los separados pesan menos.
+El artefacto contiene **un solo archivo**: `GeoMineExplorerV1.0.1.apk`, universal e instalable en cualquier teléfono Android. Hasta la v1.0.0 se publicaban además los APK por arquitectura (`armeabi-v7a`, `arm64-v8a`, `x86_64`) y al descomprimir aparecían cuatro archivos sin indicación de cuál instalar; el flujo actual falla si vuelve a generarse más de uno.
 
 ---
 
 ## Publicar una versión
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+git tag v1.0.1
+git push origin v1.0.1
 ```
 
-Dispara la compilación y adjunta los APK a la release de GitHub.
+Dispara la compilación y adjunta el APK a la release de GitHub. La numeración de versiones está descrita en [`09_versionado.md`](09_versionado.md).
 
 ---
 

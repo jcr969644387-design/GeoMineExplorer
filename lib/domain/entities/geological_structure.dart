@@ -39,6 +39,8 @@ class GeologicalStructure {
     required this.miningImplication,
     required this.keyParameters,
     required this.commonError,
+    this.measurement = '',
+    this.geotechnical = '',
   });
 
   final String id;
@@ -53,6 +55,12 @@ class GeologicalStructure {
 
   /// Error frecuente documentado, usado como material de enseñanza.
   final String commonError;
+
+  /// Que se mide en campo y con que criterio, no solo que parametros existen.
+  final String measurement;
+
+  /// Consecuencia geomecanica: estabilidad, agua y sostenimiento.
+  final String geotechnical;
 
   @override
   bool operator ==(Object other) =>

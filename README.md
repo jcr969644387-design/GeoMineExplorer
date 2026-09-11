@@ -1,5 +1,7 @@
 # GeoMine Explorer
 
+**Versión actual: GeoMineExplorerV1.0.1**
+
 Aplicación móvil educativa para estudiantes de Ingeniería de Minas. Entrena la **determinación de muestras geológicas mediante descarte sistemático** y la lectura de estructuras en clave minera.
 
 Desarrollada dentro del proyecto *Educational Mobile Apps Factory* siguiendo su metodología de seis etapas.
@@ -27,6 +29,9 @@ GeoMine Explorer se construye para esas tres fallas. No para "enseñar geología
 | **Práctica** | Sesiones de 8 ejercicios situacionales, con repaso dirigido de lo fallado |
 | **Casos** | 3 casos encadenados sobre un mismo yacimiento, 13 decisiones con información parcial |
 | **Avance** | Precisión por competencia. Sin rachas, sin insignias, sin puntos |
+| **Inicio** | Punto de entrada: resumen de avance, accesos directos y consejo de laboratorio del día |
+| **Guía técnica** | Escala de Mohs, protocolo de cada prueba, clasificación de rocas, alteraciones hidrotermales, rumbo y buzamiento, glosario |
+| **Ajustes** | Sonido, vibración y tema (claro, oscuro o el del sistema) |
 
 ### Qué lo diferencia de un PDF o de un catálogo web
 
@@ -45,7 +50,9 @@ flutter run
 
 ### Generar el APK sin entorno local
 
-Subir el repositorio a GitHub, entrar en **Actions → Build APK → Run workflow** y descargar el artefacto `geomine-explorer-apk`.
+Subir el repositorio a GitHub, entrar en **Actions → Build APK → Run workflow** y descargar el artefacto `GeoMineExplorerV1.0.1`.
+
+Contiene **un solo archivo**, `GeoMineExplorerV1.0.1.apk`: un APK universal que se instala en cualquier teléfono Android. No se generan APK separados por arquitectura.
 
 ---
 
@@ -61,7 +68,7 @@ data/           datasources · mappers · repos     Assets · SharedPreferences
 
 `domain/` no importa Flutter en ninguna parte, así que la lógica pedagógica —la clave determinativa, el armado de sesiones, el cálculo de competencias— se prueba en milisegundos sin levantar un binding de widgets.
 
-**Dos dependencias en total:** `flutter_riverpod` y `shared_preferences`. Cada paquete es superficie de mantenimiento.
+**Tres dependencias en total:** `flutter_riverpod` (estado), `shared_preferences` (avance y preferencias) y `audioplayers` (tonos de realimentación). Cada paquete es superficie de mantenimiento, y por eso la lista es corta.
 
 Detalle completo en [`docs/05_arquitectura.md`](docs/05_arquitectura.md).
 
@@ -69,7 +76,7 @@ Detalle completo en [`docs/05_arquitectura.md`](docs/05_arquitectura.md).
 
 ## Privacidad
 
-La aplicación **no recoge ningún dato**. Sin cuentas, sin red, sin permisos de Android, sin telemetría. El progreso se guarda solo en el dispositivo y el usuario puede borrarlo desde la propia app.
+La aplicación **no recoge ningún dato**. Sin cuentas, sin registro, sin telemetría y sin llamadas de red: todo el contenido viaja dentro del APK. No pide ningún permiso sensible —ubicación, cámara, micrófono, contactos o almacenamiento— y la vibración usa la realimentación háptica del sistema, que no requiere permiso. El progreso y las preferencias se guardan solo en el dispositivo, y el usuario puede borrar el avance desde la propia app.
 
 No es una omisión: el usuario es población estudiantil, en parte menor de edad. No recolectar nada elimina la categoría entera de problema y no cuesta ninguna funcionalidad.
 
@@ -98,6 +105,8 @@ El contenido se valida en CI igual que el código: un ejercicio con dos respuest
 | [`06_ia.md`](docs/06_ia.md) | Por qué el MVP **no lleva IA** y bajo qué condiciones la llevaría |
 | [`07_plan_qa.md`](docs/07_plan_qa.md) | Estrategia de pruebas y qué queda sin cubrir |
 | [`08_devops.md`](docs/08_devops.md) | CI/CD, compilación y publicación |
+| [`09_versionado.md`](docs/09_versionado.md) | Numeración de versiones, un commit por entrega y nombre del APK |
+| [`CHANGELOG.md`](CHANGELOG.md) | Qué cambió en cada versión |
 
 ---
 

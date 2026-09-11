@@ -11,6 +11,8 @@
     ],
     "miningImplication": "La potencia y el buzamiento definen el método de explotación. Vetas angostas y de fuerte buzamiento favorecen corte y relleno; potencias mayores permiten sublevel stoping.",
     "keyParameters": ["Rumbo", "Buzamiento", "Potencia", "Ley media", "Continuidad"],
+    "measurement": "Rumbo y buzamiento con brújula sobre la caja, más la potencia perpendicular real: la que se ve en la labor es aparente y siempre mayor.",
+    "geotechnical": "Las cajas alteradas son más débiles que el relleno de la veta; el sostenimiento se diseña para la caja, no para la estructura mineralizada.",
     "commonError": "Medir la potencia en la dirección de avance de la labor en lugar de perpendicular a las paredes: se sobreestima la potencia real y con ella el tonelaje."
   },
   {
@@ -25,6 +27,8 @@
     ],
     "miningImplication": "Complica el diseño de mallas de perforación y la dilución. Los lazos cimoides suelen concentrar mayor ley, por lo que definen los clavos económicos.",
     "keyParameters": ["Ángulo de ramificación", "Potencia por ramal", "Dilución esperada"],
+    "measurement": "Se levanta cada ramal por separado y se anota el ángulo que forma con la estructura principal.",
+    "geotechnical": "Los bloques atrapados entre ramales quedan sueltos: las intersecciones concentran la mayoría de los desprendimientos.",
     "commonError": "Asumir que la ley del ramal es igual a la de la veta principal al calcular reservas."
   },
   {
@@ -39,6 +43,8 @@
     ],
     "miningImplication": "Habilita métodos masivos de bajo costo unitario como block caving o tajo abierto, porque no hay un cuerpo estrecho que seguir selectivamente.",
     "keyParameters": ["Densidad de vetillas por metro", "Ley de la roca total", "Volumen mineralizado"],
+    "measurement": "Se cuantifica por densidad de vetillas por metro y por porcentaje volumétrico, no midiendo cada vetilla.",
+    "geotechnical": "El fracturamiento denso hunde el índice de calidad de roca aunque la roca sea dura, y obliga a sostenimiento sistemático.",
     "commonError": "Muestrear solo las vetillas y no la roca intersticial, lo que sesga la ley hacia arriba."
   },
   {
@@ -53,6 +59,8 @@
     ],
     "miningImplication": "Obliga a operar grandes tonelajes con leyes bajas: la viabilidad depende de la escala y del costo unitario, no de la ley puntual.",
     "keyParameters": ["Ley media", "Tonelaje", "Ley de corte"],
+    "measurement": "No se mide como estructura: se define por muestreo sistemático y modelo de bloques, con la ley referida al volumen.",
+    "geotechnical": "Macizo masivo de buena calidad; el problema deja de ser la estabilidad y pasa a ser la dilución por ley marginal.",
     "commonError": "Descartar el cuerpo por ley baja sin evaluar el tonelaje total y el costo de operación a escala."
   },
   {
@@ -67,6 +75,8 @@
     ],
     "miningImplication": "Suele concentrar leyes altas pero con geometría difícil de modelar; exige perforación cerrada para delimitar el cuerpo.",
     "keyParameters": ["Proporción clasto/matriz", "Geometría del cuerpo", "Ley de la matriz"],
+    "measurement": "Se describe la relación clasto-matriz, el tamaño de los clastos y la composición del cemento.",
+    "geotechnical": "Contacto irregular y cemento de resistencia variable: zona típica de ingreso de agua y de caída de bloques durante el avance.",
     "commonError": "Confundirla con una brecha de falla: la hidrotermal tiene matriz mineralizada, la de falla tiene harina de roca."
   },
   {
@@ -81,6 +91,8 @@
     ],
     "miningImplication": "Corta y desplaza vetas. Para recuperar la veta perdida se debe reconocer cuál bloque bajó y perforar en consecuencia; equivocarse cuesta metros de exploración estéril.",
     "keyParameters": ["Salto", "Rumbo y buzamiento del plano", "Sentido de desplazamiento"],
+    "measurement": "Rumbo, buzamiento, salto vertical y estrías sobre el espejo de falla para confirmar el sentido del movimiento.",
+    "geotechnical": "El panizo (arcilla de falla) tiene resistencia muy baja: exige sostenimiento reforzado y control de agua antes de cruzarla.",
     "commonError": "Determinar el sentido de desplazamiento sin usar indicadores cinemáticos (estrías, escalones, arrastre) y solo por la geometría aparente en el frente."
   },
   {
@@ -95,6 +107,8 @@
     ],
     "miningImplication": "Puede duplicar el cuerpo mineralizado, generando dos intersecciones del mismo manto. No reconocerlo lleva a duplicar el recurso en el modelo de bloques.",
     "keyParameters": ["Salto", "Ángulo del plano", "Repetición estratigráfica"],
+    "measurement": "Rumbo, buzamiento (habitualmente menor a 45 grados) y repetición de la secuencia en el sondaje.",
+    "geotechnical": "Repite la secuencia en profundidad y puede duplicar el cuerpo mineralizado, pero la zona de cizalla asociada es inestable.",
     "commonError": "Interpretar dos intersecciones de la misma veta como dos cuerpos independientes."
   },
   {
@@ -109,6 +123,8 @@
     ],
     "miningImplication": "El desplazamiento se aprecia mejor en planta que en sección. Buscar la veta desplazada requiere cruceros laterales, no profundizar.",
     "keyParameters": ["Desplazamiento horizontal", "Sentido dextral o sinestral"],
+    "measurement": "Rumbo, buzamiento subvertical y desplazamiento horizontal medido sobre un marcador reconocible en ambos bloques.",
+    "geotechnical": "Desplaza la veta lateralmente sin cambiarla de cota: el error caro es profundizar la labor cuando había que desplazarse.",
     "commonError": "Buscar la continuación de la veta hacia abajo cuando el desplazamiento fue lateral."
   },
   {
@@ -123,6 +139,8 @@
     ],
     "miningImplication": "El espaciado y la condición de las diaclasas alimentan directamente el cálculo de RMR y definen el tipo de sostenimiento y el diseño de voladura.",
     "keyParameters": ["Espaciado", "Persistencia", "Rugosidad", "Apertura", "Relleno"],
+    "measurement": "Se registran por familias: rumbo, buzamiento, espaciamiento, persistencia, rugosidad, apertura y relleno.",
+    "geotechnical": "Tres familias más la cara libre definen bloques removibles; es la base del análisis de cuñas y del diseño de la malla de voladura.",
     "commonError": "Registrar solo la orientación y olvidar la condición de la discontinuidad, que pesa fuertemente en la clasificación geomecánica."
   },
   {
@@ -137,6 +155,8 @@
     ],
     "miningImplication": "La charnela concentra fracturamiento por extensión y puede actuar como trampa de fluidos mineralizantes, generando engrosamiento de los mantos.",
     "keyParameters": ["Orientación del eje", "Inmersión", "Apertura del pliegue"],
+    "measurement": "Traza axial, buzamiento de ambos flancos e inmersión del eje.",
+    "geotechnical": "La charnela concentra fracturas de extensión: más permeabilidad, más ingreso de agua y mayor riesgo de desprendimiento.",
     "commonError": "Interpretar la estructura como un solo manto continuo y subestimar el engrosamiento en la charnela."
   },
   {
@@ -151,6 +171,8 @@
     ],
     "miningImplication": "Preserva mantos que en los anticlinales ya fueron erosionados, lo que puede hacerlo el objetivo de exploración más rentable a pesar de estar más profundo.",
     "keyParameters": ["Orientación del eje", "Profundidad del núcleo"],
+    "measurement": "Traza axial, buzamiento de flancos e inmersión del eje; los estratos más jóvenes quedan en el centro.",
+    "geotechnical": "Acumula agua en la charnela: el drenaje se proyecta antes de entrar a la estructura, no cuando ya está inundada.",
     "commonError": "Descartar el sinclinal por profundidad sin evaluar que allí se conserva el manto completo."
   },
   {
@@ -165,6 +187,8 @@
     ],
     "miningImplication": "Cuando el intrusivo corta calizas, el contacto es el lugar donde se desarrolla el skarn: es un objetivo de perforación prioritario.",
     "keyParameters": ["Geometría del contacto", "Ancho de la aureola", "Litología de caja"],
+    "measurement": "Se mapea la geometría del contacto, el ancho de la aureola de metamorfismo y la orientación de las apófisis.",
+    "geotechnical": "Cambio brusco de competencia y de perforabilidad; la aureola cornificada suele ser la roca más dura de todo el yacimiento.",
     "commonError": "Perforar el centro del intrusivo en lugar del contacto, donde se concentra la mineralización de skarn."
   }
 ]

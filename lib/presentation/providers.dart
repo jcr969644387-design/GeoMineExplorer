@@ -2,18 +2,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/datasources/geology_local_datasource.dart';
 import '../data/datasources/progress_local_datasource.dart';
+import '../data/datasources/settings_local_datasource.dart';
 import '../data/repositories/geology_repository_impl.dart';
 import '../data/repositories/progress_repository_impl.dart';
+import '../data/repositories/settings_repository_impl.dart';
+import '../domain/entities/app_settings.dart';
 import '../domain/entities/identification_query.dart';
 import '../domain/entities/mineral.dart';
 import '../domain/entities/student_progress.dart';
 import '../domain/repositories/geology_repository.dart';
 import '../domain/repositories/progress_repository.dart';
+import '../domain/repositories/settings_repository.dart';
 import '../domain/usecases/filter_minerals.dart';
+import 'services/feedback_service.dart';
 import 'viewmodels/case_view_model.dart';
 import 'viewmodels/identification_view_model.dart';
 import 'viewmodels/practice_view_model.dart';
 import 'viewmodels/progress_view_model.dart';
+import 'viewmodels/settings_view_model.dart';
 
 // ---------------------------------------------------------------------------
 // Fuentes de datos y repositorios
@@ -38,6 +44,33 @@ final geologyRepositoryProvider = Provider<GeologyRepository>(
 final progressRepositoryProvider = Provider<ProgressRepository>(
   (ref) => ProgressRepositoryImpl(ref.watch(progressLocalDataSourceProvider)),
 );
+
+final settingsLocalDataSourceProvider = Provider<SettingsLocalDataSource>(
+  (ref) => const SharedPrefsSettingsLocalDataSource(),
+);
+
+final settingsRepositoryProvider = Provider<SettingsRepository>(
+  (ref) => SettingsRepositoryImpl(ref.watch(settingsLocalDataSourceProvider)),
+);
+
+// ---------------------------------------------------------------------------
+// Preferencias y realimentacion
+// ---------------------------------------------------------------------------
+
+final settingsProvider = StateNotifierProvider<SettingsViewModel, AppSettings>(
+  (ref) => SettingsViewModel(ref.watch(settingsRepositoryProvider)),
+);
+
+/// Sonido y vibracion.
+///
+/// El servicio lee los ajustes en el momento de sonar, no al construirse: asi
+/// apagar el sonido surte efecto en la misma pantalla, sin recrear nada.
+final feedbackProvider = Provider<FeedbackService>((ref) {
+  final FeedbackService service =
+      FeedbackService(() => ref.read(settingsProvider));
+  ref.onDispose(service.dispose);
+  return service;
+});
 
 // ---------------------------------------------------------------------------
 // Contenido geologico

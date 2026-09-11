@@ -38,6 +38,9 @@ class Rock {
     required this.identificationKeys,
     required this.miningContext,
     required this.hostsFor,
+    this.classification = '',
+    this.grainSize = '',
+    this.geotechnical = '',
   });
 
   final String id;
@@ -51,6 +54,15 @@ class Rock {
   /// Que significa encontrar esta roca dentro de un sistema mineralizado.
   final String miningContext;
   final List<String> hostsFor;
+
+  /// Criterio formal de clasificacion (QAPF, Dunham, Folk, grado metamorfico).
+  final String classification;
+
+  /// Granulometria con su rango numerico, no solo el adjetivo.
+  final String grainSize;
+
+  /// Comportamiento geomecanico y de perforacion en la labor.
+  final String geotechnical;
 
   @override
   bool operator ==(Object other) => other is Rock && other.id == id;

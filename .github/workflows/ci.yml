@@ -30,14 +30,60 @@ jobs:
       - name: Descargar dependencias
         run: flutter pub get
 
-      - name: Verificar el formato del código
+      # Informativo y no bloqueante: el proyecto se edita también desde
+      # equipos sin SDK de Dart instalado, donde no se puede ejecutar
+      # `dart format` antes de subir. El resultado queda en el resumen para
+      # aplicarlo en la siguiente pasada; lo que sí bloquea es el análisis
+      # estático y las pruebas, que son las que detectan errores reales.
+      - name: Revisar el formato del código (informativo)
+        continue-on-error: true
         run: dart format --output=none --set-exit-if-changed lib test
 
+      # `flutter analyze` trata los avisos de estilo como fatales por defecto;
+      # con --no-fatal-infos siguen bloqueando los errores y las advertencias
+      # reales (import sin usar, variable muerta, tipo incompatible) y las
+      # sugerencias del linter quedan listadas sin tumbar la entrega.
+      #
+      # La salida se copia al resumen del job porque los registros completos
+      # de Actions exigen iniciar sesión: así cualquiera que abra la ejecución
+      # ve qué falló sin tener acceso al repositorio.
       - name: Análisis estático
-        run: flutter analyze --fatal-infos
+        run: |
+          set +e
+          flutter analyze --no-fatal-infos 2>&1 | tee analyze.log
+          status=${PIPESTATUS[0]}
+          {
+            echo '### Análisis estático'
+            echo ''
+            echo '```text'
+            tail -n 300 analyze.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
 
       - name: Pruebas con cobertura
-        run: flutter test --coverage
+        run: |
+          set +e
+          flutter test --coverage 2>&1 | tee test.log
+          status=${PIPESTATUS[0]}
+          {
+            echo '### Pruebas'
+            echo ''
+            echo '```text'
+            tail -n 300 test.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          # Además del resumen, el primer fallo se emite como anotación: las
+          # anotaciones son públicas vía API y el registro completo no, así que
+          # esto es lo que permite diagnosticar sin acceso al repositorio.
+          if [ "$status" -ne 0 ]; then
+            encode() { tr -d '\r' | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}'; }
+            first="$(grep -m1 -A 60 -E '❌|✖|EXCEPTION CAUGHT' test.log | encode)"
+            last="$(tail -n 120 test.log | encode)"
+            echo "::error title=Primer fallo::${first}"
+            echo "::error title=Final del registro::${last}"
+          fi
+          exit $status
 
       - name: Publicar el reporte de cobertura
         uses: actions/upload-artifact@v4

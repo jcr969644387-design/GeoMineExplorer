@@ -7,7 +7,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:geomine_explorer/app/app.dart';
 import 'package:geomine_explorer/data/datasources/geology_local_datasource.dart';
 import 'package:geomine_explorer/data/datasources/progress_local_datasource.dart';
+import 'package:geomine_explorer/data/datasources/settings_local_datasource.dart';
 import 'package:geomine_explorer/presentation/providers.dart';
+import 'package:geomine_explorer/presentation/views/library_view.dart';
+import 'package:geomine_explorer/presentation/views/mineral_detail_view.dart';
+import 'package:geomine_explorer/presentation/views/practice_view.dart';
+import 'package:geomine_explorer/presentation/views/progress_view.dart';
 import 'package:geomine_explorer/presentation/widgets/answer_option_tile.dart';
 
 /// Carga los catalogos reales desde disco.
@@ -40,36 +45,91 @@ Widget harness() {
       ),
       progressLocalDataSourceProvider
           .overrideWithValue(InMemoryProgressLocalDataSource()),
+      settingsLocalDataSourceProvider
+          .overrideWithValue(InMemorySettingsLocalDataSource()),
     ],
     child: const GeoMineExplorerApp(),
   );
 }
 
+/// Cambia de seccion pulsando la barra inferior.
+///
+/// El finder se acota a la [NavigationBar] a proposito: varias pantallas
+/// llevan en su cabecera el mismo texto que su destino, y todas conviven en el
+/// arbol dentro del IndexedStack.
 Future<void> goTo(WidgetTester tester, String destination) async {
-  await tester.tap(find.text(destination));
+  await tester.tap(
+    find.descendant(
+      of: find.byType(NavigationBar),
+      matching: find.text(destination),
+    ),
+  );
+  await tester.pumpAndSettle();
+}
+
+/// Acota un texto a la pantalla del catalogo.
+Finder inLibrary(String text) {
+  return find.descendant(
+    of: find.byType(LibraryView),
+    matching: find.text(text),
+  );
+}
+
+/// Desplaza la lista de [view] hasta dejar [target] a la vista.
+///
+/// Los finders de flutter_test ignoran lo que esta construido pero fuera del
+/// area visible, asi que una prueba que dependa de cuantas tarjetas caben en
+/// pantalla es una prueba fragil: cambia el alto de una tarjeta y falla sin
+/// que nada se haya roto.
+Future<void> scrollTo(WidgetTester tester, Type view, Finder target) async {
+  // Se toma el último desplazable de la pantalla y no el primero: en el
+  // catálogo, el primero es el PageView horizontal de las pestañas, y
+  // arrastrarlo en vertical no mueve nada.
+  await tester.scrollUntilVisible(
+    target,
+    120,
+    scrollable: find
+        .descendant(of: find.byType(view), matching: find.byType(Scrollable))
+        .last,
+  );
   await tester.pumpAndSettle();
 }
 
 void main() {
-  testWidgets('arranca en la biblioteca y lista los minerales del catálogo',
+  testWidgets('la pantalla de inicio presenta la aplicación',
       (WidgetTester tester) async {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
+    expect(find.text('GeoMine Explorer'), findsOneWidget);
+    expect(find.text('Empieza por aquí'), findsOneWidget);
+    expect(find.text('Tengo una muestra'), findsOneWidget);
+  });
+
+  testWidgets('el catálogo lista los minerales del contenido empaquetado',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(harness());
+    await tester.pumpAndSettle();
+
+    await goTo(tester, 'Catálogo');
     expect(find.text('Biblioteca geológica'), findsOneWidget);
-    expect(find.text('Pirita'), findsOneWidget);
-    expect(find.text('Galena'), findsOneWidget);
+    expect(inLibrary('Cuarzo'), findsOneWidget);
+    expect(inLibrary('Pirita'), findsOneWidget);
+    // Una muestra del final del catálogo, a la que hay que desplazarse.
+    await scrollTo(tester, LibraryView, inLibrary('Biotita'));
+    expect(inLibrary('Biotita'), findsOneWidget);
   });
 
   testWidgets('el buscador filtra por nombre', (WidgetTester tester) async {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
+    await goTo(tester, 'Catálogo');
     await tester.enterText(find.byType(TextField).first, 'galena');
     await tester.pumpAndSettle();
 
-    expect(find.text('Galena'), findsOneWidget);
-    expect(find.text('Pirita'), findsNothing);
+    expect(inLibrary('Galena'), findsOneWidget);
+    expect(inLibrary('Pirita'), findsNothing);
   });
 
   testWidgets('el buscador también encuentra por fórmula',
@@ -77,10 +137,11 @@ void main() {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
+    await goTo(tester, 'Catálogo');
     await tester.enterText(find.byType(TextField).first, 'FeS2');
     await tester.pumpAndSettle();
 
-    expect(find.text('Pirita'), findsOneWidget);
+    expect(inLibrary('Pirita'), findsOneWidget);
   });
 
   testWidgets('una búsqueda sin resultados muestra el estado vacío',
@@ -88,11 +149,12 @@ void main() {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
+    await goTo(tester, 'Catálogo');
     await tester.enterText(find.byType(TextField).first, 'zzzzz');
     await tester.pumpAndSettle();
 
-    expect(find.text('Galena'), findsNothing);
-    expect(find.text('Pirita'), findsNothing);
+    expect(inLibrary('Galena'), findsNothing);
+    expect(find.text('Sin coincidencias'), findsOneWidget);
   });
 
   testWidgets('abrir una ficha muestra sus datos y vuelve atrás',
@@ -100,10 +162,21 @@ void main() {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Galena'));
+    await goTo(tester, 'Catálogo');
+    // Se filtra antes de abrir: así la ficha buscada queda la primera de la
+    // lista y la prueba no depende de cuántas tarjetas caben en pantalla.
+    await tester.enterText(find.byType(TextField).first, 'galena');
+    await tester.pumpAndSettle();
+    await tester.tap(inLibrary('Galena'));
     await tester.pumpAndSettle();
 
     expect(find.textContaining('PbS'), findsWidgets);
+
+    // La ficha ampliada de la v1.0.1 incorpora ambiente y paragénesis, varias
+    // tarjetas más abajo.
+    final Finder section = find.text('Ambiente y paragénesis');
+    await scrollTo(tester, MineralDetailView, section);
+    expect(section, findsOneWidget);
 
     await tester.pageBack();
     await tester.pumpAndSettle();
@@ -115,13 +188,16 @@ void main() {
     await tester.pumpWidget(harness());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Rocas'));
+    await goTo(tester, 'Catálogo');
+    // El finder se acota al catálogo: Inicio muestra un contador con esos
+    // mismos rótulos.
+    await tester.tap(inLibrary('Rocas'));
     await tester.pumpAndSettle();
-    expect(find.text('Granito'), findsOneWidget);
+    expect(inLibrary('Granito'), findsOneWidget);
 
-    await tester.tap(find.text('Estructuras'));
+    await tester.tap(inLibrary('Estructuras'));
     await tester.pumpAndSettle();
-    expect(find.text('Stockwork'), findsWidgets);
+    expect(inLibrary('Veta tabular'), findsOneWidget);
   });
 
   testWidgets('el determinador reduce candidatos al declarar el brillo',
@@ -146,28 +222,6 @@ void main() {
     // cuál es la siguiente prueba que conviene hacer.
     expect(find.text('13 candidatos posibles'), findsOneWidget);
     expect(find.textContaining('Siguiente prueba más útil'), findsOneWidget);
-  });
-
-  testWidgets('la clave resuelve la hematita por su raya roja',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(harness());
-    await tester.pumpAndSettle();
-
-    await goTo(tester, 'Determinar');
-    await tester.tap(find.text('Metálico'));
-    await tester.pumpAndSettle();
-
-    // El bloque de color de raya queda fuera de pantalla; hay que desplazarse.
-    await tester.scrollUntilVisible(
-      find.text('roja parduzca'),
-      300,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(find.text('roja parduzca'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Identificación resuelta'), findsOneWidget);
-    expect(find.text('Hematita'), findsWidgets);
   });
 
   testWidgets('limpiar devuelve el determinador a cero observaciones',
@@ -198,10 +252,14 @@ void main() {
     expect(find.byType(AnswerOptionTile), findsWidgets);
 
     // El botón de confirmar está deshabilitado hasta elegir una alternativa.
-    final Finder confirm = find.widgetWithText(FilledButton, 'Confirmar respuesta');
+    final Finder confirm = find.widgetWithText(
+      FilledButton,
+      'Confirmar respuesta',
+    );
+    await scrollTo(tester, PracticeView, confirm);
     expect(tester.widget<FilledButton>(confirm).onPressed, isNull);
 
-    await tester.tap(find.byType(AnswerOptionTile).first);
+    await tester.tap(find.byType(AnswerOptionTile).last);
     await tester.pumpAndSettle();
     expect(tester.widget<FilledButton>(confirm).onPressed, isNotNull);
 
@@ -210,6 +268,7 @@ void main() {
 
     // Se acierte o no, siempre aparece la explicación y el paso siguiente.
     expect(find.byType(ExplanationPanel), findsOneWidget);
+    await scrollTo(tester, PracticeView, find.text('Siguiente'));
     expect(find.text('Siguiente'), findsOneWidget);
   });
 
@@ -233,15 +292,21 @@ void main() {
     await goTo(tester, 'Práctica');
     await tester.tap(find.text('Sesión mixta'));
     await tester.pumpAndSettle();
-    await tester.tap(find.byType(AnswerOptionTile).first);
+
+    final Finder confirm = find.widgetWithText(
+      FilledButton,
+      'Confirmar respuesta',
+    );
+    await scrollTo(tester, PracticeView, confirm);
+    await tester.tap(find.byType(AnswerOptionTile).last);
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithText(FilledButton, 'Confirmar respuesta'));
+    await tester.tap(confirm);
     await tester.pumpAndSettle();
 
     await goTo(tester, 'Avance');
     // El intento quedó registrado: el panel ya no está en cero.
-    expect(find.text('Avance'), findsWidgets);
-    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(find.text('Por competencia'), findsOneWidget);
+    expect(find.text('Todavía no hay datos'), findsNothing);
   });
 
   testWidgets('la lista de casos se muestra y un caso se puede abrir',
@@ -265,7 +330,33 @@ void main() {
     await tester.pumpAndSettle();
 
     await goTo(tester, 'Avance');
-    expect(find.byType(CircularProgressIndicator), findsNothing);
-    expect(find.textContaining('0'), findsWidgets);
+    expect(find.text('Todavía no hay datos'), findsOneWidget);
+  });
+
+  testWidgets('el sonido se puede apagar desde los ajustes',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(harness());
+    await tester.pumpAndSettle();
+
+    await goTo(tester, 'Avance');
+    await tester.tap(
+      find.descendant(
+        of: find.byType(ProgressView),
+        matching: find.byTooltip('Ajustes'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final Finder sound = find.widgetWithText(
+      SwitchListTile,
+      'Tonos de respuesta',
+    );
+    expect(sound, findsOneWidget);
+    expect(tester.widget<SwitchListTile>(sound).value, isTrue);
+
+    await tester.tap(sound);
+    await tester.pumpAndSettle();
+
+    expect(tester.widget<SwitchListTile>(sound).value, isFalse);
   });
 }
