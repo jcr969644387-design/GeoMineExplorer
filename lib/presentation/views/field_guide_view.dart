@@ -40,12 +40,7 @@ class FieldGuideView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Guía técnica')),
       body: ListView.separated(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         itemCount: kFieldGuide.length + 1,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
         itemBuilder: (BuildContext context, int index) {
@@ -105,12 +100,7 @@ class _GuideTopicView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(topic.title)),
       body: ListView.separated(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         itemCount: topic.sections.length + 1,
         separatorBuilder: (_, __) => const SizedBox(height: 12),
         itemBuilder: (BuildContext context, int index) {

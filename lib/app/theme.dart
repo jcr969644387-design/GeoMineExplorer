@@ -61,6 +61,58 @@ abstract class GeoSpacing {
   static const double chipRadius = 12;
 }
 
+/// Estilo de las barras del sistema.
+///
+/// La aplicacion dibuja de borde a borde, asi que la barra de estado y la de
+/// navegacion son transparentes y el contenido pasa por detras. Eso obliga a
+/// declarar el color de sus iconos: sin esto, el reloj o los botones de
+/// atras/inicio/recientes pueden quedar blancos sobre fondo claro, es decir,
+/// invisibles.
+abstract class GeoOverlay {
+  static const SystemUiOverlayStyle light = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    systemNavigationBarDividerColor: Colors.transparent,
+  );
+
+  static const SystemUiOverlayStyle dark = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.transparent,
+    systemNavigationBarIconBrightness: Brightness.light,
+    systemNavigationBarDividerColor: Colors.transparent,
+  );
+}
+
+/// Relleno estandar de una pantalla con contenido desplazable.
+///
+/// Suma a los margenes propios los huecos que reserva el sistema: la barra de
+/// gestos o los botones de navegacion abajo, y los bordes curvos a los lados.
+///
+/// Se usa el mismo helper en todas las pantallas aunque parezca innecesario en
+/// algunas. Dentro del contenedor principal esos huecos valen cero, porque la
+/// barra de navegacion inferior ya los consume; en una pantalla abierta encima
+/// valen lo que mida la barra del sistema. Tener una sola funcion evita el
+/// error clasico: acertar en la pantalla que se probo y dejar el ultimo boton
+/// debajo de los botones del telefono en las demas.
+EdgeInsets geoScreenPadding(
+  BuildContext context, {
+  double top = 8,
+  double bottom = 28,
+}) {
+  final EdgeInsets inset = MediaQuery.paddingOf(context);
+  return EdgeInsets.fromLTRB(
+    GeoSpacing.gutter + inset.left,
+    top,
+    GeoSpacing.gutter + inset.right,
+    bottom + inset.bottom,
+  );
+}
+
 abstract class GeoTheme {
   static ThemeData light() {
     final ColorScheme scheme = ColorScheme.fromSeed(
@@ -158,8 +210,7 @@ abstract class GeoTheme {
         scrolledUnderElevation: 0,
         centerTitle: false,
         titleSpacing: GeoSpacing.gutter,
-        systemOverlayStyle:
-            isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
+        systemOverlayStyle: isDark ? GeoOverlay.dark : GeoOverlay.light,
         titleTextStyle: base.titleLarge?.copyWith(
           fontWeight: FontWeight.w700,
           letterSpacing: -0.3,
@@ -175,12 +226,15 @@ abstract class GeoTheme {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         // Seis destinos no caben con la tipografia por defecto en un telefono
         // de 360 dp: se reduce el cuerpo de la etiqueta en lugar de recortar
-        // nombres que el estudiante necesita leer completos.
+        // nombres que el estudiante necesita leer completos. El `ellipsis` es
+        // la red de seguridad para pantallas aun mas estrechas: antes de que
+        // dos etiquetas se solapen, la larga se recorta con puntos suspensivos.
         labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
           (Set<WidgetState> states) => TextStyle(
-            fontSize: 10.5,
-            letterSpacing: 0,
+            fontSize: 10,
+            letterSpacing: -0.1,
             height: 1.1,
+            overflow: TextOverflow.ellipsis,
             fontWeight: states.contains(WidgetState.selected)
                 ? FontWeight.w700
                 : FontWeight.w500,

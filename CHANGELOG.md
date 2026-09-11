@@ -5,6 +5,46 @@ La numeración y el procedimiento de entrega están descritos en
 
 ---
 
+## GeoMineExplorerV1.0.2
+
+Entrega dedicada por completo a las áreas seguras: notch, bordes de pantalla y
+zona de los botones de navegación del teléfono. No cambia el diseño, solo los
+márgenes y los espaciados.
+
+### Corregido
+
+- **Contenido por debajo de la barra de navegación del teléfono.** Las pantallas
+  que se abren encima de la principal —ajustes, guía técnica, fichas de mineral,
+  roca y estructura, y la resolución de casos— no reservaban el hueco de los
+  botones de atrás, inicio y recientes. El último elemento de cada lista, que
+  suele ser un botón de acción (`Tomar la decisión`, `Cerrar el caso`, `Volver a
+  los casos`), quedaba parcialmente tapado. Ahora las veinte listas de la
+  aplicación calculan su margen inferior con el mismo helper, que suma el hueco
+  real que reserva el sistema.
+- **Etiquetas de la barra inferior solapadas.** Con seis destinos y el tamaño de
+  letra del sistema al 130 %, los rótulos se montaban unos sobre otros. El
+  tamaño de fuente se limita ahora solo en esa barra —el resto de la aplicación
+  sigue respetando la preferencia del usuario— y las etiquetas se recortan con
+  puntos suspensivos antes de invadir la vecina.
+- **Iconos del sistema invisibles.** Con las barras transparentes, el reloj y los
+  botones de navegación heredaban un color que podía coincidir con el fondo. La
+  aplicación declara ahora explícitamente el brillo de esos iconos para cada
+  tema.
+- **Barra de estado en la pantalla de Inicio.** La cabecera verde pedía iconos
+  claros para toda la pantalla, de modo que al desplazarse hacia abajo quedaban
+  blancos sobre fondo blanco. El estilo claro se aplica ahora solo mientras la
+  cabecera está visible.
+- **Bordes curvos.** Los márgenes laterales suman los insets izquierdo y derecho
+  del sistema, para que en pantallas con bordes redondeados el texto no se
+  arrime al filo.
+- **Etiqueta de granulometría cortada por la coma decimal.** En la lista de
+  rocas se recortaba el texto por la primera coma, que en español suele separar
+  decimales: «Menor a 0,1 mm» se mostraba como «Menor a 0» y «Entre 0,1 y 2 mm»
+  como «Entre 0». Ahora el corte busca el final de la frase y respeta los
+  números.
+
+---
+
 ## GeoMineExplorerV1.0.1
 
 ### Identidad

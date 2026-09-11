@@ -75,12 +75,7 @@ class ProgressView extends ConsumerWidget {
           final Set<String> pending = progress.pendingReviewItemIds;
 
           return ListView(
-            padding: const EdgeInsets.fromLTRB(
-              GeoSpacing.gutter,
-              8,
-              GeoSpacing.gutter,
-              32,
-            ),
+            padding: geoScreenPadding(context, top: 8, bottom: 32),
             children: <Widget>[
               GeoCard(
                 accentColor: GeoPalette.malachite,

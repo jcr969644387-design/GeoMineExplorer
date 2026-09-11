@@ -51,12 +51,7 @@ class IdentificationView extends ConsumerWidget {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         children: <Widget>[
           Text(
             'Declara solo lo que realmente observaste. La clave funciona con '

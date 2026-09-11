@@ -19,12 +19,7 @@ class RockDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(rock.name)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         children: <Widget>[
           Row(
             children: <Widget>[
@@ -136,12 +131,7 @@ class StructureDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(structure.name)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         children: <Widget>[
           GeoTag(label: structure.category.label, color: GeoPalette.malachite),
           const SizedBox(height: 14),

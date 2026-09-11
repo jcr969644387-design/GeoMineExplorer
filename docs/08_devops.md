@@ -54,17 +54,17 @@ flutter run
 
 1. Crear un repositorio en GitHub y subir el contenido de este paquete.
 2. Entrar en **Actions**, seleccionar **Build APK** y pulsar **Run workflow**.
-3. Al terminar, descargar el artefacto `GeoMineExplorerV1.0.1`.
+3. Al terminar, descargar el artefacto `GeoMineExplorerV1.0.2`.
 
-El artefacto contiene **un solo archivo**: `GeoMineExplorerV1.0.1.apk`, universal e instalable en cualquier teléfono Android. Hasta la v1.0.0 se publicaban además los APK por arquitectura (`armeabi-v7a`, `arm64-v8a`, `x86_64`) y al descomprimir aparecían cuatro archivos sin indicación de cuál instalar; el flujo actual falla si vuelve a generarse más de uno.
+El artefacto contiene **un solo archivo**: `GeoMineExplorerV1.0.2.apk`, universal e instalable en cualquier teléfono Android. Hasta la v1.0.0 se publicaban además los APK por arquitectura (`armeabi-v7a`, `arm64-v8a`, `x86_64`) y al descomprimir aparecían cuatro archivos sin indicación de cuál instalar; el flujo actual falla si vuelve a generarse más de uno.
 
 ---
 
 ## Publicar una versión
 
 ```bash
-git tag v1.0.1
-git push origin v1.0.1
+git tag v1.0.2
+git push origin v1.0.2
 ```
 
 Dispara la compilación y adjunta el APK a la release de GitHub. La numeración de versiones está descrita en [`09_versionado.md`](09_versionado.md).

@@ -8,7 +8,7 @@ abstract class AppInfo {
   /// Nombre visible. Nunca se muestra el identificador del paquete.
   static const String name = 'GeoMine Explorer';
 
-  static const String version = '1.0.1';
+  static const String version = '1.0.2';
 
   /// Etiqueta de la entrega; es tambien el nombre del APK publicado.
   static const String release = 'GeoMineExplorerV$version';

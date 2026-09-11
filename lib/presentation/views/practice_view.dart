@@ -111,12 +111,7 @@ class _PracticeViewState extends ConsumerState<PracticeView> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          12,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 12, bottom: 32),
         children: <Widget>[
           GeoCard(
             accentColor: GeoPalette.slate,
@@ -227,12 +222,7 @@ class _ModulePicker extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Práctica')),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         children: <Widget>[
           Text(
             'Sesiones de ocho ejercicios. Los que fallaste antes vuelven a '
@@ -413,12 +403,7 @@ class _SessionSummary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sesión completada')),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          12,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 12, bottom: 32),
         children: <Widget>[
           GeoCard(
             accentColor: accent,

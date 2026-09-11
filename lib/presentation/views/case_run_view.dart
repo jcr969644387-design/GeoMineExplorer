@@ -74,12 +74,7 @@ class CaseRunView extends ConsumerWidget {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          12,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 12, bottom: 32),
         children: <Widget>[
           if (state.stepIndex == 0) ...<Widget>[
             GeoCard(
@@ -208,12 +203,7 @@ class _CaseSummary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(miningCase.title)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          12,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 12, bottom: 32),
         children: <Widget>[
           GeoCard(
             accentColor: GeoPalette.malachite,

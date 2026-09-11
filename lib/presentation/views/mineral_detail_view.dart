@@ -40,12 +40,7 @@ class _MineralDetailViewState extends ConsumerState<MineralDetailView> {
     return Scaffold(
       appBar: AppBar(title: Text(mineral.name)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(
-          GeoSpacing.gutter,
-          8,
-          GeoSpacing.gutter,
-          32,
-        ),
+        padding: geoScreenPadding(context, top: 8, bottom: 32),
         children: <Widget>[
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -62,41 +62,51 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             top: BorderSide(color: Theme.of(context).colorScheme.outline),
           ),
         ),
-        child: NavigationBar(
-          selectedIndex: _index,
-          onDestinationSelected: _select,
-          destinations: const <NavigationDestination>[
-            NavigationDestination(
-              icon: Icon(Icons.explore_outlined),
-              selectedIcon: Icon(Icons.explore),
-              label: 'Inicio',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.menu_book_outlined),
-              selectedIcon: Icon(Icons.menu_book),
-              label: 'Catálogo',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.travel_explore_outlined),
-              selectedIcon: Icon(Icons.travel_explore),
-              label: 'Determinar',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.fitness_center_outlined),
-              selectedIcon: Icon(Icons.fitness_center),
-              label: 'Práctica',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.cases_outlined),
-              selectedIcon: Icon(Icons.cases),
-              label: 'Casos',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.insights_outlined),
-              selectedIcon: Icon(Icons.insights),
-              label: 'Avance',
-            ),
-          ],
+        // La barra reserva por su cuenta el hueco de los botones del telefono
+        // (atras, inicio y recientes) o de la barra de gestos, asi que los
+        // destinos nunca quedan debajo de ellos.
+        //
+        // El tamaño de letra del sistema si se limita aqui, y solo aqui: con
+        // seis destinos, una fuente al 130 % hace que las etiquetas se solapen
+        // entre si. El resto de la aplicacion respeta el ajuste del usuario.
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1,
+          child: NavigationBar(
+            selectedIndex: _index,
+            onDestinationSelected: _select,
+            destinations: const <NavigationDestination>[
+              NavigationDestination(
+                icon: Icon(Icons.explore_outlined),
+                selectedIcon: Icon(Icons.explore),
+                label: 'Inicio',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.menu_book_outlined),
+                selectedIcon: Icon(Icons.menu_book),
+                label: 'Catálogo',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.travel_explore_outlined),
+                selectedIcon: Icon(Icons.travel_explore),
+                label: 'Determinar',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.fitness_center_outlined),
+                selectedIcon: Icon(Icons.fitness_center),
+                label: 'Práctica',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.cases_outlined),
+                selectedIcon: Icon(Icons.cases),
+                label: 'Casos',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.insights_outlined),
+                selectedIcon: Icon(Icons.insights),
+                label: 'Avance',
+              ),
+            ],
+          ),
         ),
       ),
     );

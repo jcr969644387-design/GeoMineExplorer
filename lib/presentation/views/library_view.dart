@@ -78,12 +78,7 @@ class _LibraryViewState extends ConsumerState<LibraryView> {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                GeoSpacing.gutter,
-                14,
-                GeoSpacing.gutter,
-                4,
-              ),
+              padding: geoScreenPadding(context, top: 14, bottom: 4),
               child: TextField(
                 controller: _searchController,
                 onChanged: (String value) => setState(() => _query = value),
@@ -158,12 +153,7 @@ class _LibraryViewState extends ConsumerState<LibraryView> {
           return const _EmptyState();
         }
         return ListView.separated(
-          padding: const EdgeInsets.fromLTRB(
-            GeoSpacing.gutter,
-            14,
-            GeoSpacing.gutter,
-            28,
-          ),
+          padding: geoScreenPadding(context, top: 14, bottom: 28),
           itemCount: filtered.length + 1,
           separatorBuilder: (_, __) => const SizedBox(height: 10),
           itemBuilder: (BuildContext context, int index) {
@@ -234,12 +224,7 @@ class _LibraryViewState extends ConsumerState<LibraryView> {
           return const _EmptyState();
         }
         return ListView.separated(
-          padding: const EdgeInsets.fromLTRB(
-            GeoSpacing.gutter,
-            14,
-            GeoSpacing.gutter,
-            28,
-          ),
+          padding: geoScreenPadding(context, top: 14, bottom: 28),
           itemCount: filtered.length + 1,
           separatorBuilder: (_, __) => const SizedBox(height: 10),
           itemBuilder: (BuildContext context, int index) {
@@ -318,12 +303,7 @@ class _LibraryViewState extends ConsumerState<LibraryView> {
           return const _EmptyState();
         }
         return ListView.separated(
-          padding: const EdgeInsets.fromLTRB(
-            GeoSpacing.gutter,
-            14,
-            GeoSpacing.gutter,
-            28,
-          ),
+          padding: geoScreenPadding(context, top: 14, bottom: 28),
           itemCount: filtered.length + 1,
           separatorBuilder: (_, __) => const SizedBox(height: 10),
           itemBuilder: (BuildContext context, int index) {
@@ -398,10 +378,19 @@ class _LibraryViewState extends ConsumerState<LibraryView> {
   }
 
   /// Recorta un texto largo para usarlo como etiqueta.
+  ///
+  /// Corta por el primer punto y coma, punto o coma que separe frases, pero
+  /// nunca por la coma decimal de un numero como "0,06 mm". Cortar por esa
+  /// coma dejaba etiquetas sin sentido del tipo "Menor a 0" o "Entre 0". Lo
+  /// que aun asi resulta largo se recorta a lo que cabe con holgura en la
+  /// tarjeta, para que no invada el resto de la fila.
   static String _firstWords(String text) {
-    final int cut = text.indexOf(',');
-    final String head = cut > 0 ? text.substring(0, cut) : text;
-    return head.length > 26 ? '${head.substring(0, 26)}…' : head;
+    final int cut = text.indexOf(RegExp(r'[;.]|,(?!\s*\d)'));
+    final String head = (cut > 0 ? text.substring(0, cut) : text).trim();
+    if (head.length <= 24) {
+      return head;
+    }
+    return '${head.substring(0, 23).trimRight()}…';
   }
 }
 

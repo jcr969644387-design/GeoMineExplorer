@@ -48,19 +48,19 @@ class HomeView extends ConsumerWidget {
     final ThemeData theme = Theme.of(context);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      // Estilo del tema para el resto de la pantalla. La cabecera declara el
+      // suyo por separado: al desplazarla fuera de vista, unos iconos claros
+      // fijos quedarian en blanco sobre fondo blanco, o sea, invisibles.
+      value: theme.brightness == Brightness.dark
+          ? GeoOverlay.dark
+          : GeoOverlay.light,
       child: Scaffold(
         body: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             _Hero(progress: progress),
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                GeoSpacing.gutter,
-                22,
-                GeoSpacing.gutter,
-                28,
-              ),
+              padding: geoScreenPadding(context, top: 22, bottom: 28),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -186,111 +186,118 @@ class _Hero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final double topInset = MediaQuery.paddingOf(context).top;
+    final EdgeInsets inset = MediaQuery.paddingOf(context);
     final bool started = progress.totalAttempts > 0;
 
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: GeoGradients.brand,
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
-      ),
-      padding: EdgeInsets.fromLTRB(
-        GeoSpacing.gutter,
-        topInset + 14,
-        GeoSpacing.gutter,
-        22,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(7),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const GeoLogo(size: 30, fallbackColor: Colors.white),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'GeoMine Explorer',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      'Laboratorio geológico de bolsillo',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.72),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              IconButton(
-                tooltip: 'Ajustes',
-                onPressed: () => Navigator.of(context).push<void>(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const SettingsView(),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // La cabecera siempre es verde oscuro, asi que sus iconos de sistema van
+      // siempre en claro, sea cual sea el tema de la aplicacion.
+      value: GeoOverlay.dark,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: GeoGradients.brand,
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
+        ),
+        // El alto de la barra de estado se reserva aqui: es lo que impide que
+        // el nombre de la aplicacion quede debajo del notch.
+        padding: EdgeInsets.fromLTRB(
+          GeoSpacing.gutter + inset.left,
+          inset.top + 14,
+          GeoSpacing.gutter + inset.right,
+          22,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(14),
                   ),
+                  child: const GeoLogo(size: 30, fallbackColor: Colors.white),
                 ),
-                icon: const Icon(Icons.tune, color: Colors.white),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.11),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
-            ),
-            child: started
-                ? Row(
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      _HeroStat(
-                        value: '${(progress.globalAccuracy * 100).round()} %',
-                        label: 'Acierto',
+                      Text(
+                        'GeoMine Explorer',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                      _HeroStat(
-                        value: '${progress.totalAttempts}',
-                        label: 'Respuestas',
-                      ),
-                      _HeroStat(
-                        value: '${progress.reviewedMineralIds.length}',
-                        label: 'Fichas vistas',
-                      ),
-                    ],
-                  )
-                : Row(
-                    children: <Widget>[
-                      const Icon(
-                        Icons.flag_outlined,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Aún no has registrado respuestas. Una sesión de '
-                          'práctica basta para empezar a medir tu criterio.',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.85),
-                          ),
+                      Text(
+                        'Laboratorio geológico de bolsillo',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.72),
                         ),
                       ),
                     ],
                   ),
-          ),
-        ],
+                ),
+                IconButton(
+                  tooltip: 'Ajustes',
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const SettingsView(),
+                    ),
+                  ),
+                  icon: const Icon(Icons.tune, color: Colors.white),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.11),
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
+              ),
+              child: started
+                  ? Row(
+                      children: <Widget>[
+                        _HeroStat(
+                          value: '${(progress.globalAccuracy * 100).round()} %',
+                          label: 'Acierto',
+                        ),
+                        _HeroStat(
+                          value: '${progress.totalAttempts}',
+                          label: 'Respuestas',
+                        ),
+                        _HeroStat(
+                          value: '${progress.reviewedMineralIds.length}',
+                          label: 'Fichas vistas',
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: <Widget>[
+                        const Icon(
+                          Icons.flag_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'Aún no has registrado respuestas. Una sesión de '
+                            'práctica basta para empezar a medir tu criterio.',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.85),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

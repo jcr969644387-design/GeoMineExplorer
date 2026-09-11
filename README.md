@@ -1,6 +1,6 @@
 # GeoMine Explorer
 
-**Versión actual: GeoMineExplorerV1.0.1**
+**Versión actual: GeoMineExplorerV1.0.2**
 
 Aplicación móvil educativa para estudiantes de Ingeniería de Minas. Entrena la **determinación de muestras geológicas mediante descarte sistemático** y la lectura de estructuras en clave minera.
 
@@ -50,9 +50,9 @@ flutter run
 
 ### Generar el APK sin entorno local
 
-Subir el repositorio a GitHub, entrar en **Actions → Build APK → Run workflow** y descargar el artefacto `GeoMineExplorerV1.0.1`.
+Subir el repositorio a GitHub, entrar en **Actions → Build APK → Run workflow** y descargar el artefacto `GeoMineExplorerV1.0.2`.
 
-Contiene **un solo archivo**, `GeoMineExplorerV1.0.1.apk`: un APK universal que se instala en cualquier teléfono Android. No se generan APK separados por arquitectura.
+Contiene **un solo archivo**, `GeoMineExplorerV1.0.2.apk`: un APK universal que se instala en cualquier teléfono Android. No se generan APK separados por arquitectura.
 
 ---
 

@@ -31,12 +31,7 @@ class CasesView extends ConsumerWidget {
           message: '$error',
         ),
         data: (List<MiningCase> items) => ListView(
-          padding: const EdgeInsets.fromLTRB(
-            GeoSpacing.gutter,
-            8,
-            GeoSpacing.gutter,
-            32,
-          ),
+          padding: geoScreenPadding(context, top: 8, bottom: 32),
           children: <Widget>[
             Text(
               'Escenarios encadenados donde cada decisión condiciona la '
